@@ -1,0 +1,58 @@
+<?php
+
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\teacher\TeacherController;
+use App\Http\Controllers\user\UserController;
+
+
+
+
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
+  Route::get('/admin/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout'); // optional
+});
+
+Route::middleware(['auth', 'role:teacher'])->group(function () {
+    Route::get('/teacher/dashboard', [TeacherController::class, 'TeacherDashboard'])->name('teacher.dashboard');
+    Route::get('/teacher/logout', [TeacherController::class, 'TeacherLogout'])->name('teacher.logout'); // optional
+});
+
+Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::get('/user/dashboard', [UserController::class, 'UserDashboard'])->name('user.dashboard');
+    Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout'); // optional
+    Route::get('/user/About', [UserController::class, 'UserAbout'])->name('user.about'); // optional
+
+});
+
+
+/**
+ * After login, send users to their role dashboard automatically:
+ */
+Route::get('/dashboard', function () {
+    $user = auth()->user();
+    return match ($user?->role) {
+        'admin'   => redirect()->route('admin.dashboard'),
+        'teacher' => redirect()->route('teacher.dashboard'),
+        default   => redirect()->route('user.dashboard'),
+    };
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
+
+require __DIR__.'/auth.php';
