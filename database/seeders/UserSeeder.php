@@ -17,17 +17,17 @@ class UserSeeder extends Seeder
     {
         User::updateOrCreate(
             ['email' => 'admin@gmail.com'],
-            ['name' => 'Admin', 'password' => Hash::make('111'), 'role' => 'admin']
+            ['name' => 'Admin', 'password' => Hash::make('11111111'), 'role' => 'admin']
         );
 
         User::updateOrCreate(
             ['email' => 'teacher@gmail.com'],
-            ['name' => 'Teacher', 'password' => Hash::make('111'), 'role' => 'teacher']
+            ['name' => 'Teacher', 'password' => Hash::make('11111111'), 'role' => 'teacher']
         );
 
         User::updateOrCreate(
             ['email' => 'user@gmail.com'],
-            ['name' => 'User', 'password' => Hash::make('111'), 'role' => 'user']
+            ['name' => 'User', 'password' => Hash::make('11111111'), 'role' => 'user']
         );
     }
 }
