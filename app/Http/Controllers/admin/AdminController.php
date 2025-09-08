@@ -10,7 +10,7 @@ class AdminController extends Controller
 {
     public function AdminDashboard()
     {
-        return view('admin.dashboard');
+        return view('admin.index');
     }
 
    public function AdminLogout(Request $request)
@@ -18,6 +18,6 @@ class AdminController extends Controller
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect('/login');
     }
 }
