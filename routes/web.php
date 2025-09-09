@@ -24,7 +24,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('all/category' , 'AllCategory')->name('all.category');
         Route::get('/add/category' , 'AddCategory')->name('add.category');
         Route::post('/store/category' , 'StoreCategory')->name('store.category');
-        Route::get('/edit/category/{id}' , 'EditCaategory')->name('edit.category');
+        Route::get('/edit/category/{id}' , 'EditCategory')->name('edit.category');
         Route::post('/update/category/{id}', 'UpdateCategory')->name('update.category'); 
         Route::get('/delete/category/{id}', 'DeleteCategory')->name('delete.category'); 
     });
@@ -34,6 +34,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/all/answer' , 'AllAnswer')->name('all.answer');
         Route::get('/add/answer' , 'AddAnswer')->name('add.answer');
         Route::post('/store/answer' , 'StoreAnswer')->name('store.answer');
+        Route::get('/edit/answer/{id}' , 'EditAnswer')->name('edit.answer');
+        Route::post('/update/answer' , 'UpdateAnswer')->name('update.answer');
+        Route::get('/delete/answer/{id}' , 'DeleteAnswer')->name('delete.answer');
 
     });
 
