@@ -32,6 +32,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(Uni_answer_qController::class)->group(function() {
 
         Route::get('/all/answer' , 'AllAnswer')->name('all.answer');
+        Route::get('/add/answer' , 'AddAnswer')->name('add.answer');
+        Route::post('/store/answer' , 'StoreAnswer')->name('store.answer');
 
     });
 

@@ -9,6 +9,6 @@ class uni_answer_q extends Model
     protected $guarded = [];
 
     public function category() {
-        return $this->belongsTo(category::class , 'category_id');
+        return $this->belongsTo(Category::class , 'category_id');
     }
 }
