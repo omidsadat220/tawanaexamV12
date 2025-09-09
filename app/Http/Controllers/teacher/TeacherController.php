@@ -10,7 +10,7 @@ class TeacherController extends Controller
 {
     public function TeacherDashboard()
     {
-       return view('teacher.dashboard');
+       return view('teacher.index');
     }
 
     public function TeacherLogout(Request $request)
@@ -18,6 +18,6 @@ class TeacherController extends Controller
         Auth::guard('web')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+        return redirect('/login');
     }
 }
