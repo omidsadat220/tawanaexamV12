@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\Uni_answer_qController;
 use App\Http\Controllers\teacher\TeacherController;
 use App\Http\Controllers\user\UserController;
 
@@ -26,7 +27,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/edit/category/{id}' , 'EditCaategory')->name('edit.category');
         Route::post('/update/category/{id}', 'UpdateCategory')->name('update.category'); 
         Route::get('/delete/category/{id}', 'DeleteCategory')->name('delete.category'); 
+    });
 
+    Route::controller(Uni_answer_qController::class)->group(function() {
+
+        Route::get('/all/answer' , 'AllAnswer')->name('all.answer');
 
     });
 

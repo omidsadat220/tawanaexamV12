@@ -39,10 +39,10 @@
               >
               <div class="nav-item dropdown">
                 <a href="{{route('all.category')}}" class="nav-item nav-link"
-                  ><i class="fa fa-laptop me-2"></i>Catagory</a
+                  ><i class="fa fa-laptop me-2"></i> All Catagory</a
                 >
-                <a href="students.html" class="nav-item nav-link"
-                  ><i class="fa fa-laptop me-2"></i>Students</a
+                <a href="{{route('all.answer')}}" class="nav-item nav-link"
+                  ><i class="fa fa-laptop me-2"></i> All Answer</a
                 >
                 <a href="Catagory.html" class="nav-item nav-link"
                   ><i class="fa fa-laptop me-2"></i>Teacher</a
