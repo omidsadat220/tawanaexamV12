@@ -44,7 +44,7 @@
                 <a href="{{route('all.answer')}}" class="nav-item nav-link"
                   ><i class="fa fa-laptop me-2"></i> All Answer</a
                 >
-                <a href="Catagory.html" class="nav-item nav-link"
+                {{-- <a href="Catagory.html" class="nav-item nav-link"
                   ><i class="fa fa-laptop me-2"></i>Teacher</a
                 >
                 <a href="subCatagory.html" class="nav-item nav-link"
@@ -55,10 +55,10 @@
                 >
                 <a href="exam.html" class="nav-item nav-link"
                   ><i class="fa fa-laptop me-2"></i>Exam</a
-                >
+                > --}}
               </div>
 
-              <div class="nav-item dropdown">
+              {{-- <div class="nav-item dropdown">
                 <a
                   href="#"
                   class="nav-link dropdown-toggle"
@@ -70,7 +70,7 @@
                             <a href="students.html" class="dropdown-item">Students</a> -->
                   <a href="404.html" class="dropdown-item">404 Error</a>
                 </div>
-              </div>
+              </div> --}}
             </div>
           </nav>
         </div>
