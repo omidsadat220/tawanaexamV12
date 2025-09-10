@@ -21,7 +21,22 @@ class UserController extends Controller
         return redirect('/');
     }
 
-    public function UserAbout(){
-        return view('user.about');
+    public function UserFinalexamdah(){
+        return view('user.finalexamdash');
     }
+
+    public function UserProfile(){
+        return view('user.userprofile');
+    }
+
+    public function UserUnicode(){
+        return view('user.uni.unicode');
+    }
+
+    public function UserUniexam(){
+        return view('user.uni.uniexam');
+    }
+
 }
+
+

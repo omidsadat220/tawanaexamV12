@@ -49,8 +49,10 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
 
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/user/dashboard', [UserController::class, 'UserDashboard'])->name('user.dashboard');
-    Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout'); // optional
-    Route::get('/user/About', [UserController::class, 'UserAbout'])->name('user.about'); // optional
+    Route::get('/user/finalexamdash', [UserController::class, 'UserFinalexamdah'])->name('user.finalexamdash'); 
+    Route::get('/user/userprofile', [UserController::class, 'UserProfile'])->name('user.userprofile'); 
+    Route::get('/user/uni/unicode', [UserController::class, 'UserUnicode'])->name('user.unicode'); 
+    Route::get('/user/uni/uniexam', [UserController::class, 'UserUniexam'])->name('user.uniexam'); 
 
 });
 
