@@ -29,6 +29,7 @@ class Uni_answer_qController extends Controller
 
         uni_answer_q::insert([
             'category_id' => $request->category_id,
+            'question' => $request->question,
             'question_one' => $request->question_one,
             'question_two' => $request->question_two,
             'question_three' => $request->question_three,
@@ -59,11 +60,12 @@ class Uni_answer_qController extends Controller
         $answer = uni_answer_q::findOrFail($request->ans_id);
 
         $answer->update([
-            'category_id'    => $request->category_id,
-            'question_one'   => $request->question_one,
-            'question_two'   => $request->question_two,
+            'category_id' => $request->category_id,
+            'question' => $request->question,
+            'question_one' => $request->question_one,
+            'question_two' => $request->question_two,
             'question_three' => $request->question_three,
-            'question_four'  => $request->question_four,
+            'question_four' => $request->question_four,
             'correct_answer' => $request->correct_answer,
         ]);
 

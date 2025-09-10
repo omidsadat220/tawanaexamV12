@@ -33,6 +33,11 @@
                 </select>
                       </div>
 
+                       <div class="col-12 d-flex align-items-center justify-content-between mb-3">
+                        <label for="categoryName" class="text-start">question</label>
+                        <input class="catinput" type="text" id="question" name="question"  placeholder="Enter  question_one">
+                      </div>
+
                          <div class="col-12 d-flex align-items-center justify-content-between mb-3">
                         <label for="categoryName" class="text-start">question_one</label>
                         <input class="catinput" type="text" id="question_one" name="question_one"  placeholder="Enter  question_one">

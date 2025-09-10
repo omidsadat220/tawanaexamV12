@@ -29,6 +29,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Category</th>
+                                <th>question title</th>
                                 <th>question_one</th>
                                 <th>question_two</th>
                                 <th>question_three</th>
@@ -42,6 +43,7 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $item->category->uni_name }}</td>
+                                    <td>{{ $item->question }}</td>
                                     <td>{{ $item->question_one }}</td>
                                     <td>{{ $item->question_two }}</td>
                                     <td>{{ $item->question_three }}</td>

@@ -186,6 +186,10 @@
           <div
             class="flex flex-col md:flex-row justify-between items-center relative z-10"
           >
+
+          @php
+            $category = App\Models\Category::first();
+          @endphp
             <div>
               <h1
                 class="text-2xl md:text-3xl font-bold bg-gradient-to-r from-green-400 to-green-700 bg-clip-text text-transparent"
@@ -193,7 +197,7 @@
                 Tawana Technology Exam Center
               </h1>
               <p class="text-gray-400 mt-2">
-                Specialized Web Programming Questions
+                Specialized Web Programming Questions {{$category->uni_name}}
               </p>
             </div>
 
@@ -213,6 +217,8 @@
         </div>
       </div>
 
+     
+
       <div class="flex flex-col lg:flex-row gap-6">
         <!-- Main Content -->
         <div class="lg:w-3/4 order-2 lg:order-1">
@@ -226,11 +232,17 @@
                 <span class="text-sm text-yellow-400">Score: 4 of 5</span>
               </div>
 
+                 @php
+                 $answer = \App\Models\uni_answer_q::orderBy('id')->paginate(1);
+              @endphp
+
               <!-- Question -->
               <div class="gradient-border mb-8">
+
+                               @foreach($answer as $item)
                 <div class="bg-gray-900 rounded-xl p-6">
                   <h2 class="text-xl font-semibold text-white mb-4">
-                    Question 1
+                    {{$item->question}}
                   </h2>
 
                   <div
@@ -253,9 +265,14 @@
                 </div>
               </div>
 
+            
+
               <!-- Options -->
+ 
+
               <div class="space-y-4">
-                <div class="option-hover gradient-border">
+
+                     <div class="option-hover gradient-border">
                   <label
                     class="flex items-center bg-gray-900 rounded-xl p-4 cursor-pointer transition-all duration-300"
                   >
@@ -268,11 +285,13 @@
                       ></div>
                     </div>
                     <span class="text-gray-300 flex-1"
-                      >Grid supports two-dimensional layout system</span
+                      >{{$item->question_one}}</span
                     >
                     <span class="text-xs text-white-500 ml-2">A</span>
                   </label>
                 </div>
+               
+             
 
                 <div class="option-hover gradient-border">
                   <label
@@ -287,7 +306,7 @@
                       ></div>
                     </div>
                     <span class="text-gray-300 flex-1"
-                      >Can be used to create complex layouts</span
+                      >{{$item->question_two}}</span
                     >
                     <span class="text-xs text-gray-500 ml-2">B</span>
                   </label>
@@ -306,7 +325,7 @@
                       ></div>
                     </div>
                     <span class="text-gray-300 flex-1"
-                      >Only supports fixed units</span
+                      >{{$item->question_three}}</span
                     >
                     <span class="text-xs text-gray-500 ml-2">C</span>
                   </label>
@@ -325,15 +344,43 @@
                       ></div>
                     </div>
                     <span class="text-gray-300 flex-1"
-                      >Supports minmax() and repeat() functions</span
+                      >{{$item->question_four}}</span
                     >
                     <span class="text-xs text-gray-500 ml-2">D</span>
                   </label>
                 </div>
+
+
+
               </div>
+                 @endforeach
+
 
               <!-- Navigation Buttons -->
-              <div
+
+              <!-- Laravel Pagination -->
+<div class="mt-6 flex justify-between">
+  {{-- Previous Page --}}
+  @if ($answer->onFirstPage())
+      <span class="px-4 py-2 bg-gray-700 text-gray-400 rounded">Previous</span>
+  @else
+      <a href="{{ $answer->previousPageUrl() }}" 
+         class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+         Previous
+      </a>
+  @endif
+
+  {{-- Next Page --}}
+  @if ($answer->hasMorePages())
+      <a href="{{ $answer->nextPageUrl() }}" 
+         class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+         Next
+      </a>
+  @else
+      <span class="px-4 py-2 bg-gray-700 text-gray-400 rounded">Next</span>
+  @endif
+</div>
+              {{-- <div
                 class="flex justify-between mt-8 pt-6 border-t border-gray-700"
               >
                 <button
@@ -348,7 +395,7 @@
                   Next Question
                   <i class="fas fa-arrow-right ml-2"></i>
                 </button>
-              </div>
+              </div> --}}
             </div>
           </div>
         </div>

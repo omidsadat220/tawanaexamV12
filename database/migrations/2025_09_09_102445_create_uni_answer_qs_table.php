@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('uni_answer_qs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('category_id')->nullable();
+            $table->string('question');
             $table->string('question_one');
             $table->string('question_two');
             $table->string('question_three');
