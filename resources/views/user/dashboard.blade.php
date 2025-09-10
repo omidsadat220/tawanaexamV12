@@ -720,7 +720,7 @@
             <!-- Card 2: Resume Test -->
             <div class="card-custom ca__fx-clipGridReveal" role="button" tabindex="0" aria-label="Resume Test">
                 <div class="card-text">
-                    <a href="./exam_Dashboard.html">Week Exam</a>
+                    <a href="{{route('user.unicode')}}">Week Exam</a>
                     <span class="arrow-icon">↻</span>
                 </div>
                 <div class="icon-container" aria-hidden="true">
