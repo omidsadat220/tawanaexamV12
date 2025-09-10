@@ -683,7 +683,7 @@
                     <div class="dropdown-divider"></div>
                     <div class="dropdown-item">
                         <i class="bi bi-box-arrow-right"></i>
-                        <a href="./signin.html">Logout</a>
+                        <a href="{{ route('user.logout') }}">Logout</a>
                     </div>
                 </div>
             </div>
@@ -720,7 +720,7 @@
             <!-- Card 2: Resume Test -->
             <div class="card-custom ca__fx-clipGridReveal" role="button" tabindex="0" aria-label="Resume Test">
                 <div class="card-text">
-                    <a href="{{route('user.unicode')}}">Week Exam</a>
+                    <a href="{{route('user.unicode')}}">University Exam</a>
                     <span class="arrow-icon">↻</span>
                 </div>
                 <div class="icon-container" aria-hidden="true">

@@ -187,20 +187,24 @@
     </style>
   </head>
   <body>
+    <?php
+      use App\Models\Category;
 
-    @php
-        $alldata = App\Models\Category::all();
-    @endphp
-
+     
+      $category = Category::first();
+      $uni_name = $category ? $category->uni_name : 'No University Found';
+      ?>
     <div class="container">
-      <h1>{{$alldata->uni_name}}</h1>
+      <h1><?php echo $uni_name; ?></h1>
       <p class="description">
         Enter your voucher code below to check its validity and applicable
         benefits
       </p>
 
+      <form action="{{ route('user.varifycode') }}" method="POST">
+        @csrf
       <div class="input-group">
-        <label for="voucher">Voucher Code</label>
+        <label for="voucher">University Code || <a href="{{ route('user.dashboard') }}" style="text-decoration: none; color:red"><span >Back</span></a></label>
         <div class="input-wrapper">
           <span class="icon">
             <svg class="svg-icon" viewBox="0 0 24 24">
@@ -212,19 +216,21 @@
           <input
             type="text"
             id="voucher"
+            name="code"
             placeholder="Enter voucher code"
             autocomplete="off"
           />
         </div>
       </div>
 
-      <button id="verify-btn">
+      <button id="verify-btn" type="submit">
         <svg class="svg-icon" viewBox="0 0 24 24" style="color: white">
           <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />
         </svg>
-        Verify Voucher
+        Verify Code
       </button>
 
+    </form>
       <div class="result" id="result">
         <div class="result-content">
           <div class="result-icon">
@@ -288,5 +294,5 @@
           }, 800);
         });
     </script>
-  </body>
+  </body>
 </html>
