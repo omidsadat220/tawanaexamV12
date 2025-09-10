@@ -662,6 +662,9 @@
                 <div class="user-avatar">
                     <span class="user-name">{{ $profileData->name }} |</span>
 
+
+
+                    {{-- when we create the image folder you can incomment  --}}
                     {{-- <img class="rounded-circle header-profile-user" src="{{ (!empty($profileData->photo)) ? url('upload/client_images/'.$profileData->photo) : url('upload/no_image.jpg') }}" --}}
 
 
