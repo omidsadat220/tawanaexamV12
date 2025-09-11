@@ -58,6 +58,9 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
     Route::post('user/varifycode', [UserController::class, 'UserVarifyCode'])->name('user.varifycode');
 
+    // Route::post('/update/exam' , 'UpdateExam')->name('update.exam');
+    Route::post('update/exam' , [UserController::class , 'UpdateExam'])->name('update.exam');
+
 });
 
 
