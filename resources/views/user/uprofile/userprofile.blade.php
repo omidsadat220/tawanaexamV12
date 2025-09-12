@@ -680,7 +680,7 @@
         <!-- Profile Picture -->
         <div class="relative">
           <img
-            src="{{ Auth::user()->photo ? asset('uploads/user_profiles/'.Auth::user()->photo) : asset('assets/img/roman.png') }}"
+            src="https://www.tawanatechnology.com/upload/clientlogo/1843057306006446.png"
             alt="Student Profile"
             class="rounded-full w-40 h-40 border-4 border-green-400 shadow-lg"
           />
@@ -704,24 +704,21 @@
             {{ Auth::user()->role ?? 'web developer' }}
           </p>
           <div class="flex flex-wrap gap-4 mb-2">
-            <div class="flex items-center gap-2 text-gray-600" style="color: #fff">
-              <i class="fas fa-book-open text-green-500"></i> Major:
-              <span class="font-semibold" style="color: #fff">{{ Auth::user()->major ?? 'front end' }}</span>
-            </div>
+           
             <div class="flex items-center gap-2 text-gray-600" style="color: #fff">
               <i class="fas fa-calendar-alt text-green-500"></i> Joined:
               <span class="font-semibold" style="color: #fff">{{ Auth::user()->created_at->format('Y') }}</span>
             </div>
           </div>
           <div class="flex flex-wrap gap-2 mb-4">
-            <a href="{{ route('user.finalexamdash') }}"
+            <a href="{{ route('user.dashboard') }}"
                class="btn-sm mt-2 px-4 py-1 rounded-lg bg-green-500 text-white font-semibold shadow hover:bg-green-600 transition flex items-center gap-2">
               Home
             </a>
-            <a href="{{ route('user.uprofile.usereditprofile') }}"
+            {{-- <a href="{{ route('user.uprofile.usereditprofile') }}"
                class="btn-sm mt-2 px-4 py-1 rounded-lg bg-green-500 text-white font-semibold shadow hover:bg-green-600 transition flex items-center gap-2">
               Edit Profile
-            </a>
+            </a> --}}
             <a href="{{ route('user.uprofile.change-password') }}"
                class="mt-2 px-4 py-1 rounded-lg bg-green-500 text-white font-semibold shadow hover:bg-green-600 transition flex items-center gap-2">
               Change Password
@@ -739,7 +736,7 @@
         <div class="exam-history-section">
           <h2 class="section-title">
             <i class="bi bi-calendar-check me-2"></i>
-            Exam History
+            Coming Soon
           </h2>
 
           <div class="exam-grid">
@@ -763,7 +760,7 @@
                       <div
                         class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full"
                       >
-                        Complated
+                        coming soon
                       </div>
                     </div>
                     <p
@@ -828,7 +825,7 @@
                       <div
                         class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full"
                       >
-                        Complated
+                        coming soon
                       </div>
                     </div>
                     <p
@@ -893,7 +890,7 @@
                       <div
                         class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full"
                       >
-                        Complated
+                        coming soon
                       </div>
                     </div>
                     <p
@@ -958,7 +955,7 @@
                       <div
                         class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full"
                       >
-                        Complated
+                        coming soon
                       </div>
                     </div>
                     <p

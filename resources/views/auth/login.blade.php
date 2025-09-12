@@ -31,6 +31,16 @@
                     #0f0f0f 100%);
         }
 
+         /* Responsive for screens smaller than 720px */
+            @media (max-width: 720px) {
+            .center {
+                width: 90%;
+                padding: 20px 30px;
+                font-size: 16px;
+            }
+            }
+        
+
         /* Advanced Background with Animated Gradients */
         .auth-container {
             overflow-x: hidden !important;
@@ -1021,13 +1031,13 @@
     <div class="container" id="container_login">
         <!-- auto type -->
         <div class="typing">
-            Welcome To <span id="text"> </span><span class="cursor"></span>
+             <span id="text"> </span><span class="cursor"></span>
         </div>
         <!-- auto type -->
         <!-- login card -->
-        <div class="auth-card max-w-sm mx-auto rounded-2xl shadow-2xl overflow-hidden">
+        <div class="auth-card max-w-sm mx-auto rounded-2xl shadow-2xl overflow-hidden " >
             <!-- Advanced Tab Selector -->
-            <div class="tab-selector flex">
+            <div class="tab-selector flex " >
                 <div class="tab-item flex-1 text-center py-4 cursor-pointer active text-white"
                     onclick="showPage('loginPage')" style="background-color: rgb(38, 38, 38)">
                     <i class="fas fa-sign-in-alt mr-2"></i>Login
