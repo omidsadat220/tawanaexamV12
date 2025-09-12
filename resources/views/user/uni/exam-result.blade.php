@@ -65,14 +65,17 @@ $currectAnsower = App\Models\CorrectAns::where('correct_answer', 'correct_answer
         </div>
       </header>
 
+     
+
       <section class="text-center">
         <h2 class="text-xl text-green-500 font-semibold mb-6 drop-shadow-md">
-          Review of Incorrect Answers
+         Get Your Certificate
         </h2>
-        <button
-          id="backButton"
-          class="bg-gray-700 hover:bg-green-600 text-green-400 hover:text-gray-900 font-semibold py-2 px-6 rounded-md shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 inline-flex items-center space-x-2 mx-auto"
-        >
+       <button
+        id="backButton"
+        class="bg-gray-700 hover:bg-green-600 text-green-400 hover:text-gray-900 font-semibold py-2 px-6 rounded-md shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 inline-flex items-center space-x-2 mx-auto"
+          >
+          <a href="{{ route('user.certificate') }}"><span>Certificate</span></a>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5 text-green-500"
@@ -85,12 +88,35 @@ $currectAnsower = App\Models\CorrectAns::where('correct_answer', 'correct_answer
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
-              d="M15 19l-7-7 7-7"
+              d="M9 5l7 7-7 7"
             />
           </svg>
-          <span>Back</span>
-        </button>
+        </button> <br><br>
+
+         <h2 class="text-xl text-green-500 font-semibold mb-6 drop-shadow-md">
+          Review of Incorrect Answers
+        </h2>
+
       </section>
+
+      @if($wrong > 0)
+  <div class="bg-gray-700 rounded-lg shadow px-6 py-6 text-center text-gray-200">
+      <h3 class="font-bold text-red-400 text-lg mb-2">
+          You got {{ $wrong }} answers wrong.
+      </h3>
+      <p class="text-yellow-300 font-semibold">
+          Don’t worry — mistakes are proof that you are trying and learning! 🚀
+      </p>
+  </div>
+@else
+  <div class="bg-gray-700 rounded-lg shadow px-6 py-6 text-center text-green-400 font-bold">
+      🎉 Excellent! You answered everything correctly. Keep up the great work!
+  </div>
+@endif
+
+
+
+{{--       
     @foreach($wrongQuestions as $item)
       <article
         class="bg-gray-700 rounded-lg shadow px-6 py-5 sm:py-6 text-gray-300 leading-relaxed max-h-96 overflow-y-auto no-scrollbar"
@@ -115,7 +141,34 @@ $currectAnsower = App\Models\CorrectAns::where('correct_answer', 'correct_answer
         <span class="text-green-400 font-semibold">{{ $item->real_answer }}</span>
         </p>
       </article>
-      @endforeach
+      @endforeach --}}
+
+   <section class="text-center">
+        
+        <button
+          id="backButton"
+          class="bg-gray-700 hover:bg-green-600 text-green-400 hover:text-gray-900 font-semibold py-2 px-6 rounded-md shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 inline-flex items-center space-x-2 mx-auto"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 text-green-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        <a href="{{ route('user.dashboard') }}"><span style="padding-right: 8px">Back</span></a>
+        </button>
+      </section>
+
+
       
     </main>
 

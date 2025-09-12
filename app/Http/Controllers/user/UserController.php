@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\CorrectAns;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use App\Models\uni_answer_q;
 
 class UserController extends Controller
 {
@@ -172,11 +173,14 @@ class UserController extends Controller
     //Start UserExamResult
 
     public function UserExamResult(){
-         // Total questions answered
-    $totalQuestions = CorrectAns::count();
+        $userId = Auth::id(); // current logged in user id
+
+    // Total questions answered by this user
+    $totalQuestions = CorrectAns::where('user_id', $userId)->count();
 
     // Correct answers count
     $correct = CorrectAns::join('uni_answer_qs', 'correct_ans.question', '=', 'uni_answer_qs.question')
+        ->where('correct_ans.user_id', $userId)
         ->whereColumn('correct_ans.correct_answer', 'uni_answer_qs.correct_answer')
         ->count();
 
@@ -188,6 +192,7 @@ class UserController extends Controller
 
     // Wrong questions detail (for review section)
     $wrongQuestions = CorrectAns::join('uni_answer_qs', 'correct_ans.question', '=', 'uni_answer_qs.question')
+        ->where('correct_ans.user_id', $userId)
         ->whereColumn('correct_ans.correct_answer', '!=', 'uni_answer_qs.correct_answer')
         ->select(
             'uni_answer_qs.question',
