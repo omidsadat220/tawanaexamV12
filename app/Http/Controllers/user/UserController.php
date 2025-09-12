@@ -5,6 +5,8 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Category;
+use App\Models\CorrectAns;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -110,6 +112,27 @@ class UserController extends Controller
         
         $category = Category::findOrFail($id);
         return view('user.uni.uniexam', compact('category'));
+    }
+
+    public function UpdateExam(Request $request) {
+
+         $cat_id = $request->cat_id;
+ 
+    $correct = CorrectAns::findOrFail($request->cat_id);
+
+    $correct->update([
+        'question' => $request->question,
+        'correct_answer' => $request->correct_answer,
+    ]);
+
+        $notification = [
+        'message' => 'Answer Add  Successfully',
+        'alert-type' => 'success'
+    ];
+
+    return redirect()->back()->with($notification);
+
+
     }
 
 

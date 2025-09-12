@@ -234,15 +234,33 @@
 
                  @php
                  $answer = \App\Models\uni_answer_q::orderBy('id')->paginate(1);
+                 $title = \App\Models\uni_answer_q::all();
               @endphp
 
               <!-- Question -->
               <div class="gradient-border mb-8">
 
+                <form action="{{'update.exam' , $category->id}}" method="POST">
+
+
+                @csrf
+
+  
+
+                 <input type="hidden" name="cat_id" id="cat_id" value="{{ $category->id }}">
+
                                @foreach($answer as $item)
                 <div class="bg-gray-900 rounded-xl p-6">
                   <h2 class="text-xl font-semibold text-white mb-4">
-                    {{$item->question}}
+
+                                  @foreach ($answer as $ans)
+                                      
+                               <input type="text" name="question" value="{{ $ans->question }}" class="form-control">
+                                  
+
+                                  @endforeach
+
+                    {{-- {{$item->question}} --}}
                   </h2>
 
                   <div
@@ -276,7 +294,7 @@
                   <label
                     class="flex items-center bg-gray-900 rounded-xl p-4 cursor-pointer transition-all duration-300"
                   >
-                    <input type="radio" name="answer" class="hidden" />
+                    <input type="radio" name="correct_answer" class="hidden" />
                     <div
                       class="w-6 h-6 rounded-full border-2 border-gray-600 flex items-center justify-center mr-3 transition-all duration-300"
                     >
@@ -297,7 +315,7 @@
                   <label
                     class="flex items-center bg-gray-900 rounded-xl p-4 cursor-pointer transition-all duration-300"
                   >
-                    <input type="radio" name="answer" class="hidden" />
+                    <input type="radio" name="correct_answer" class="hidden" />
                     <div
                       class="w-6 h-6 rounded-full border-2 border-gray-600 flex items-center justify-center mr-3 transition-all duration-300"
                     >
@@ -316,7 +334,7 @@
                   <label
                     class="flex items-center bg-gray-900 rounded-xl p-4 cursor-pointer transition-all duration-300"
                   >
-                    <input type="radio" name="answer" class="hidden" />
+                    <input type="radio" name="correct_answer" class="hidden" />
                     <div
                       class="w-6 h-6 rounded-full border-2 border-gray-600 flex items-center justify-center mr-3 transition-all duration-300"
                     >
@@ -335,7 +353,7 @@
                   <label
                     class="flex items-center bg-gray-900 rounded-xl p-4 cursor-pointer transition-all duration-300"
                   >
-                    <input type="radio" name="answer" class="hidden" />
+                    <input type="radio" name="correct_answer" class="hidden" />
                     <div
                       class="w-6 h-6 rounded-full border-2 border-gray-600 flex items-center justify-center mr-3 transition-all duration-300"
                     >
@@ -377,7 +395,8 @@
          Next
       </a>
   @else
-      <span class="px-4 py-2 bg-gray-700 text-gray-400 rounded">Next</span>
+  <button type="submit" class="px-4 py-2 bg-gray-700 text-gray-400 rounded">Next</button>
+      {{-- <span class="px-4 py-2 bg-gray-700 text-gray-400 rounded">Next</span> --}}
   @endif
 </div>
               {{-- <div
@@ -399,6 +418,9 @@
             </div>
           </div>
         </div>
+
+                </form>
+
 
         <!-- Sidebar -->
         <div class="lg:w-1/4 order-1 lg:order-2">
