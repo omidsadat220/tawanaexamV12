@@ -1,0 +1,371 @@
+
+      body {
+        /* width: 100%;
+        height: 100vh; */
+        font-family: sans-serif;
+        text-align: center;
+        background: #f4f4f4;
+        padding: 20px;
+        display:flex;
+        flex-direction: column;
+        justify-content:center ;
+        align-content: center;
+        gap: 10px;
+        
+      }
+
+      .certificate-container {
+        position: relative;
+        width: 100%;
+        width: 970px;
+        margin: auto;
+        aspect-ratio: 14/9;
+        background: white;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        display:flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: top;
+
+        /* background-image:url(../img/) ;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover; */
+      }
+
+      /* cer-header************************** */
+        .cer-header{
+            width: 100%;
+            height: 90px;
+            /* border: 1px solid green; */
+            position: relative;
+            z-index: +2;
+        }
+        .header-title {
+            width:60% ;
+            height: 100%;
+            background-color: rgb(1, 82, 1);
+            color: #fff;
+            clip-path: polygon(0 0%, 100% 0%, 100% 0, 88% 100%, 0 100%);
+            line-height: 3;
+            text-align: center;
+            font-family: sans-serif;
+            font-size: 30px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-right-box {
+            width: 100%;
+            height: 30px;
+            background-color: rgb(10, 207, 10);
+            position: absolute;
+            top: 0px;
+            
+        }
+        /* cer-header************************** */
+        /* cer-name  ************************** */
+        .cer-name {
+            width: 100%;
+            height: 150px;
+            /* border-bottom:1px solid lightblue; */
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: top;
+        }
+        .name-box1 {
+            width: 60%;
+            height: 100%;
+            /* background-color: silver; */
+            display: flex;
+            flex-direction: column;
+            justify-content: top;
+            align-items: left;
+        }
+        .name-box1 > .box1-h1 {
+            /* background-color: red; */
+            font-size: 50px;
+            text-align: center;
+            font-family: sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1.5;
+            color: #1a7032;
+
+        }
+        .name-box1 > .box1-h2 {
+            /* background-color: red; */
+            font-size: 30px;
+            text-align: center;
+            font-family: sans-serif;
+            font-weight:bold ;
+            text-transform: uppercase;
+            letter-spacing: 6.5px;
+            line-height: 1;
+            color: #1a7032;
+            
+
+        }
+
+        .name-box1 > .box1-h3 {
+            /* background-color: blue; */
+            font-size: 25px;
+            text-align: left;
+            font-family: sans-serif;
+            font-weight:lighter ;
+            letter-spacing: 0.5px;
+            line-height: 2;
+            color: #1a7032;
+            margin-left: 108px;
+
+        }
+        .name-box1-logo {
+            width: 40%;
+            height: 100%;
+            /* background-color: rgb(216, 42, 3); */
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+        .logo-img {
+            border-radius: 50%;
+        }
+        /* cer-name  ********************8********************* */
+        
+        /* text-container ************************************* */
+        .text-container {
+            width:100%;
+            height:60%;
+            /* background-color: lightgreen; */
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            align-items: top;
+        }
+        .container-dis {
+            width:90%;
+            height:auto;
+            /* background-color: red; */
+            
+           
+        }
+        .container-h1 {
+            font-size: 40px;
+            font-family: Tempus Sans ITC;
+            font-weight: 900;
+            font-style: italic;
+            color: rgb(120, 196, 5);
+            /* background-color: blue; */
+            margin-top: 25pxpx;
+        }
+
+        .container-hr {
+            width: 75%;
+            height: 2px;
+            border-radius:50%;
+            background-color: green;
+            margin-top: -15px;
+
+        }
+
+        .container-p1 {
+            font-size: 20px;
+            font-family: sans-serif;
+            margin-top: 20px;
+            
+
+        }
+        .container-p2 {
+            font-size: 25px;
+            color: #000;
+            font-family: sans-serif;
+            margin-top: -5px;
+
+        }
+
+        .container-p2 > .span1 {
+            font-size: 25px;
+            font-weight: 500;
+        }
+        .container-p2 > .span2 {
+            font-size: 25px;
+            font-weight: 300;
+            color: rgb(120, 196, 5);
+        }
+
+        .container-p3 {
+            color: #000;
+            font-family: sans-serif;
+            margin-top: -10px;
+
+        }
+        /* ****** box-logos********* */
+        .container-logos {
+            width: 80%;
+            height: 30%;
+            /* background-color: red; */
+            margin: auto;
+            padding: 2px;
+             display: flex;
+            flex-direction: row;
+            justify-content: start;
+            align-items: start;
+        }
+        .container-logos > .logos-borcode {
+            width: 15%;
+            height: 100%;
+            border: 1px solid #fff ;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .barcode-img {
+            width: 80%;
+            height: 80%;
+        }
+
+        .logos-id-number {
+            width:35%;
+            height: 100%;
+            /* border:1px solid green; */
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .cer-num {
+            color: rgb(53, 51, 51);
+            font-size: 16px;
+            letter-spacing: 1px ;
+            position: absolute;
+            top:5px
+        }
+
+        .cer-link {
+            font-size: 11px;
+            color: #000;
+            position: absolute;
+            top:45px;
+            font-weight: bold;
+        }
+        .cer-date {
+            font-size: 13px;
+              position: absolute;
+            top:50px;
+
+        }
+
+        .logos-syncher {
+            width:20%;
+            height: 100%;
+            /* border:1px solid green; */
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .syncher-img {
+            width: 80%;
+            height: 80%;
+        }
+        .logos-compani {
+            width:15%;
+            height: 100%;
+            /* border:1px solid green; */
+        }
+        .compani {
+            width: 90%;
+            height: 90%;
+        }
+        /* ****** box-logos********* */
+        .footer-design {
+            width: 100%;
+            height: 30px;
+            background-color: #1a7032;
+        }
+
+        /* text-container ************************************* */
+        /* cer-bottom-right ************************************* */
+        .cer-bottom-right {
+            width:25%;
+            height: 60%;
+            /* border:1px solid lightgreen;/ */
+            /* background-color:red; */
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            
+        }
+
+        .bt-ri-box1 {
+            width:80%;
+            height: 43.5%;
+            background-color:rgb(10, 207, 10);
+            clip-path: polygon(75% 0, 0% 100%, 100% 100%);
+            position: absolute;
+            bottom: 29px;
+            right: 10px;
+        }
+
+        .bt-ri-box2 {
+            width:35%;
+            height: 90%;
+            background-color:#1a7032;
+            clip-path: polygon(36% 12%, 100% 0%, 100% 100%, 0 55%);
+            position: absolute;
+            bottom: 10px;
+            right: 0px;
+        }
+
+        .bt-ri-box3 {
+            width:35.5%;
+            height: 39%;
+            background-color:rgb(10, 207, 10);
+            clip-path: polygon(36% 0, 100% 17%, 100% 40%, 0% 100%);
+            box-shadow: 10px 10px 10px red;
+            position: absolute;
+            top: 18.5%;
+            right:0;
+
+        }
+        /* cer-bottom-right ************************************* */
+
+
+
+
+
+
+
+
+
+
+
+      .certificate-bg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+
+
+    
+ 
+      button {
+        margin: 0px auto;
+        padding: 10px 20px;
+        font-size: 16px;
+        background: #1a7032;
+        color: white;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+      }

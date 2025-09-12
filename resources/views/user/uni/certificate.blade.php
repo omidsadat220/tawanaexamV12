@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Certificate Preview</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="{{ asset('certificate/css/index.css') }}" />
 
     <!-- CDN های لازم -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -27,14 +27,14 @@
           <span class="box1-h3">Proudly Present to :</span>
         </div>
         <div class="name-box1-logo">
-          <img src="./img/logo.jpg" alt="" class="logo-img" />
+          <img src="{{ asset('certificate/img/logo.jpg') }}" alt="" class="logo-img" />
         </div>
       </div>
       <!-- name*** -->
       <!-- person name*** -->
       <div class="text-container">
         <div class="container-dis">
-          <h1 class="container-h1">Roman Noori</h1>
+          <h1 class="container-h1"><?php echo Auth::user()->name?></h1>
           <hr class="container-hr" />
           <p class="container-p1">
             Has successfully completed all requiements and criteria for
@@ -50,7 +50,7 @@
         </div>
         <div class="container-logos">
           <div class="logos-borcode">
-            <img class="barcode-img" src="./img/barcode.png" alt="" />
+            <img class="barcode-img" src="{{ asset('certificate/img/barcode.png') }}" alt="" />
           </div>
           <div class="logos-id-number">
             <h3 class="cer-num">
@@ -68,10 +68,10 @@
             </h4>
           </div>
           <div class="logos-syncher">
-            <img class="syncher-img" src="./img/syncher.png" alt="" />
+            <img class="syncher-img" src="{{ asset('certificate/img/syncher.png') }}" alt="" />
           </div>
           <div class="logos-compani">
-            <img src="./img/1-2.png" alt="" class="compani" />
+            <img src="{{ asset('certificate/img/1-2.png') }}" alt="" class="compani" />
           </div>
         </div>
       </div>
@@ -94,7 +94,7 @@
 
         // اسکرین‌شات از عنصر
         const canvas = await html2canvas(element, { scale: 2 });
-        const imgData = canvas.toDataURL("image/png");
+        const imgData = canvas.toDataURL("{{ asset('certificate/image/png') }}");
 
         // ایجاد PDF
         const pdf = new jsPDF("landscape", "mm", "a4");
