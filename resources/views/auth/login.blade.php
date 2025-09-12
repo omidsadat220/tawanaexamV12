@@ -57,7 +57,7 @@
             background-image: url("{{ asset('assets/img/login_bg.png') }}");
             background-repeat: no-repeat;
             background-position: center;
-            background-size: 90% 80%;
+            background-size: 100% 100%;
             background-color: rgb(38, 38, 38);
             /* background-color: red; */
             max-width: 100%;
@@ -82,17 +82,41 @@
         }
 
         /* Advanced Glass Card */
-        .auth-card {
-            background-color: rgb(38, 38, 38);
-            border: 1px solid rgba(0, 255, 94, 0.5);
-            width: 22rem;
-            height: 30rem;
+        @media (min-width: 999px) {
 
-            position: absolute;
-            right: 10%;
-            bottom: 19%;
-            /* box-shadow: 0px 0px 20px #16a34a; */
+            .auth-card {
+                background-color: rgb(38, 38, 38);
+                border: 1px solid rgba(0, 255, 94, 0.5);
+                width: 22rem;
+                height: 30rem;
+
+                position: absolute;
+                right: -60% !important;
+             
+                /* box-shadow: 0px 0px 20px #16a34a; */
+            }
+
         }
+
+
+        @media (min-width: 370px) {
+         
+         
+            .auth-card {
+                background-color: rgb(38, 38, 38);
+                border: 1px solid rgba(0, 255, 94, 0.5);
+                width: 22rem;
+                height: 30rem;
+                position:absolute;
+                right:0;
+                left:0;
+                   bottom: 19%;
+            }
+
+        }
+
+        
+
 
         .auth-card::before {
             content: "";
@@ -435,7 +459,7 @@
             .auth-card {
                 background-color: rgb(38, 38, 38);
                 position: absolute;
-                right: 2%;
+              <!--  right: 2%;-->
                 bottom: 13%;
                 /* box-shadow: 0px 0px 20px #16a34a; */
             }
@@ -454,7 +478,7 @@
                 width: 90%;
                 max-width: 440px;
                 min-width: 352px;
-                margin-right: 0;
+               
             }
 
             .container {
@@ -536,7 +560,7 @@
             }
 
             .auth-card {
-  
+                margin:auto;
                 border-radius: 12px;
                 width: 95%;
                 max-width: 385px;
@@ -608,32 +632,7 @@
             }
         }
 
-        @media (min-width: 570px) {
-            .auth-card {
-                margin-right:180px !important;
-            }
-        }
-        
-        @media (min-width: 820px) {
-            .auth-card {
-                margin-right:220px !important;
-            }
-        }
-           
     
-
-        @media (min-width: 786px) {
-            .auth-card {
-                margin-right:180px !important;
-            }
-        }
-
-        
-        @media (min-width: 1024px) {
-            .auth-card {
-                margin-right:10px !important;
-            }
-        }
 
         @media (max-width: 360px) {
             .auth-container {
@@ -642,7 +641,7 @@
             }
 
             .auth-card {
-                margin: 0.125rem;
+                
                 border-radius: 8px;
                 width: 98%;
                 max-width: 352px;
@@ -1054,6 +1053,9 @@
         }
 
         /* <!-- body animation datted css end --> */
+
+        
+
     </style>
 </head>
 
