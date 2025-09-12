@@ -674,7 +674,7 @@
             <span class="user-name">Roman Noori |</span>
 
             <img
-              src="./img/roman.png"
+             src="{{ asset('assets/img/roman.png') }}"
               alt="User Avatar"
               class="avatar-img"
               id="userAvatar"
@@ -683,7 +683,7 @@
           <div class="dropdown-menu" id="userDropdown">
             <div class="dropdown-item">
               <i class="bi bi-person-circle"></i>
-               <a href="{{ route('user.userprofile') }}">Profile</a>
+               <a href="{{ route('user.uprofile.userprofile') }}">Profile</a>
             </div>
             <div class="dropdown-item">
               <i class="bi bi-gear"></i>
