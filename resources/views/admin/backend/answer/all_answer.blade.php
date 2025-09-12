@@ -42,7 +42,7 @@
                             @foreach ($allData as $key => $item)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $item->category->uni_name }}</td>
+                                    <td>{{ $item->category->uni_name ?? 'N/A' }}</td>
                                     <td>{{ $item->question }}</td>
                                     <td>{{ $item->question_one }}</td>
                                     <td>{{ $item->question_two }}</td>

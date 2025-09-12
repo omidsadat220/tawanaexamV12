@@ -59,8 +59,14 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::post('user/varifycode', [UserController::class, 'UserVarifyCode'])->name('user.varifycode');
 
     // Route::post('/update/exam' , 'UpdateExam')->name('update.exam');
-    Route::post('update/exam' , [UserController::class , 'UpdateExam'])->name('update.exam');
+    Route::post('submit/exam' , [UserController::class , 'SubmitExam'])->name('exam.submit');
+    
+    //exam-result
+    Route::get('/user/examresult' , [UserController::class , 'UserExamResult'])->name('user.examresult');
 
+    //certificateUniveristy
+    Route::get('/user/certificate' , [UserController::class , 'UserCertificate'])->name('user.certificate');
+    
 });
 
 
