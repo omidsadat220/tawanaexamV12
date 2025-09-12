@@ -47,13 +47,19 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
     Route::get('/teacher/logout', [TeacherController::class, 'TeacherLogout'])->name('teacher.logout'); // optional
 });
 
+
 Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/user/dashboard', [UserController::class, 'UserDashboard'])->name('user.dashboard');
     Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');
-    Route::get('/user/finalexamdash', [UserController::class, 'UserFinalexamdah'])->name('user.finalexamdash'); 
-    Route::get('/user/userprofile', [UserController::class, 'UserProfile'])->name('user.userprofile'); 
+    Route::get('/user/finalexamdash', [UserController::class, 'UserFinalexamdash'])->name('user.finalexamdash'); 
+    Route::get('/user/uprofile/userprofile', [UserController::class, 'UserProfile'])->name('user.uprofile.userprofile'); 
+    Route::get('/user/uprofile/usereditprofile', [UserController::class, 'UserEditprofile'])->name('user.uprofile.usereditprofile'); 
+    Route::post('/user/uprofile/update', [UserController::class, 'UserProfileUpdate'])->name('user.uprofile.update');
+    Route::get('/user/uprofile/change-password', [UserController::class, 'UserChangepassword'])->name('user.uprofile.change-password'); 
+
+    Route::post('/user/uprofile/update-password', [UserController::class, 'UserPasswordUpdate'])->name('user.uprofile.updatepassword');
+
     Route::get('/user/uni/unicode', [UserController::class, 'UserUnicode'])->name('user.unicode'); 
-    //ExamPage
     Route::get('/user/uni/uniexam/{id}', [UserController::class, 'UserUniexam'])->name('user.uniexam'); 
 
     Route::post('user/varifycode', [UserController::class, 'UserVarifyCode'])->name('user.varifycode');
@@ -68,6 +74,8 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/user/certificate' , [UserController::class , 'UserCertificate'])->name('user.certificate');
     
 });
+
+
 
 
 /**
