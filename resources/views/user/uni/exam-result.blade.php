@@ -68,9 +68,7 @@ $currectAnsower = App\Models\CorrectAns::where('correct_answer', 'correct_answer
      
 
       <section class="text-center">
-        <h2 class="text-xl text-green-500 font-semibold mb-6 drop-shadow-md">
-         Get Your Certificate
-        </h2>
+       
        <button
         id="backButton"
         class="bg-gray-700 hover:bg-green-600 text-green-400 hover:text-gray-900 font-semibold py-2 px-6 rounded-md shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 inline-flex items-center space-x-2 mx-auto"
@@ -93,9 +91,7 @@ $currectAnsower = App\Models\CorrectAns::where('correct_answer', 'correct_answer
           </svg>
         </button> <br><br>
 
-         <h2 class="text-xl text-green-500 font-semibold mb-6 drop-shadow-md">
-          Review of Incorrect Answers
-        </h2>
+        
 
       </section>
 
