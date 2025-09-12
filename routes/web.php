@@ -61,8 +61,14 @@ Route::middleware(['auth', 'role:user'])->group(function () {
 
     Route::get('/user/uni/unicode', [UserController::class, 'UserUnicode'])->name('user.unicode'); 
     Route::get('/user/uni/uniexam/{id}', [UserController::class, 'UserUniexam'])->name('user.uniexam'); 
+    
+    Route::post('/user/varifycode', [UserController::class, 'UserVarifyCode'])->name('user.varifycode');
+
 
     Route::post('user/varifycode', [UserController::class, 'UserVarifyCode'])->name('user.varifycode');
+
+    // Route::post('/update/exam' , 'UpdateExam')->name('update.exam');
+    Route::post('update/exam' , [UserController::class , 'UpdateExam'])->name('update.exam');
 
 });
 

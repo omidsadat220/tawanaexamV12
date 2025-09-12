@@ -25,7 +25,7 @@ class UserController extends Controller
         return redirect('/');
     }
 
-    public function UserFinalexamdah()
+    public function UserFinalexamdash()
     {
         return view('user.finalexamdash');
     }
@@ -36,7 +36,7 @@ class UserController extends Controller
         return view('user.uprofile.userprofile', compact('user'));
     }
 
-    public function UserEditprofile()
+   public function UserEditprofile()
     {
         $user = Auth::user();
         return view('user.uprofile.usereditprofile', compact('user'));
@@ -45,28 +45,33 @@ class UserController extends Controller
 
     public function UserProfileUpdate(Request $request)
     {
-        $user = auth()->user();
+    $user = auth()->user();
 
-        $request->validate([
-            'name'   => 'required|string|max:255',
-            'email'  => 'required|email|unique:users,email,' . $user->id,
-            'avatar' => 'nullable|image|max:2048',
-        ]);
+    $request->validate([
+        'name'   => 'required|string|max:255',
+        'email'  => 'required|email|unique:users,email,' . $user->id,
+        'avatar' => 'nullable|image|max:2048',
+    ]);
 
-       
-        $user->name  = $request->name;
-        $user->email = $request->email;
+    $user->name  = $request->name;
+    $user->email = $request->email;
 
-        if ($request->hasFile('avatar')) {
-            $avatarName = time().'.'.$request->avatar->extension();
-            $request->avatar->move(public_path('avatars'), $avatarName);
-            $user->photo = 'avatars/'.$avatarName; 
+    if ($request->hasFile('avatar')) {
+
+        if ($user->photo && file_exists(public_path($user->photo))) {
+            unlink(public_path($user->photo));
         }
 
-        $user->save();
+        $avatarName = time().'.'.$request->avatar->extension();
+        $request->avatar->move(public_path('uploads/user_profiles'), $avatarName);
 
-        return redirect()->route('user.uprofile.userprofile')
-                        ->with('success', 'Profile updated successfully!');
+        $user->photo = 'uploads/user_profiles/'.$avatarName;
+    }
+
+    $user->save();
+
+    return redirect()->route('user.uprofile.userprofile')
+                     ->with('success', 'Profile updated successfully!');
     }
 
 

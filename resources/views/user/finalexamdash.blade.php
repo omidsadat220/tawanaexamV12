@@ -674,7 +674,7 @@
             <span class="user-name">Roman Noori |</span>
 
             <img
-             src="{{ asset('assets/img/roman.png') }}"
+             src="{{ asset('assets/img/no-image.jpeg') }}"
               alt="User Avatar"
               class="avatar-img"
               id="userAvatar"

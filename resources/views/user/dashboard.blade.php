@@ -662,14 +662,10 @@
                 <div class="user-avatar">
                     <span class="user-name">{{ $profileData->name }} |</span>
 
-
-
-                    {{-- when we create the image folder you can incomment  --}}
-                    {{-- <img class="rounded-circle header-profile-user" src="{{ (!empty($profileData->photo)) ? url('upload/client_images/'.$profileData->photo) : url('upload/no_image.jpg') }}" --}}
-
-
-                    <img src="{{ asset('assets/img/roman.png') }}" alt="User Avatar" class="avatar-img"
-                        id="userAvatar" />
+                    <img id="userAvatar"  class="avatar-img rounded-full w-40 h-40 border-4 border-green-400 shadow-lg"  
+                    src="{{ !empty($userData->photo) ? asset('uploads/admin_profiles/'.$userData->photo) : asset('uploads/no-image.jpeg') }}" 
+                    alt="profile" >
+                        
                 </div>
                 <div class="dropdown-menu" id="userDropdown">
                     <div class="dropdown-item">
@@ -708,7 +704,8 @@
             <!-- Card 1: Take Test -->
             <div class="card-custom" role="button" tabindex="0" aria-label="Take Test">
                 <div class="card-text">
-                    <a href="{{ route('user.finalexamdash') }}">Final Exam</a>
+                <!--    <a href="{{ route('user.finalexamdash') }}">Final Exam</a> -->
+                <a href="https://www.tawanatechnology.com/">Final Exam</a>
                     <span class="arrow-icon">↻</span>
                 </div>
 
@@ -731,7 +728,7 @@
             <!-- Card 3: Test History -->
             <div class="card-custom" role="button" tabindex="0" aria-label="Test History">
                 <div class="card-text">
-                    <a href="../cer/index.html">Certificate</a>
+                    <a href="https://www.tawanatechnology.com/">Certificate</a>
                     <span class="arrow-icon">↻</span>
                 </div>
                 <div class="icon-container" aria-hidden="true">
@@ -742,7 +739,7 @@
             <!-- Card 4: Contact Us -->
             <div class="card-custom" role="button" tabindex="0" aria-label="Contact Us">
                 <div class="card-text">
-                    <a href="#">Contact Us</a> <span class="arrow-icon">↻</span>
+                    <a href="https://www.tawanatechnology.com/">Contact Us</a> <span class="arrow-icon">↻</span>
                 </div>
                 <div class="icon-container" aria-hidden="true">
                     <i class="bi bi-telephone-fill"></i>
@@ -789,6 +786,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+
         document.addEventListener("DOMContentLoaded", function() {
             const userAvatar = document.getElementById("userAvatar");
             const userDropdown = document.getElementById("userDropdown");

@@ -452,6 +452,9 @@
                 width: 100vw;
                 max-width: 100vw;
                 overflow-x: hidden;
+                display:flex;
+                align-items:center;
+                justify-content:center;
             }
 
             .input-field {
@@ -523,7 +526,7 @@
             }
 
             .auth-card {
-                margin: 0.25rem;
+  
                 border-radius: 12px;
                 width: 95%;
                 max-width: 385px;
@@ -592,6 +595,33 @@
                 top: 1px;
                 width: 4px;
                 height: 8px;
+            }
+        }
+
+        @media (min-width: 570px) {
+            .auth-card {
+                margin-right:180px !important;
+            }
+        }
+        
+        @media (min-width: 820px) {
+            .auth-card {
+                margin-right:220px !important;
+            }
+        }
+           
+    
+
+        @media (min-width: 786px) {
+            .auth-card {
+                margin-right:180px !important;
+            }
+        }
+
+        
+        @media (min-width: 1024px) {
+            .auth-card {
+                margin-right:10px !important;
             }
         }
 

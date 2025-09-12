@@ -143,14 +143,17 @@
       </div>
 
       <div class="profile-card">
-        <div class="avatar-section">
-          <div class="avatar" onclick="document.getElementById('avatar-upload').click()">
-            @if($user->photo)
-              <img id="avatar-preview" src="{{ asset($user->photo) }}" alt="Avatar">
-            @else
-              <i class="fas fa-user" id="avatar-icon"></i>
-            @endif
-          </div>
+       <div class="avatar-section">
+        <div class="avatar" onclick="document.getElementById('avatar-upload').click()">
+
+            <img id="avatar-preview" 
+                src="{{ $user->photo ? asset($user->photo) : asset('assets/img/no-image.jpeg') }}" 
+                alt="Avatar" style="width:120px; height:120px; object-fit:cover; border-radius:50%;">
+                
+        </div>
+        <input type="file" id="avatar-upload" name="avatar" accept="image/*" style="display:none;" onchange="previewAvatar(event)">
+      </div>
+
           <input type="file" id="avatar-upload" name="avatar" class="avatar-upload" accept="image/*">
           <p style="color: #888; font-size: 0.9rem">Click to change photo</p>
         </div>
@@ -183,6 +186,14 @@
     </div>
 
     <script>
+
+    function previewAvatar(event) {
+    const reader = new FileReader();
+    reader.onload = function(){
+        document.getElementById('avatar-preview').src = reader.result;
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}
       // Avatar preview
       document.getElementById('avatar-upload').addEventListener('change', function(event) {
         const file = event.target.files[0];

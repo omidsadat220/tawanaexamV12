@@ -508,7 +508,8 @@
       .profile-card {
         animation: fadeInUp 0.7s cubic-bezier(0.4, 2, 0.6, 1) both;
         background-color: #0f0f0f;
-        background-image: url("./img/hb.png");
+        background-image: url("{{ asset('assets/img/hb.png') }}");
+
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -675,15 +676,21 @@
     <div class="profile-header">
       <!-- Profile Card -->
       <div
-        class="profile-card bg-dark rounded-2xl shadow-xl p-8 flex flex-col md:flex-row items-center gap-8 relative"
+        class="profile-card rounded-2xl shadow-xl p-8 flex flex-col md:flex-row items-center gap-8 relative"
       >
         <!-- Profile Picture -->
         <div class="relative">
-          <img
-            src="{{ Auth::user()->photo ? asset('uploads/user_profiles/'.Auth::user()->photo) : asset('assets/img/roman.png') }}"
-            alt="Student Profile"
+
+
+
+        <img 
+            src="{{ $user->photo ? asset($user->photo) : ('assets/img/hb.png') }}" 
+            alt="Avatar" 
             class="rounded-full w-40 h-40 border-4 border-green-400 shadow-lg"
-          />
+        />
+
+
+        
           <span
             class="absolute bottom-2 right-2 w-5 h-5 bg-green-500 border-2 border-white rounded-full animate-pulse"
           ></span>
@@ -694,27 +701,39 @@
           <div class="flex items-center gap-3 mb-2">
           
             <h2 class="text-3xl font-bold">{{ Auth::user()->name }} {{ Auth::user()->lastname }}</h2>
-            <span
+            <!---            <span
               class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-xs font-semibold flex items-center gap-1"
             >
               <i class="fas fa-user-graduate text-green-500"></i> Student
             </span>
+            -->
           </div>
+          <!--
           <p class="text-gray-500 mb-4" style="color: #fff; text-align: left">
             {{ Auth::user()->role ?? 'web developer' }}
           </p>
+          -->
           <div class="flex flex-wrap gap-4 mb-2">
+          <!---
             <div class="flex items-center gap-2 text-gray-600" style="color: #fff">
               <i class="fas fa-book-open text-green-500"></i> Major:
               <span class="font-semibold" style="color: #fff">{{ Auth::user()->major ?? 'front end' }}</span>
             </div>
+          -->
+
+
+
             <div class="flex items-center gap-2 text-gray-600" style="color: #fff">
-              <i class="fas fa-calendar-alt text-green-500"></i> Joined:
-              <span class="font-semibold" style="color: #fff">{{ Auth::user()->created_at->format('Y') }}</span>
-            </div>
+              <i class="fas fa-calendar text-green-500"></i> Joined:
+              <span class="font-semibold" style="color: #fff">
+                  {{ Auth::user()->created_at->format('Y-m-d') }}
+              </span>
+          </div>
+
+
           </div>
           <div class="flex flex-wrap gap-2 mb-4">
-            <a href="{{ route('user.finalexamdash') }}"
+            <a href="{{ route('user.dashboard') }}"
                class="btn-sm mt-2 px-4 py-1 rounded-lg bg-green-500 text-white font-semibold shadow hover:bg-green-600 transition flex items-center gap-2">
               Home
             </a>
@@ -739,7 +758,7 @@
         <div class="exam-history-section">
           <h2 class="section-title">
             <i class="bi bi-calendar-check me-2"></i>
-            Exam History
+            Comming Soon
           </h2>
 
           <div class="exam-grid">
@@ -763,7 +782,7 @@
                       <div
                         class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full"
                       >
-                        Complated
+                        Comming soon
                       </div>
                     </div>
                     <p
@@ -828,7 +847,7 @@
                       <div
                         class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full"
                       >
-                        Complated
+                        Comming soon
                       </div>
                     </div>
                     <p
@@ -893,7 +912,7 @@
                       <div
                         class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full"
                       >
-                        Complated
+                        Comming soon
                       </div>
                     </div>
                     <p
@@ -958,7 +977,7 @@
                       <div
                         class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded-full"
                       >
-                        Complated
+                        Comming soon
                       </div>
                     </div>
                     <p
