@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Advanced Authentication System | Service</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="{{ asset('favicon-32x32.png') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <!-- <link rel="stylesheet" href="./css/signin.css"> -->
     <style>
@@ -57,7 +58,7 @@
             background-image: url("{{ asset('assets/img/login_bg.png') }}");
             background-repeat: no-repeat;
             background-position: center;
-            background-size: 90% 80%;
+            background-size: 100% 100%;
             background-color: rgb(38, 38, 38);
             /* background-color: red; */
             max-width: 100%;
@@ -82,17 +83,41 @@
         }
 
         /* Advanced Glass Card */
-        .auth-card {
-            background-color: rgb(38, 38, 38);
-            border: 1px solid rgba(0, 255, 94, 0.5);
-            width: 22rem;
-            height: 30rem;
+        @media (min-width: 999px) {
 
-            position: absolute;
-            right: 10%;
-            bottom: 19%;
-            /* box-shadow: 0px 0px 20px #16a34a; */
+            .auth-card {
+                background-color: rgb(38, 38, 38);
+                border: 1px solid rgba(0, 255, 94, 0.5);
+                width: 22rem;
+                height: 30rem;
+
+                position: absolute;
+                right: -60% !important;
+             
+                /* box-shadow: 0px 0px 20px #16a34a; */
+            }
+
         }
+
+
+        @media (min-width: 370px) {
+         
+         
+            .auth-card {
+                background-color: rgb(38, 38, 38);
+                border: 1px solid rgba(0, 255, 94, 0.5);
+                width: 22rem;
+                height: 30rem;
+                position:absolute;
+                right:0;
+                left:0;
+                   bottom: 19%;
+            }
+
+        }
+
+        
+
 
         .auth-card::before {
             content: "";
@@ -435,7 +460,7 @@
             .auth-card {
                 background-color: rgb(38, 38, 38);
                 position: absolute;
-                right: 2%;
+              <!--  right: 2%;-->
                 bottom: 13%;
                 /* box-shadow: 0px 0px 20px #16a34a; */
             }
@@ -454,7 +479,7 @@
                 width: 90%;
                 max-width: 440px;
                 min-width: 352px;
-                margin-right: 0;
+               
             }
 
             .container {
@@ -462,6 +487,9 @@
                 width: 100vw;
                 max-width: 100vw;
                 overflow-x: hidden;
+                display:flex;
+                align-items:center;
+                justify-content:center;
             }
 
             .input-field {
@@ -533,7 +561,7 @@
             }
 
             .auth-card {
-                margin: 0.25rem;
+                margin:auto;
                 border-radius: 12px;
                 width: 95%;
                 max-width: 385px;
@@ -605,6 +633,8 @@
             }
         }
 
+    
+
         @media (max-width: 360px) {
             .auth-container {
                 overflow-x: hidden;
@@ -612,7 +642,7 @@
             }
 
             .auth-card {
-                margin: 0.125rem;
+                
                 border-radius: 8px;
                 width: 98%;
                 max-width: 352px;
@@ -1024,6 +1054,9 @@
         }
 
         /* <!-- body animation datted css end --> */
+
+        
+
     </style>
 </head>
 
