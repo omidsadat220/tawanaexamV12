@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
@@ -7,10 +6,6 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\Uni_answer_qController;
 use App\Http\Controllers\teacher\TeacherController;
 use App\Http\Controllers\user\UserController;
-
-
-
-
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
@@ -62,6 +57,10 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/user/uni/unicode', [UserController::class, 'UserUnicode'])->name('user.unicode'); 
     Route::get('/user/uni/uniexam/{id}', [UserController::class, 'UserUniexam'])->name('user.uniexam'); 
     Route::post('user/varifycode', [UserController::class, 'UserVarifyCode'])->name('user.varifycode');
+    
+    Route::post('submit/exam' , [UserController::class , 'SubmitExam'])->name('exam.submit');
+    Route::get('/user/examresult' , [UserController::class , 'UserExamResult'])->name('user.examresult');
+    Route::get('/user/certificate' , [UserController::class , 'UserCertificate'])->name('user.certificate');
 
 });
 
@@ -88,3 +87,15 @@ Route::get('/', function () {
 
 
 require __DIR__.'/auth.php';
+
+
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
+
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });

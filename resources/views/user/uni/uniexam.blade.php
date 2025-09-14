@@ -145,7 +145,7 @@
         }
         
            .bg-img { 
-            background-image: url('hb.png');
+            background-image: url("{{ asset('assets/img/hb.png') }}");
             background-position: center;
             background-size: cover;
            }
