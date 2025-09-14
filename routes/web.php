@@ -41,7 +41,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::controller(classcategoryController::class)->group(function() {
         Route::get('/all/class/category' , 'AllClassCategory')->name('all.class.category');
         Route::get('/add/class/category' , 'AddClassCategory')->name('add.class.category');
-        Route::post('store/class/category' , 'StoreClassCategory')->name('store.class.category');
+        Route::post('/store/class/category' , 'StoreClassCategory')->name('store.class.category');
+        Route::get('/edit/class/category/{id}' , 'EditClassCategory')->name('edit.class.category');
+        Route::post('/update/class/category' , 'UpdateClassCategory')->name('update.class.category');
+        Route::get('/delete/class/category/{id}' , 'DeleteClassCategory')->name('delete.class.category');
+
+
     });
 
 });

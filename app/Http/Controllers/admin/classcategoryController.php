@@ -34,4 +34,42 @@ class classcategoryController extends Controller
 
         return redirect()->route('all.class.category');
     }
+
+    //end method 
+
+    public function EditClassCategory($id) {
+
+        $classcateogry = classcategory::find($id);
+
+        return view('admin.backend.class_category.edit_class_category', compact('classcateogry'));
+    }
+    //end method 
+
+    public function UpdateClassCategory(Request $request) {
+        $class_id = $request->id;
+
+        classcategory::find($class_id)->update([
+            'class_category' =>$request->class_category,
+            'slug_name' => strtolower(str_replace(' ', '-', $request->class_category)),
+        ]);
+
+            $notification = array(
+            'message' => 'Category Inserted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('all.class.category');
+    }
+
+    //end method 
+
+    public function DeleteClassCategory($id) {
+        $classcateogry = classcategory::find($id)->delete();
+
+         $notification = array(
+            'message' => 'Category Delete Successfully',
+            'alert-type' => 'success'
+         ); 
+         return redirect()->back()->with($notification);
+    }
 }
