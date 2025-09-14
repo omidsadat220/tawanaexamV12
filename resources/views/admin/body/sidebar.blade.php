@@ -37,13 +37,28 @@
               <a href="index.html" class="nav-item nav-link"
                 ><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a
               >
+
               <div class="nav-item dropdown">
-                <a href="{{route('all.category')}}" class="nav-item nav-link"
+
+                <a
+                  href="#"
+                  class="nav-link dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  ><i class="far fa-file-alt me-2"></i>All Category</a
+                >
+                 <div class="dropdown-menu bg-transparent border-0">
+                   <a href="{{route('all.category')}}" class="nav-item nav-link"
                   ><i class="fa fa-laptop me-2"></i> All Catagory</a
                 >
-                <a href="{{route('all.answer')}}" class="nav-item nav-link"
+                 <a href="{{route('all.answer')}}" class="nav-item nav-link"
                   ><i class="fa fa-laptop me-2"></i> All Answer</a
                 >
+                </div>
+
+               
+                
+
+                
                 {{-- <a href="Catagory.html" class="nav-item nav-link"
                   ><i class="fa fa-laptop me-2"></i>Teacher</a
                 >
@@ -58,6 +73,24 @@
                 > --}}
               </div>
 
+              <div class="nav-item dropdown">
+
+                <a
+                  href="#"
+                  class="nav-link dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  ><i class="far fa-file-alt me-2"></i>Class Category</a
+                >
+                 <div class="dropdown-menu bg-transparent border-0">
+                   <a href="{{route('all.class.category')}}" class="nav-item nav-link"
+                  ><i class="fa fa-laptop me-2"></i> All class</a
+                >
+                 <a href="{{route('all.answer')}}" class="nav-item nav-link"
+                  ><i class="fa fa-laptop me-2"></i> All Subject</a
+                >
+                </div>
+                </div>
+
               {{-- <div class="nav-item dropdown">
                 <a
                   href="#"
@@ -66,8 +99,8 @@
                   ><i class="far fa-file-alt me-2"></i>Pages</a
                 >
                 <div class="dropdown-menu bg-transparent border-0">
-                  <!-- <a href="teachers.html" class="dropdown-item">Teachers</a>
-                            <a href="students.html" class="dropdown-item">Students</a> -->
+                  <a href="teachers.html" class="dropdown-item">Teachers</a>
+                            <a href="students.html" class="dropdown-item">Students</a> 
                   <a href="404.html" class="dropdown-item">404 Error</a>
                 </div>
               </div> --}}

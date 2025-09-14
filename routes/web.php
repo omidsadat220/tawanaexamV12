@@ -3,9 +3,12 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\classcategoryController;
 use App\Http\Controllers\admin\Uni_answer_qController;
 use App\Http\Controllers\teacher\TeacherController;
 use App\Http\Controllers\user\UserController;
+
+use function Pest\Laravel\get;
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
 
@@ -33,6 +36,12 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::post('/update/answer' , 'UpdateAnswer')->name('update.answer');
         Route::get('/delete/answer/{id}' , 'DeleteAnswer')->name('delete.answer');
 
+    });
+
+    Route::controller(classcategoryController::class)->group(function() {
+        Route::get('/all/class/category' , 'AllClassCategory')->name('all.class.category');
+        Route::get('/add/class/category' , 'AddClassCategory')->name('add.class.category');
+        Route::post('store/class/category' , 'StoreClassCategory')->name('store.class.category');
     });
 
 });
