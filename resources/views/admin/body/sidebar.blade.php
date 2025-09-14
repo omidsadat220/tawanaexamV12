@@ -85,7 +85,7 @@
                    <a href="{{route('all.class.category')}}" class="nav-item nav-link"
                   ><i class="fa fa-laptop me-2"></i> All class</a
                 >
-                 <a href="{{route('all.answer')}}" class="nav-item nav-link"
+                 <a href="{{route('all.subject')}}" class="nav-item nav-link"
                   ><i class="fa fa-laptop me-2"></i> All Subject</a
                 >
                 </div>

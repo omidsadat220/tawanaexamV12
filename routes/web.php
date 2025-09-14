@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\classcategoryController;
+use App\Http\Controllers\admin\classsubjectController;
 use App\Http\Controllers\admin\Uni_answer_qController;
 use App\Http\Controllers\teacher\TeacherController;
 use App\Http\Controllers\user\UserController;
@@ -45,8 +46,15 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/edit/class/category/{id}' , 'EditClassCategory')->name('edit.class.category');
         Route::post('/update/class/category' , 'UpdateClassCategory')->name('update.class.category');
         Route::get('/delete/class/category/{id}' , 'DeleteClassCategory')->name('delete.class.category');
+    });
 
-
+    Route::controller(classsubjectController::class)->group(function() {
+        Route::get('/all/subject' , 'AllSubject')->name('all.subject');
+        Route::get('/add/subject' , 'AddSubject')->name('add.subject');
+        Route::post('/store/subject' , 'StoreSubject')->name('store.subject');
+        Route::get('/edit/subject/{id}' , 'EditSubject')->name('edit.subject');
+        Route::post('/update/subject' , 'UpdateSubject')->name('update.subject');
+        Route::get('/delete/subject/{id}' , 'DeleteSubject')->name('delete.subject');
     });
 
 });

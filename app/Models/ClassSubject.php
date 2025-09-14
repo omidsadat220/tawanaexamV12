@@ -8,9 +8,10 @@ class ClassSubject extends Model
 {
     protected $guarded = [];
 
-    public function classcategory() {
-        return $this->belongsTo(classcategory::class , 'classcategory_id');
-    }
+    public function classcategory()
+{
+    return $this->belongsTo(ClassCategory::class, 'class_category_id', 'id');
+}
 
        
 }
