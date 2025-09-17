@@ -664,12 +664,10 @@
 
 
 
-                    {{-- when we create the image folder you can incomment  --}}
-                    {{-- <img class="rounded-circle header-profile-user" src="{{ (!empty($profileData->photo)) ? url('upload/client_images/'.$profileData->photo) : url('upload/no_image.jpg') }}" --}}
-
-
-                    <img src="https://www.tawanatechnology.com/upload/clientlogo/1843057306006446.png" alt="User Avatar" class="avatar-img"
-                        id="userAvatar" />
+                    {{-- when we create the image folder you can incomment --}}
+                    {{-- <img class="rounded-circle header-profile-user"
+                        src="{{ (!empty($profileData->photo)) ? url('upload/client_images/'.$profileData->photo) : url('upload/no_image.jpg') }}"
+                        --}} <img src="{{ asset($profileData->photo) }}" class="avatar-img" id="userAvatar" />
                 </div>
                 <div class="dropdown-menu" id="userDropdown">
                     <div class="dropdown-item">
@@ -678,7 +676,7 @@
                     </div>
                     <div class="dropdown-item">
                         <i class="bi bi-gear"></i>
-                        <a href="./edituser.html">Settings</a>
+                        <a href="{{ route('user.uprofile.usereditprofile') }}">Settings</a>
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="dropdown-item">
@@ -789,19 +787,19 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const userAvatar = document.getElementById("userAvatar");
             const userDropdown = document.getElementById("userDropdown");
             let isDropdownOpen = false;
 
             // Toggle dropdown on avatar click
-            userAvatar.addEventListener("click", function(e) {
+            userAvatar.addEventListener("click", function (e) {
                 e.stopPropagation();
                 toggleDropdown();
             });
 
             // Close dropdown when clicking outside
-            document.addEventListener("click", function(e) {
+            document.addEventListener("click", function (e) {
                 if (
                     !userAvatar.contains(e.target) &&
                     !userDropdown.contains(e.target)
@@ -813,7 +811,7 @@
             // Handle dropdown item clicks
             const dropdownItems = document.querySelectorAll(".dropdown-item");
             dropdownItems.forEach((item) => {
-                item.addEventListener("click", function() {
+                item.addEventListener("click", function () {
                     const action = this.querySelector("span").textContent.toLowerCase();
                     handleDropdownAction(action);
                     closeDropdown();
@@ -858,7 +856,7 @@
             }
 
             // Close dropdown on escape key
-            document.addEventListener("keydown", function(e) {
+            document.addEventListener("keydown", function (e) {
                 if (e.key === "Escape" && isDropdownOpen) {
                     closeDropdown();
                 }
