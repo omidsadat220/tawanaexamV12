@@ -25,20 +25,25 @@ class classsubjectController extends Controller
         return view('admin.backend.class_subject.add_subject' , compact('categories'));
     }
 
-    public function StoreSubject(Request $request) {
+public function StoreSubject(Request $request)
+{
+    $request->validate([
+        'class_category_id' => 'required|integer',
+        'subject_name'      => 'required|array|min:1',
+        'subject_name.*'    => 'required|string|max:255',
+    ]);
 
-        ClassSubject::insert([
-            'class_category_id' =>$request->class_category_id,
-            'subject_name' =>$request->subject_name,
-        ]);
+    // store all subjects in ONE row
+    ClassSubject::create([
+        'class_category_id' => $request->class_category_id,
+        'subject_name'      => json_encode($request->subject_name),
+    ]);
 
-           $notification = array(
-            'message' => 'subject Inserted Successfully',
-            'alert-type' => 'success'
-        );
-
-        return redirect()->route('all.subject')->with($notification);
-    }
+    return redirect()->route('all.subject')->with([
+        'message' => 'Subjects Inserted Successfully',
+        'alert-type' => 'success'
+    ]);
+}
 
     //end method 
 

@@ -38,7 +38,13 @@
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $item->classcategory->class_category }}</td>
-                                    <td>{{ $item->subject_name }}</td>
+
+<td>
+    @foreach($allData as $item)
+        {{ implode(', ', json_decode($item->subject_name)) }}
+    @endforeach
+</td>
+                                    {{-- <td>{{ $item->subject_name }}</td> --}}
                                  
                                     <td>
                                         <a title="Edit" href="{{ route('edit.subject', $item->id) }}"
