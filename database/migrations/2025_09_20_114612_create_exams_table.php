@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('exams', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('class_category_id')->nullable();
             $table->unsignedBigInteger('class_subject_id')->nullable();
-            $table->string('subject_name');
             $table->string('exam_name');
-            $table->integer('time');
+            $table->time('time')->nullable();
             $table->timestamps();
 
-             $table->foreign('class_subject_id')->references('id')->on('class_subjects')->onDelete('cascade');
+            $table->foreign('class_category_id')->references('id')->on('classcategories')->onDelete('cascade');
+            $table->foreign('class_subject_id')->references('id')->on('class_subjects')->onDelete('cascade');
         });
     }
 

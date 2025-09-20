@@ -59,7 +59,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     });
 
     Route::controller(ExamController::class)->group(function() {
-        Route::get('all/exam' , 'AllExam')->name('all.exam');
+        Route::get('/all/exam' , 'AllExam')->name('all.exam');
+        Route::get('/add/exam' , 'AddExam')->name('add.exam');
+        Route::post('/store/exam' , 'StoreExam')->name('store.exam');
     });
 });
 

@@ -15,7 +15,7 @@
                                         placeholder="Search" style="font-size: 18px; height: 55px; width: 300px" />
                                 </form>
 
-                                <a href="{{ route('add.class.category') }}">
+                                <a href="{{ route('add.exam') }}">
                                     <button style="--clr: #39ff14" class="button-styleee">
                                         <span>All Class Categories</span><i></i>
                                     </button>
@@ -29,28 +29,55 @@
                             <tr>
                                 <th>ID</th>
                                 <th>class Category</th>
-                                <th>Category_slug</th>
+                                <th>Subject</th>
+                                <th>Exam Name</th>
+                                <th>Time</th>
                                 <th class="action">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($allData as $key => $item)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $item->class_category }}</td>
-                                    <td>{{ $item->slug_name }}</td>
-                                 
-                                    <td>
-                                        <a title="Edit" href="{{ route('edit.class.category', $item->id) }}"
-                                            class="btn btn-success btn-sm"> <span class="mdi mdi-book-edit mdi-18px">edit</span>
-                                        </a>
+<tr>
+    <td>{{ $key + 1 }}</td>
 
-                                        <a title="Delete" href="{{ route('delete.class.category', $item->id) }}"
-                                            class="btn btn-danger btn-sm" id="delete"><span
-                                                class="mdi mdi-delete-circle  mdi-18px">delete</span></a>
-                                    </td>
-                                </tr>
-                            @endforeach
+    {{-- Class Category --}}
+    <td>{{ $item->classcategory->class_category ?? 'N/A' }}</td>
+
+    {{-- Subjects (comma-separated) --}}
+    <td>
+    @php
+        $allSubjects = [];
+        foreach ($item->classSubjects as $sub) {
+            // decode if it's JSON, otherwise take as string
+            $decoded = json_decode($sub->subject_name, true);
+            if (is_array($decoded)) {
+                $allSubjects = array_merge($allSubjects, $decoded);
+            } else {
+                $allSubjects[] = $sub->subject_name;
+            }
+        }
+    @endphp
+    {{ implode(', ', $allSubjects) }}
+</td>
+
+    {{-- Exam Name --}}
+    <td>{{ $item->exam_name }}</td>
+
+    {{-- Exam Time --}}
+    <td>{{ $item->time }}</td>
+
+    {{-- Action buttons --}}
+    <td>
+        <a title="Edit" href="{{ route('edit.class.category', $item->id) }}" class="btn btn-success btn-sm">
+            <span class="mdi mdi-book-edit mdi-18px">edit</span>
+        </a>
+
+        <a title="Delete" href="{{ route('delete.class.category', $item->id) }}" class="btn btn-danger btn-sm" id="delete">
+            <span class="mdi mdi-delete-circle mdi-18px">delete</span>
+        </a>
+    </td>
+</tr>
+@endforeach
 
 
                         </tbody>
