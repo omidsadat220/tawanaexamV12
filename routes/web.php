@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\classcategoryController;
 use App\Http\Controllers\admin\classsubjectController;
+use App\Http\Controllers\admin\ExamController;
 use App\Http\Controllers\admin\Uni_answer_qController;
 use App\Http\Controllers\teacher\TeacherController;
 use App\Http\Controllers\user\UserController;
@@ -55,6 +56,10 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/edit/subject/{id}', 'EditSubject')->name('edit.subject');
         Route::post('/update/subject', 'UpdateSubject')->name('update.subject');
         Route::get('/delete/subject/{id}', 'DeleteSubject')->name('delete.subject');
+    });
+
+    Route::controller(ExamController::class)->group(function() {
+        Route::get('all/exam' , 'AllExam')->name('all.exam');
     });
 });
 

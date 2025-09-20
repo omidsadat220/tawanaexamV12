@@ -13,5 +13,10 @@ class ClassSubject extends Model
     return $this->belongsTo(ClassCategory::class, 'class_category_id', 'id');
 }
 
+    public function exam()
+    {
+        return $this->hasMany(Exam::class, 'class_subject_id', 'id');
+    }
+
        
 }
