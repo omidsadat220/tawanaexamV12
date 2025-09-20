@@ -7,23 +7,15 @@
     <meta content="" name="keywords" />
     <meta content="" name="description" />
 
-    
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- DataTables CSS -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
-<!-- DataTables JS -->
-<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
-
-
-
-
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" />
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
     <!-- my style  -->
     <link rel="stylesheet" href="{{asset('backend/assets/css/mystyle.css')}}" />
-
     <!-- Favicon -->
     <link href="{{asset('backend/assets/img/fav4.png')}}" rel="icon" />
 
@@ -158,8 +150,9 @@
                 break;
         }
     @endif
-</script>
 
+
+</script>
     <!-- Template Javascript -->
     <script src="{{asset('backend/assets/js/main.js')}}"></script>
     <script src="{{asset('backend/assets/js/myjs.js')}}"></script>

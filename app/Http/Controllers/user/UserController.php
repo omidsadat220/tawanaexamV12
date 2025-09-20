@@ -33,7 +33,7 @@ class UserController extends Controller
 
     public function UserProfile()
     {
-        $user = auth()->user();  
+        $user = auth()->user();
         return view('user.uprofile.userprofile', compact('user'));
     }
 
@@ -54,29 +54,31 @@ class UserController extends Controller
             'avatar' => 'nullable|image|max:2048',
         ]);
 
-       
+
         $user->name  = $request->name;
         $user->email = $request->email;
 
         if ($request->hasFile('avatar')) {
-            $avatarName = time().'.'.$request->avatar->extension();
+            $avatarName = time() . '.' . $request->avatar->extension();
             $request->avatar->move(public_path('avatars'), $avatarName);
-            $user->photo = 'avatars/'.$avatarName; 
+            $user->photo = 'avatars/' . $avatarName;
         }
 
         $user->save();
 
         return redirect()->route('user.uprofile.userprofile')
-                        ->with('success', 'Profile updated successfully!');
+            ->with('success', 'Profile updated successfully!');
     }
 
 
 
-    public function UserChangepassword() {
-            return view('user.uprofile.change-password');
-        }
+    public function UserChangepassword()
+    {
+        return view('user.uprofile.change-password');
+    }
 
-    public function UserPasswordUpdate(Request $request) {
+    public function UserPasswordUpdate(Request $request)
+    {
         $request->validate([
             'old_password' => 'required',
             'new_password' => 'required|confirmed',
@@ -104,122 +106,123 @@ class UserController extends Controller
 
 
 
-    public function UserUnicode(){
+    public function UserUnicode()
+    {
         return view('user.uni.unicode');
     }
 
-    //Exam Page 
-    public function UserUniexam($id){
-        
+    //Exam Page
+    public function UserUniexam($id)
+    {
+
         $category = Category::findOrFail($id);
         return view('user.uni.uniexam', compact('category'));
     }
 
-    public function UpdateExam(Request $request) {
+    public function UpdateExam(Request $request)
+    {
 
-         $cat_id = $request->cat_id;
- 
-    $correct = CorrectAns::findOrFail($request->cat_id);
+        $cat_id = $request->cat_id;
 
-    $correct->update([
-        'question' => $request->question,
-        'correct_answer' => $request->correct_answer,
-    ]);
+        $correct = CorrectAns::findOrFail($request->cat_id);
+
+        $correct->update([
+            'question' => $request->question,
+            'correct_answer' => $request->correct_answer,
+        ]);
 
         $notification = [
-        'message' => 'Answer Add  Successfully',
-        'alert-type' => 'success'
-    ];
+            'message' => 'Answer Add  Successfully',
+            'alert-type' => 'success'
+        ];
 
-    return redirect()->back()->with($notification);
-
-
+        return redirect()->back()->with($notification);
     }
 
 
     // userVaryfucode
-    public function UserVarifyCode(Request $request){
-       
-    $request_code = $request->input('code');
-   
-    $category = Category::where('code', $request_code)->first();
+    public function UserVarifyCode(Request $request)
+    {
 
-    if ($category) {
-       
-        return redirect()->route('user.uniexam', ['id' => $category->id]);
-    } else {
-       
-        return redirect()->back()->with('error', 'Invalid voucher code!');
-    }
+        $request_code = $request->input('code');
+
+        $category = Category::where('code', $request_code)->first();
+
+        if ($category) {
+
+            return redirect()->route('user.uniexam', ['id' => $category->id]);
+        } else {
+
+            return redirect()->back()->with('error', 'Invalid voucher code!');
+        }
     }
 
     //SubmitExam
-    public function SubmitExam (Request $request){
-    $userId = auth()->id() ?? 1; 
-    foreach ($request->answers as $questionId => $answer) {
-        $question = \App\Models\uni_answer_q::find($questionId);
+    public function SubmitExam(Request $request)
+    {
+        $userId = auth()->id() ?? 1;
+        foreach ($request->answers as $questionId => $answer) {
+            $question = \App\Models\uni_answer_q::find($questionId);
 
-        \App\Models\CorrectAns::create([
-            'user_id' => $userId,
-            'question' => $question->question,
-            'correct_answer' => $answer,
-        ]);
-    }
+            \App\Models\CorrectAns::create([
+                'user_id' => $userId,
+                'question' => $question->question,
+                'correct_answer' => $answer,
+            ]);
+        }
 
-    return redirect()->route('user.examresult');
+        return redirect()->route('user.examresult');
     }
     //End Method
 
     //Start UserExamResult
 
-    public function UserExamResult(){
+    public function UserExamResult()
+    {
         $userId = Auth::id(); // current logged in user id
 
-    // Total questions answered by this user
-    $totalQuestions = CorrectAns::where('user_id', $userId)->count();
+        // Total questions answered by this user
+        $totalQuestions = CorrectAns::where('user_id', $userId)->count();
 
-    // Correct answers count
-    $correct = CorrectAns::join('uni_answer_qs', 'correct_ans.question', '=', 'uni_answer_qs.question')
-        ->where('correct_ans.user_id', $userId)
-        ->whereColumn('correct_ans.correct_answer', 'uni_answer_qs.correct_answer')
-        ->count();
+        // Correct answers count
+        $correct = CorrectAns::join('uni_answer_qs', 'correct_ans.question', '=', 'uni_answer_qs.question')
+            ->where('correct_ans.user_id', $userId)
+            ->whereColumn('correct_ans.correct_answer', 'uni_answer_qs.correct_answer')
+            ->count();
 
-    // Wrong answers count
-    $wrong = $totalQuestions - $correct;
+        // Wrong answers count
+        $wrong = $totalQuestions - $correct;
 
-    // Score percentage
-    $score = $totalQuestions > 0 ? round(($correct / $totalQuestions) * 100, 2) : 0;
+        // Score percentage
+        $score = $totalQuestions > 0 ? round(($correct / $totalQuestions) * 100, 2) : 0;
 
-    // Wrong questions detail (for review section)
-    $wrongQuestions = CorrectAns::join('uni_answer_qs', 'correct_ans.question', '=', 'uni_answer_qs.question')
-        ->where('correct_ans.user_id', $userId)
-        ->whereColumn('correct_ans.correct_answer', '!=', 'uni_answer_qs.correct_answer')
-        ->select(
-            'uni_answer_qs.question',
-            'uni_answer_qs.correct_answer as real_answer',
-            'correct_ans.correct_answer as user_answer',
-            'uni_answer_qs.question_one',
-            'uni_answer_qs.question_two',
-            'uni_answer_qs.question_three',
-            'uni_answer_qs.question_four'
-        )
-        ->get();
+        // Wrong questions detail (for review section)
+        $wrongQuestions = CorrectAns::join('uni_answer_qs', 'correct_ans.question', '=', 'uni_answer_qs.question')
+            ->where('correct_ans.user_id', $userId)
+            ->whereColumn('correct_ans.correct_answer', '!=', 'uni_answer_qs.correct_answer')
+            ->select(
+                'uni_answer_qs.question',
+                'uni_answer_qs.correct_answer as real_answer',
+                'correct_ans.correct_answer as user_answer',
+                'uni_answer_qs.question_one',
+                'uni_answer_qs.question_two',
+                'uni_answer_qs.question_three',
+                'uni_answer_qs.question_four'
+            )
+            ->get();
 
-    return view('user.uni.exam-result', compact(
-        'totalQuestions',
-        'correct',
-        'wrong',
-        'score',
-        'wrongQuestions'
-    ));
-
+        return view('user.uni.exam-result', compact(
+            'totalQuestions',
+            'correct',
+            'wrong',
+            'score',
+            'wrongQuestions'
+        ));
     }
 
     //UserCertificate
-    public function UserCertificate(){
+    public function UserCertificate()
+    {
         return view('user.uni.certificate');
     }
-
 }
-
-

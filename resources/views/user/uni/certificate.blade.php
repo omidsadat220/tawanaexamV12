@@ -15,7 +15,7 @@
     <div id="certificate" class="certificate-container">
       <!-- head*** -->
       <div class="cer-header">
-        {{-- <div class="header-right-box"></div> --}}
+        <div class="header-right-box"></div>
         <div class="header-title">Tawana Technology</div>
       </div>
       <!-- head*** -->
@@ -23,8 +23,8 @@
       <div class="cer-name">
         <div class="name-box1">
           <span class="box1-h1">certificate</span>
-          <span class="box1-h2">Of Achievement</span>
-          {{-- <span class="box1-h3">Proudly Present to :</span> --}}
+          <span class="box1-h2">Of APPRECIATION</span>
+          <span class="box1-h3">Proudly Present to :</span>
         </div>
         <div class="name-box1-logo">
           <img src="{{ asset('certificate/img/logo.jpg') }}" alt="" class="logo-img" />
@@ -37,82 +37,77 @@
           <h1 class="container-h1"><?php echo Auth::user()->name?></h1>
           <hr class="container-hr" />
           <p class="container-p1">
-           This is to certify that [<span style="color: #78c405; font-weight: bold; font-style: italic;">
-    <?php echo Auth::user()->name; ?>
-</span> ] has successfully completed <br> the online examination for.
+            Has successfully completed all requiements and criteria for
           </p>
           <p class="container-p2">
-            <span class="span1">Seminar</span>(<span class="span2"
-              >Cyber Security</span
+            <span class="span1">CCNA Enterprise</span>(<span class="span2"
+              >Cisco Certified network Associate</span
             >)
           </p>
           <p class="container-p3">
-           This certificate is awarded in recognition of their dedication, knowledge, and successful performance.
-
+            certification through Examination Administered By tawana Technology.
           </p>
         </div>
         <div class="container-logos">
-          <div class="logos-borcode">
-            <img class="barcode-img" src="{{ asset('certificate/img/barcode.png') }}" alt="" />
-          </div>
           <div class="logos-id-number">
-            {{-- <h3 class="cer-num">
+            <h3 class="cer-num">
               Certification Num
               <span style="color: #000; letter-spacing: 0px">T-211212</span>
-            </h3> --}}
+            </h3>
             <a href="https://tawanatechnology.com/" class="cer-link"
-              >https://tawanatechnology.com</a
+              >https://tawanatechnology.com/certificate</a
             >
             <h4 class="cer-date">
               Date of achievment:
               <span style="color: #000; letter-spacing: 0px">
-                  {{ \Carbon\Carbon::now()->format('F j, Y') }}
-              </span>
+                January3,2026</span
+              >
             </h4>
+          </div>
+          <div class="logos-borcode">
+            <img class="barcode-img" src="{{ asset('certificate/img/barcode.png') }}" alt="" />
           </div>
           <div class="logos-syncher">
             <img class="syncher-img" src="{{ asset('certificate/img/syncher.png') }}" alt="" />
           </div>
           <div class="logos-compani">
-            <img src="{{ asset('certificate/img/logo.png') }}" alt="" class="compani" />
+            <img src="{{ asset('certificate/img/1-2.png') }}" alt="" class="compani" />
           </div>
         </div>
       </div>
       <!-- person name*** -->
+      <div class="cer-bottom-right">
+        <img class="cer-bottom-img" src="{{ asset('certificate/img/bg-c.png') }}" alt="" />
+      </div>
       <div class="footer-design"></div>
-      <!-- cer-bottom-right -->
-      {{-- <div class="cer-bottom-right">
-        <div class="bt-ri-box1"></div>
-        <div class="bt-ri-box2"></div>
-        <div class="bt-ri-box3"></div>
-      </div> --}}
     </div>
+
     <!-- certificate -->
-    <button onclick="downloadPNG()">🖼️ Download PNG</button>
+    <button onclick="downloadPDF()">📄 Download PDF</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://unpkg.com/html-to-image@1.11.11/dist/html-to-image.min.js"></script>
 
-<script>
-async function downloadPNG() {
-  const element = document.getElementById("certificate");
+    <script>
+      async function downloadPDF() {
+        const { jsPDF } = window.jspdf;
+        const element = document.getElementById("certificate");
 
-  // Use html2canvas with high scale for quality
-  const canvas = await html2canvas(element, {
-    scale: 3,           // Increase resolution
-    useCORS: true,      // Load external images
-    allowTaint: true,   // Keep styles intact
-    logging: true
-  });
+        // گرفتن عکس دقیق از کل سند
+        const canvas = await html2canvas(element, {
+          scale: 2,
+          useCORS: true,
+        });
+        const dataUrl = canvas.toDataURL("image/png");
 
-  // Convert to PNG
-  const imgData = canvas.toDataURL("image/png");
+        // ساخت PDF
+        const pdf = new jsPDF("landscape", "mm", "a4");
+        const pageWidth = pdf.internal.pageSize.getWidth();
+        const pageHeight = pdf.internal.pageSize.getHeight();
 
-  // Create a temporary link to download
-  const link = document.createElement("a");
-  link.href = imgData;
-  link.download = "Certificate.png";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-}
-</script>
+        pdf.addImage(dataUrl, "PNG", 0, 0, pageWidth, pageHeight);
+        pdf.save("Certificate.pdf");
+      }
+
+    </script>
   </body>
 </html>
