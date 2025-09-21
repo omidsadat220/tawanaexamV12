@@ -13,13 +13,13 @@ class Exam extends Model
         'start_time',
     ];
 
-public function department()
-{
-    return $this->belongsTo(Department::class, 'department_id'); 
-}
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
+    }
 
-public function subject()
-{
-    return $this->belongsTo(DepartmentSubject::class, 'subject_id');
-}
+    public function subject()
+    {
+        return $this->belongsTo(DepartmentSubject::class, 'subject_id');
+    }
 }

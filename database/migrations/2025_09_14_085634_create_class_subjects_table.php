@@ -17,11 +17,10 @@ return new class extends Migration
             $table->string('subject_name');
             $table->timestamps();
 
-             $table->foreign('class_category_id')
-            ->references('id')
-      ->on('classcategories')
-      ->onDelete('cascade');
-
+            $table->foreign('class_category_id')
+                ->references('id')
+                ->on('classcategories')
+                ->onDelete('cascade');
         });
     }
 

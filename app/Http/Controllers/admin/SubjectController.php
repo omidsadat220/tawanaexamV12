@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
-     public function getSubjectsByDepartment($department_id)
+    public function getSubjectsByDepartment($department_id)
     {
         $subjects = DepartmentSubject::where('department_id', $department_id)->get();
 

@@ -14,109 +14,105 @@ use Illuminate\Support\Facades\DB;
 class examcontroller extends Controller
 {
 
-public function AllExam() {
-    $departments = Department::with(['subjects', 'subjects.exams'])->get();
-    $exams = Exam::with(['department', 'subject'])->get();
-    
-    return view('admin.backend.exam.all_exam', compact('departments', 'exams'));
-}
+    public function AllExam()
+    {
+        $departments = Department::with(['subjects', 'subjects.exams'])->get();
+        $exams = Exam::with(['department', 'subject'])->get();
 
-public function AddExam() {
-  $depart = Department::all();
-$firstDepartId = Department::first()->id ?? null;
-$subjects = DepartmentSubject::where('department_id', $firstDepartId)->get();
+        return view('admin.backend.exam.all_exam', compact('departments', 'exams'));
+    }
 
-return view('admin.backend.exam.add_exam', compact('depart', 'subjects'));
-}
+    public function AddExam()
+    {
+        $depart = Department::all();
+        $firstDepartId = Department::first()->id ?? null;
+        $subjects = DepartmentSubject::where('department_id', $firstDepartId)->get();
 
-
-public function StoreExam(Request $request) {
-
-                $validated = $request->validate([
-                'department_id' => 'required|exists:departments,id',
-                'subject_id' => 'required|exists:department_subjects,id',
-                'exam_title' => 'required|string|max:255',
-                'start_time' => 'required|date_format:H:i'
-            ]);
+        return view('admin.backend.exam.add_exam', compact('depart', 'subjects'));
+    }
 
 
-            Exam::create([
-                'department_id' => $request->department_id,
-                'subject_id' => $request->subject_id,
-                'exam_title' => $request->exam_title,
-                'start_time' => $request->start_time
-            ]);
+    public function StoreExam(Request $request)
+    {
 
-                 $notification = [
-                'message' => 'Exam Created Successfully',
-                'alert-type' => 'success'
-            ];
+        $validated = $request->validate([
+            'department_id' => 'required|exists:departments,id',
+            'subject_id' => 'required|exists:department_subjects,id',
+            'exam_title' => 'required|string|max:255',
+            'start_time' => 'required|date_format:H:i'
+        ]);
 
-            return redirect()->route('all.exam')->with($notification);
 
-}
+        Exam::create([
+            'department_id' => $request->department_id,
+            'subject_id' => $request->subject_id,
+            'exam_title' => $request->exam_title,
+            'start_time' => $request->start_time
+        ]);
 
-public function EditExam($id)
-{
-    // Get the exam with related department and subject
-    $exam = Exam::with(['department', 'subject'])->findOrFail($id);
+        $notification = [
+            'message' => 'Exam Created Successfully',
+            'alert-type' => 'success'
+        ];
 
-    // Get all departments with their subjects (and exams if needed)
-    $departments = Department::with(['subjects', 'subjects.exams'])->get();
+        return redirect()->route('all.exam')->with($notification);
+    }
 
-    // Load subjects of the selected department for pre-selection
-    $subjects = $exam->department ? $exam->department->subjects : collect();
+    public function EditExam($id)
+    {
+        $exam = Exam::with(['department', 'subject'])->findOrFail($id);
 
-    return view('admin.backend.exam.edit_exam', compact('exam', 'departments', 'subjects'));
-}
+        $departments = Department::with(['subjects', 'subjects.exams'])->get();
 
+        $subjects = $exam->department ? $exam->department->subjects : collect();
+
+        return view('admin.backend.exam.edit_exam', compact('exam', 'departments', 'subjects'));
+    }
 
 
 
 
-public function UpdateExam(Request $request)
-{
 
-    $examId = $request->id;
-    // Validate the request
-    $request->validate([
-        'department_id' => 'required|exists:departments,id',
-        'subject_id' => [
-            'required',
-            Rule::exists('department_subjects', 'id')->where(function ($query) use ($request) {
-                $query->where('department_id', $request->department_id);
-            }),
-        ],
-        'exam_title' => 'required|string|max:255',
-        'start_time' => 'required|date_format:H:i',
-    ], [
-        'subject_id.exists' => 'Selected subject does not belong to the chosen department.'
-    ]);
+    public function UpdateExam(Request $request)
+    {
 
-    // Find the exam
-    $exam = Exam::findOrFail($examId);
+        $examId = $request->id;
+        // Validate the request
+        $request->validate([
+            'department_id' => 'required|exists:departments,id',
+            'subject_id' => [
+                'required',
+                Rule::exists('department_subjects', 'id')->where(function ($query) use ($request) {
+                    $query->where('department_id', $request->department_id);
+                }),
+            ],
+            'exam_title' => 'required|string|max:255',
+            'start_time' => 'required|date_format:H:i',
+        ], [
+            'subject_id.exists' => 'Selected subject does not belong to the chosen department.'
+        ]);
 
-    // Update the exam
-    $exam->update($request->only('department_id', 'subject_id', 'exam_title', 'start_time'));
+        // Find the exam
+        $exam = Exam::findOrFail($examId);
 
-    // Redirect back with success message
-    return redirect()->route('all.exam')->with([
-        'message' => 'Exam updated successfully',
-        'alert-type' => 'success'
-    ]);
-}
+        // Update the exam
+        $exam->update($request->only('department_id', 'subject_id', 'exam_title', 'start_time'));
 
-public function DeleteExam($id)
-{
-    $exam = Exam::findOrFail($id);
-    $exam->delete();
+        // Redirect back with success message
+        return redirect()->route('all.exam')->with([
+            'message' => 'Exam updated successfully',
+            'alert-type' => 'success'
+        ]);
+    }
 
-    return redirect()->route('all.exam')->with([
-        'message' => 'Exam deleted successfully',
-        'alert-type' => 'success'
-    ]);
+    public function DeleteExam($id)
+    {
+        $exam = Exam::findOrFail($id);
+        $exam->delete();
 
-
-}
-
+        return redirect()->route('all.exam')->with([
+            'message' => 'Exam deleted successfully',
+            'alert-type' => 'success'
+        ]);
+    }
 }

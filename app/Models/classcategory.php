@@ -8,8 +8,8 @@ class classcategory extends Model
 {
     protected $guarded = [];
 
-      public function subjects()
-{
-    return $this->hasMany(ClassSubject::class, 'ClassSubject_id');
-}
+    public function subjects()
+    {
+        return $this->hasMany(ClassSubject::class, 'ClassSubject_id');
+    }
 }

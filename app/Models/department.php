@@ -10,13 +10,13 @@ class department extends Model
 
     protected $guarded = [];
 
-       public function subjects()
-{
-    return $this->hasMany(DepartmentSubject::class, 'department_id');
-}
+    public function subjects()
+    {
+        return $this->hasMany(DepartmentSubject::class, 'department_id');
+    }
 
-public function exams()
-{
-    return $this->hasMany(Exam::class);
-}
+    public function exams()
+    {
+        return $this->hasMany(Exam::class);
+    }
 }
