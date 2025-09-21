@@ -79,7 +79,8 @@ Route::controller(ExamController::class)->group(function () {
     Route::get('/add/exam', 'AddExam')->name('add.exam');
     Route::post('/store/exam', 'StoreExam')->name('store.exam');
     Route::get('/exam/edit/{id}', 'EditExam')->name('exam.edit');
-    Route::put('/exam/update/{id}', 'UpdateExam')->name('exam.update'); // <- fixed
+    Route::post('/exam/update/', 'UpdateExam')->name('exam.update');
+    Route::get('/exam/delete/{id}', 'DeleteExam')->name('exam.delete');
 });
 
 });

@@ -7,6 +7,8 @@ use App\Models\department;
 use App\Models\DepartmentSubject;
 use App\Models\Exam;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+
 use Illuminate\Support\Facades\DB;
 
 class examcontroller extends Controller
@@ -56,46 +58,65 @@ public function StoreExam(Request $request) {
 
 public function EditExam($id)
 {
-    $exam = Exam::findOrFail($id);
-    $depart = Department::all();
+    // Get the exam with related department and subject
+    $exam = Exam::with(['department', 'subject'])->findOrFail($id);
 
-    // Load subjects of the selected department
+    // Get all departments with their subjects (and exams if needed)
+    $departments = Department::with(['subjects', 'subjects.exams'])->get();
+
+    // Load subjects of the selected department for pre-selection
     $subjects = $exam->department ? $exam->department->subjects : collect();
 
-    return view('admin.backend.exam.edit_exam', compact('exam', 'depart', 'subjects'));
+    return view('admin.backend.exam.edit_exam', compact('exam', 'departments', 'subjects'));
 }
 
 
 
-public function UpdateExam(Request $request, $id)
+
+
+public function UpdateExam(Request $request)
 {
+
+    $examId = $request->id;
+    // Validate the request
     $request->validate([
         'department_id' => 'required|exists:departments,id',
-        'subject_id' => 'required|exists:department_subjects,id',
+        'subject_id' => [
+            'required',
+            Rule::exists('department_subjects', 'id')->where(function ($query) use ($request) {
+                $query->where('department_id', $request->department_id);
+            }),
+        ],
         'exam_title' => 'required|string|max:255',
         'start_time' => 'required|date_format:H:i',
+    ], [
+        'subject_id.exists' => 'Selected subject does not belong to the chosen department.'
     ]);
 
-    $exam = Exam::findOrFail($id);
+    // Find the exam
+    $exam = Exam::findOrFail($examId);
 
-    // Check if subject belongs to department
-    $subject = DepartmentSubject::where('id', $request->subject_id)
-                ->where('department_id', $request->department_id)
-                ->first();
-
-    if (!$subject) {
-        return back()->withErrors(['subject_id' => 'Selected subject does not belong to the chosen department.']);
-    }
-
+    // Update the exam
     $exam->update($request->only('department_id', 'subject_id', 'exam_title', 'start_time'));
 
+    // Redirect back with success message
     return redirect()->route('all.exam')->with([
         'message' => 'Exam updated successfully',
         'alert-type' => 'success'
     ]);
 }
 
+public function DeleteExam($id)
+{
+    $exam = Exam::findOrFail($id);
+    $exam->delete();
+
+    return redirect()->route('all.exam')->with([
+        'message' => 'Exam deleted successfully',
+        'alert-type' => 'success'
+    ]);
 
 
+}
 
 }
