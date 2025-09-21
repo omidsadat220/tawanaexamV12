@@ -5,6 +5,8 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\classcategoryController;
 use App\Http\Controllers\admin\classsubjectController;
+use App\Http\Controllers\admin\DepartmentController;
+use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\admin\Uni_answer_qController;
 use App\Http\Controllers\teacher\TeacherController;
 use App\Http\Controllers\user\UserController;
@@ -49,6 +51,8 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     });
 
     Route::controller(classsubjectController::class)->group(function() {
+
+  
         Route::get('/all/subject' , 'AllSubject')->name('all.subject');
         Route::get('/add/subject' , 'AddSubject')->name('add.subject');
         Route::post('/store/subject' , 'StoreSubject')->name('store.subject');
@@ -57,7 +61,23 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/delete/subject/{id}' , 'DeleteSubject')->name('delete.subject');
     });
 
+    //start department
+Route::controller(DepartmentController::class)->group(function () {
+    Route::get('add/depart', 'AddDepart')->name('add.depart');
+    Route::post('store/depart', 'StoreDepart')->name('store.depart');
+    Route::get('all/depart', 'AllDepart')->name('all.depart');
+    Route::get('edit/depart/{id}', 'EditDepart')->name('edit.depart');
+    Route::post('depart/update/{id}', 'UpdateDepart')->name('update.depart');
+    Route::get('delete/depart/{id}', 'DeleteDepart')->name('delete.depart');
 });
+
+
+Route::get('/get-subjects/{id}', [SubjectController::class, 'getSubjectsByDepartment']);
+Route::get('/get-subjects/{department_id}', [SubjectController::class, 'getSubjectsByDepartment']);
+
+});
+
+
 
 Route::middleware(['auth', 'role:teacher'])->group(function () {
     Route::get('/teacher/dashboard', [TeacherController::class, 'TeacherDashboard'])->name('teacher.dashboard');
