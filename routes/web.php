@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\classcategoryController;
 use App\Http\Controllers\admin\classsubjectController;
 use App\Http\Controllers\admin\DepartmentController;
+use App\Http\Controllers\admin\examcontroller;
 use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\admin\Uni_answer_qController;
 use App\Http\Controllers\teacher\TeacherController;
@@ -42,8 +43,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     });
 
     Route::controller(classsubjectController::class)->group(function() {
-
-  
         Route::get('/all/subject' , 'AllSubject')->name('all.subject');
         Route::get('/add/subject' , 'AddSubject')->name('add.subject');
         Route::post('/store/subject' , 'StoreSubject')->name('store.subject');
@@ -62,6 +61,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     });
 
 
+
+
+
     //start department
 Route::controller(DepartmentController::class)->group(function () {
     Route::get('add/depart', 'AddDepart')->name('add.depart');
@@ -70,6 +72,12 @@ Route::controller(DepartmentController::class)->group(function () {
     Route::get('edit/depart/{id}', 'EditDepart')->name('edit.depart');
     Route::post('depart/update/{id}', 'UpdateDepart')->name('update.depart');
     Route::get('delete/depart/{id}', 'DeleteDepart')->name('delete.depart');
+});
+
+Route::controller(examcontroller::class)->group(function () {
+Route::get('/all/exam', 'AllExam')->name('all.exam');
+Route::get('/add/exam', 'AddExam')->name('add.exam');
+Route::post('store/exam', 'StoreExam')->name('store.exam');
 });
 
 

@@ -12,6 +12,11 @@ class DepartmentSubject extends Model
 
      public function department()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(department::class , 'department_id');
     }
+
+ public function exams()
+{
+    return $this->hasMany(Exam::class, 'subject_id');
+}
 }
