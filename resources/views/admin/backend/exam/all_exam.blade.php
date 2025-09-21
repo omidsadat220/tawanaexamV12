@@ -41,14 +41,14 @@
         
         
 
-        {{-- <td style="text-align:center; font-size: 20px;">
+        <td style="text-align:center; font-size: 20px;">
             <a href="{{ route('exam.edit', $exam->id) }}">
                 <i class="fas fa-edit btn btn-primary"></i>
             </a>
-            <a href="{{ route('exam.delete', $exam->id) }}" id="delete">
+            {{-- <a href="{{ route('exam.delete', $exam->id) }}" id="delete">
                 <i class="fas fa-trash-alt btn btn-danger"></i>
-            </a>
-        </td> --}}
+            </a> --}}
+        </td>
     </tr>
 @endforeach
                 </tbody>

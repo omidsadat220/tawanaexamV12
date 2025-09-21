@@ -74,17 +74,17 @@ Route::controller(DepartmentController::class)->group(function () {
     Route::get('delete/depart/{id}', 'DeleteDepart')->name('delete.depart');
 });
 
-Route::controller(examcontroller::class)->group(function () {
-Route::get('/all/exam', 'AllExam')->name('all.exam');
-Route::get('/add/exam', 'AddExam')->name('add.exam');
-Route::post('store/exam', 'StoreExam')->name('store.exam');
+Route::controller(ExamController::class)->group(function () {
+    Route::get('/all/exam', 'AllExam')->name('all.exam');
+    Route::get('/add/exam', 'AddExam')->name('add.exam');
+    Route::post('/store/exam', 'StoreExam')->name('store.exam');
+    Route::get('/exam/edit/{id}', 'EditExam')->name('exam.edit');
+    Route::put('/exam/update/{id}', 'UpdateExam')->name('exam.update'); // <- fixed
 });
 
-
-Route::get('/get-subjects/{id}', [SubjectController::class, 'getSubjectsByDepartment']);
+});
 Route::get('/get-subjects/{department_id}', [SubjectController::class, 'getSubjectsByDepartment']);
 
-});
 
 
 

@@ -54,4 +54,48 @@ public function StoreExam(Request $request) {
 
 }
 
+public function EditExam($id)
+{
+    $exam = Exam::findOrFail($id);
+    $depart = Department::all();
+
+    // Load subjects of the selected department
+    $subjects = $exam->department ? $exam->department->subjects : collect();
+
+    return view('admin.backend.exam.edit_exam', compact('exam', 'depart', 'subjects'));
+}
+
+
+
+public function UpdateExam(Request $request, $id)
+{
+    $request->validate([
+        'department_id' => 'required|exists:departments,id',
+        'subject_id' => 'required|exists:department_subjects,id',
+        'exam_title' => 'required|string|max:255',
+        'start_time' => 'required|date_format:H:i',
+    ]);
+
+    $exam = Exam::findOrFail($id);
+
+    // Check if subject belongs to department
+    $subject = DepartmentSubject::where('id', $request->subject_id)
+                ->where('department_id', $request->department_id)
+                ->first();
+
+    if (!$subject) {
+        return back()->withErrors(['subject_id' => 'Selected subject does not belong to the chosen department.']);
+    }
+
+    $exam->update($request->only('department_id', 'subject_id', 'exam_title', 'start_time'));
+
+    return redirect()->route('all.exam')->with([
+        'message' => 'Exam updated successfully',
+        'alert-type' => 'success'
+    ]);
+}
+
+
+
+
 }
