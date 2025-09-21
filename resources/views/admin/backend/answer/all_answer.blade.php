@@ -49,10 +49,11 @@
                                     <td>{{ $item->question_three }}</td>
                                     <td>{{ $item->question_four }}</td>
                                     <td>{{ $item->correct_answer }}</td>
-                               
+
                                     <td>
                                         <a title="Edit" href="{{ route('edit.answer', $item->id) }}"
-                                            class="btn btn-success btn-sm"> <span class="mdi mdi-book-edit mdi-18px">edit</span>
+                                            class="btn btn-success btn-sm"> <span
+                                                class="mdi mdi-book-edit mdi-18px">edit</span>
                                         </a>
 
                                         <a title="Delete" href="{{ route('delete.answer', $item->id) }}"

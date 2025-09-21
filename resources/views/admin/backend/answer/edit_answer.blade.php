@@ -17,7 +17,7 @@
                     </a>
 
                     <h2 class="text-white">Add New Category</h2>
-                    <form id="categoryForm" action="{{ route('update.answer',$answer->id) }}" method="POST">
+                    <form id="categoryForm" action="{{ route('update.answer', $answer->id) }}" method="POST">
 
 
                         @csrf
@@ -39,10 +39,11 @@
                             </div>
                         </div>
 
-                          <div class="col-12 d-flex align-items-center justify-content-between mb-3">
-                        <label for="categoryName" class="text-start">question</label>
-                        <input class="catinput" type="text" id="question" name="question" value="{{$answer->question}}">
-                      </div>
+                        <div class="col-12 d-flex align-items-center justify-content-between mb-3">
+                            <label for="categoryName" class="text-start">question</label>
+                            <input class="catinput" type="text" id="question" name="question"
+                                value="{{ $answer->question }}">
+                        </div>
 
                         <div class="col-12 d-flex align-items-center justify-content-between mb-3">
                             <label for="categoryName" class="text-start">question_one</label>

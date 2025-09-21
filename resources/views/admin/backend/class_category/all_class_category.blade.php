@@ -39,10 +39,11 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $item->class_category }}</td>
                                     <td>{{ $item->slug_name }}</td>
-                                 
+
                                     <td>
                                         <a title="Edit" href="{{ route('edit.class.category', $item->id) }}"
-                                            class="btn btn-success btn-sm"> <span class="mdi mdi-book-edit mdi-18px">edit</span>
+                                            class="btn btn-success btn-sm"> <span
+                                                class="mdi mdi-book-edit mdi-18px">edit</span>
                                         </a>
 
                                         <a title="Delete" href="{{ route('delete.class.category', $item->id) }}"

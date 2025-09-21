@@ -2,7 +2,7 @@
 @section('admin')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 
     <div class="container-fluid pt-4 px-4">
@@ -23,60 +23,61 @@
 
                     <h2 class="text-white">Add New Category</h2>
                     <form id="categoryForm" action="{{ route('store.subject') }}" method="POST">
-    @csrf
+                        @csrf
 
-    <div class="row mb-3">
+                        <div class="row mb-3">
 
-        <!-- Category selector -->
-        <div class="col-md-6 d-flex flex-column">
-            <label for="class_category_id" class="form-label">Category Name</label>
-            <select name="class_category_id" id="class_category_id" class="form-control form-select" required>
-                <option value="">Select Category</option>
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->class_category }}</option>
-                @endforeach
-            </select>
-        </div>
+                            <!-- Category selector -->
+                            <div class="col-md-6 d-flex flex-column">
+                                <label for="class_category_id" class="form-label">Category Name</label>
+                                <select name="class_category_id" id="class_category_id" class="form-control form-select"
+                                    required>
+                                    <option value="">Select Category</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->class_category }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-        <!-- Subjects input -->
-        <div class="col-md-6">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <label class="form-label mb-0">Department Subjects</label>
-                <button type="button" class="btn btn-outline-primary btn-sm" id="add-subject">
-                    + Add Subject
-                </button>
-            </div>
+                            <!-- Subjects input -->
+                            <div class="col-md-6">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <label class="form-label mb-0">Department Subjects</label>
+                                    <button type="button" class="btn btn-outline-primary btn-sm" id="add-subject">
+                                        + Add Subject
+                                    </button>
+                                </div>
 
-            <div id="subject-container">
-                {{-- Default empty input for first subject --}}
-                <div class="input-group mb-2">
-                    <input class="form-control" name="subject_name[]" type="text" placeholder="Department subject" required>
-                    <button type="button" class="btn btn-danger remove-subject">Remove</button>
-                </div>
-            </div>
-        </div>
+                                <div id="subject-container">
+                                    {{-- Default empty input for first subject --}}
+                                    <div class="input-group mb-2">
+                                        <input class="form-control" name="subject_name[]" type="text"
+                                            placeholder="Department subject" required>
+                                        <button type="button" class="btn btn-danger remove-subject">Remove</button>
+                                    </div>
+                                </div>
+                            </div>
 
-    </div>
+                        </div>
 
-    <div class="d-flex justify-content-end">
-        <button type="submit" class="btn btn-success">Save Category</button>
-    </div>
-</form>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-success">Save Category</button>
+                        </div>
+                    </form>
 
-<!-- JS for dynamic add/remove -->
-<script>
-$('#add-subject').on('click', function() {
-    $('#subject-container').append(`
+                    <!-- JS for dynamic add/remove -->
+                    <script>
+                        $('#add-subject').on('click', function() {
+                            $('#subject-container').append(`
         <div class="input-group mb-2">
             <input type="text" name="subject_name[]" class="form-control" placeholder="Department subject" required>
             <button type="button" class="btn btn-danger remove-subject">Remove</button>
         </div>
     `);
-});
+                        });
 
-$(document).on('click', '.remove-subject', function() {
-    $(this).closest('.input-group').remove();
-});
-</script>
-
-@endsection
+                        $(document).on('click', '.remove-subject', function() {
+                            $(this).closest('.input-group').remove();
+                        });
+                    </script>
+                @endsection
