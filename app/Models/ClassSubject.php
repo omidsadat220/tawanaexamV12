@@ -13,5 +13,7 @@ class ClassSubject extends Model
     return $this->belongsTo(ClassCategory::class, 'class_category_id', 'id');
 }
 
+   
+
        
 }

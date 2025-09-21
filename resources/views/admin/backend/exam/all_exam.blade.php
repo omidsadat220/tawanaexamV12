@@ -15,7 +15,7 @@
                                         placeholder="Search" style="font-size: 18px; height: 55px; width: 300px" />
                                 </form>
 
-                                <a href="{{ route('add.subject') }}">
+                                <a href="{{ route('add.exam') }}">
                                     <button style="--clr: #39ff14" class="button-styleee">
                                         <span>All Class Categories</span><i></i>
                                     </button>
@@ -28,35 +28,56 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Class Category Name</th>
-                                <th>Subject Name</th>
+                                <th>class Category</th>
+                                <th>Subject</th>
+                                <th>Exam Name</th>
+                                <th>Time</th>
                                 <th class="action">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($allData as $key => $item)
-                                <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $item->classcategory->class_category }}</td>
+<tr>
+    <td>{{ $key + 1 }}</td>
 
-<td>
-    @foreach($allData as $item)
-        {{ implode(', ', json_decode($item->subject_name)) }}
-    @endforeach
+    {{-- Class Category --}}
+    <td>{{ $item->classcategory->class_category ?? 'N/A' }}</td>
+
+    {{-- Subjects (comma-separated) --}}
+    <td>
+    @php
+        $allSubjects = [];
+        foreach ($item->classSubjects as $sub) {
+            // decode if it's JSON, otherwise take as string
+            $decoded = json_decode($sub->subject_name, true);
+            if (is_array($decoded)) {
+                $allSubjects = array_merge($allSubjects, $decoded);
+            } else {
+                $allSubjects[] = $sub->subject_name;
+            }
+        }
+    @endphp
+    {{ implode(', ', $allSubjects) }}
 </td>
-                                    {{-- <td>{{ $item->subject_name }}</td> --}}
-                                 
-                                    <td>
-                                        <a title="Edit" href="{{ route('edit.subject', $item->id) }}"
-                                            class="btn btn-success btn-sm"> <span class="mdi mdi-book-edit mdi-18px">edit</span>
-                                        </a>
 
-                                        <a title="Delete" href="{{ route('delete.subject', $item->id) }}"
-                                            class="btn btn-danger btn-sm" id="delete"><span
-                                                class="mdi mdi-delete-circle  mdi-18px">delete</span></a>
-                                    </td>
-                                </tr>
-                            @endforeach
+    {{-- Exam Name --}}
+    <td>{{ $item->exam_name }}</td>
+
+    {{-- Exam Time --}}
+    <td>{{ $item->time }}</td>
+
+    {{-- Action buttons --}}
+    <td>
+        <a title="Edit" href="{{ route('edit.class.category', $item->id) }}" class="btn btn-success btn-sm">
+            <span class="mdi mdi-book-edit mdi-18px">edit</span>
+        </a>
+
+        <a title="Delete" href="{{ route('delete.class.category', $item->id) }}" class="btn btn-danger btn-sm" id="delete">
+            <span class="mdi mdi-delete-circle mdi-18px">delete</span>
+        </a>
+    </td>
+</tr>
+@endforeach
 
 
                         </tbody>
