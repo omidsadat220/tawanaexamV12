@@ -10,10 +10,10 @@ class DepartmentSubject extends Model
 
     protected $fillable = ['department_id', 'subject_name'];
 
-     public function department()
-    {
-        return $this->belongsTo(department::class , 'department_id');
-    }
+   public function department()
+{
+    return $this->belongsTo(Department::class, 'department_id');
+}
 
  public function exams()
 {

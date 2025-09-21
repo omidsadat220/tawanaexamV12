@@ -89,9 +89,7 @@
                   ><i class="fa fa-laptop me-2"></i> All Subject</a
                 >
 
-                 <a href="{{route('all.exam')}}" class="nav-item nav-link"
-                  ><i class="fa fa-laptop me-2"></i> All Exam</a
-                >
+               
 
               
 
@@ -112,6 +110,10 @@
                  <div class="dropdown-menu bg-transparent border-0">
                    <a href="{{route('all.depart')}}" class="nav-item nav-link"
                   ><i class="fa fa-laptop me-2"></i> All Department</a
+                >
+
+                  <a href="{{route('all.exam')}}" class="nav-item nav-link"
+                  ><i class="fa fa-laptop me-2"></i> All Exam</a
                 >
                
                 </div>

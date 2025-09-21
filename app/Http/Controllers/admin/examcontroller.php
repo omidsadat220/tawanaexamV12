@@ -14,19 +14,19 @@ class examcontroller extends Controller
 
 public function AllExam() {
     $departments = Department::with(['subjects', 'subjects.exams'])->get();
-    $exams = Exam::with(['department', 'subject'])->get(); // Add this line
+    $exams = Exam::with(['department', 'subject'])->get();
     
     return view('admin.backend.exam.all_exam', compact('departments', 'exams'));
 }
 
-   public function AddExam()
-{
-    $depart = Department::all();
-    $firstDepartId = Department::first()->id ?? null;
-   
-    $subjects = DepartmentSubject::where('department_id', $firstDepartId)->get();
-    return view('admin.backend.exam.add_exam', compact('depart', 'subjects'));
+public function AddExam() {
+  $depart = Department::all();
+$firstDepartId = Department::first()->id ?? null;
+$subjects = DepartmentSubject::where('department_id', $firstDepartId)->get();
+
+return view('admin.backend.exam.add_exam', compact('depart', 'subjects'));
 }
+
 
 public function StoreExam(Request $request) {
 
