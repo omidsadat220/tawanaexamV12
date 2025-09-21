@@ -6,12 +6,8 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\classcategoryController;
 use App\Http\Controllers\admin\classsubjectController;
-<<<<<<< HEAD
 use App\Http\Controllers\admin\DepartmentController;
 use App\Http\Controllers\admin\SubjectController;
-=======
-use App\Http\Controllers\admin\ExamController;
->>>>>>> 1ff34d9b55aeee8b6c069eee16b61f863a4ccb97
 use App\Http\Controllers\admin\Uni_answer_qController;
 use App\Http\Controllers\teacher\TeacherController;
 use App\Http\Controllers\user\UserController;
@@ -45,7 +41,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/delete/answer/{id}', 'DeleteAnswer')->name('delete.answer');
     });
 
-<<<<<<< HEAD
     Route::controller(classsubjectController::class)->group(function() {
 
   
@@ -57,16 +52,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/delete/subject/{id}' , 'DeleteSubject')->name('delete.subject');
     });
 
-    //start department
-Route::controller(DepartmentController::class)->group(function () {
-    Route::get('add/depart', 'AddDepart')->name('add.depart');
-    Route::post('store/depart', 'StoreDepart')->name('store.depart');
-    Route::get('all/depart', 'AllDepart')->name('all.depart');
-    Route::get('edit/depart/{id}', 'EditDepart')->name('edit.depart');
-    Route::post('depart/update/{id}', 'UpdateDepart')->name('update.depart');
-    Route::get('delete/depart/{id}', 'DeleteDepart')->name('delete.depart');
-=======
-    Route::controller(classcategoryController::class)->group(function () {
+        Route::controller(classcategoryController::class)->group(function () {
         Route::get('/all/class/category', 'AllClassCategory')->name('all.class.category');
         Route::get('/add/class/category', 'AddClassCategory')->name('add.class.category');
         Route::post('/store/class/category', 'StoreClassCategory')->name('store.class.category');
@@ -75,21 +61,15 @@ Route::controller(DepartmentController::class)->group(function () {
         Route::get('/delete/class/category/{id}', 'DeleteClassCategory')->name('delete.class.category');
     });
 
-    Route::controller(classsubjectController::class)->group(function () {
-        Route::get('/all/subject', 'AllSubject')->name('all.subject');
-        Route::get('/add/subject', 'AddSubject')->name('add.subject');
-        Route::post('/store/subject', 'StoreSubject')->name('store.subject');
-        Route::get('/edit/subject/{id}', 'EditSubject')->name('edit.subject');
-        Route::post('/update/subject', 'UpdateSubject')->name('update.subject');
-        Route::get('/delete/subject/{id}', 'DeleteSubject')->name('delete.subject');
-    });
 
-    Route::controller(ExamController::class)->group(function() {
-        Route::get('/all/exam' , 'AllExam')->name('all.exam');
-        Route::get('/add/exam' , 'AddExam')->name('add.exam');
-        Route::post('/store/exam' , 'StoreExam')->name('store.exam');
-    });
->>>>>>> 1ff34d9b55aeee8b6c069eee16b61f863a4ccb97
+    //start department
+Route::controller(DepartmentController::class)->group(function () {
+    Route::get('add/depart', 'AddDepart')->name('add.depart');
+    Route::post('store/depart', 'StoreDepart')->name('store.depart');
+    Route::get('all/depart', 'AllDepart')->name('all.depart');
+    Route::get('edit/depart/{id}', 'EditDepart')->name('edit.depart');
+    Route::post('depart/update/{id}', 'UpdateDepart')->name('update.depart');
+    Route::get('delete/depart/{id}', 'DeleteDepart')->name('delete.depart');
 });
 
 
