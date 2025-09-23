@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\classcategoryController;
 use App\Http\Controllers\admin\classsubjectController;
 use App\Http\Controllers\admin\DepartmentController;
 use App\Http\Controllers\admin\examcontroller;
+use App\Http\Controllers\admin\qestioncontroller;
 use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\admin\Uni_answer_qController;
 use App\Http\Controllers\teacher\TeacherController;
@@ -80,8 +81,19 @@ Route::controller(ExamController::class)->group(function () {
     Route::get('/exam/delete/{id}', 'DeleteExam')->name('exam.delete');
 });
 
-});
 Route::get('/get-subjects/{department_id}', [SubjectController::class, 'getSubjectsByDepartment']);
+
+
+Route::controller(qestioncontroller::class)->group(function() {
+    Route::get('/all/qestion' , 'AllQestion')->name('all.qestion');
+    Route::get('/add/qestion' , 'AddQestion')->name('add.qestion');
+    Route::post('store/qestion' , 'StoreQestion')->name('store.qestion');
+    Route::get('/edit/qestion/{id}' , 'EditQestion')->name('edit.qestion');
+    Route::post('update/qestion' , 'UpdateQestion')->name('update.qestion');
+    Route::get('/qestion/delete/{id}', 'DeleteQestion')->name('delete.qestion');
+});
+
+});
 
 
 
