@@ -61,9 +61,6 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     });
 
 
-
-
-
     //start department
 Route::controller(DepartmentController::class)->group(function () {
     Route::get('add/depart', 'AddDepart')->name('add.depart');
