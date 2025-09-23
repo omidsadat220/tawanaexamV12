@@ -90,6 +90,10 @@ Route::get('/get-subjects/{department_id}', [SubjectController::class, 'getSubje
 Route::controller(qestioncontroller::class)->group(function() {
     Route::get('/all/qestion' , 'AllQestion')->name('all.qestion');
     Route::get('/add/qestion' , 'AddQestion')->name('add.qestion');
+    Route::post('store/qestion' , 'StoreQestion')->name('store.qestion');
+    Route::get('/edit/qestion/{id}' , 'EditQestion')->name('edit.qestion');
+    Route::post('update/qestion' , 'UpdateQestion')->name('update.qestion');
+    Route::get('/qestion/delete/{id}', 'DeleteQestion')->name('delete.qestion');
 });
 
 });

@@ -7,7 +7,7 @@
                 <div class="container-form" id="categories-page">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-between mb-4">
-                            <h1 class="m-0">Categories</h1>
+                            <h1 class="m-0">Question</h1>
 
                             <div class="d-flex align-items-center gap-2">
                                 <form class="d-none d-md-flex">
@@ -17,7 +17,7 @@
 
                                 <a href="{{ route('add.qestion') }}">
                                     <button style="--clr: #39ff14" class="button-styleee">
-                                        <span>Add Catagory</span><i></i>
+                                        <span>Add qestion</span><i></i>
                                     </button>
                                 </a>
                             </div>
@@ -43,21 +43,23 @@
                             @foreach ($alldata as $key => $item)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $item->qestion }}</td>
                                     <td>{{ $item->subject->subject_name }}</td>
+                                    <td>{{ $item->question }}</td>
                                     <td>{{ $item->option1 }}</td>
                                     <td>{{ $item->option2 }}</td>
                                     <td>{{ $item->option3 }}</td>
                                     <td>{{ $item->option4 }}</td>
                                     <td>{{ $item->correct_answer }}</td>
+                                    <td> <img src="{{ asset($item->image) }}"></td>
+
                                    
                                     <td>
-                                        <a title="Edit" href="{{ route('edit.category', $item->id) }}"
+                                        <a title="Edit" href="{{ route('edit.qestion', $item->id) }}"
                                             class="btn btn-success btn-sm"> <span
                                                 class="mdi mdi-book-edit mdi-18px">edit</span>
                                         </a>
 
-                                        <a title="Delete" href="{{ route('delete.category', $item->id) }}"
+                                        <a title="Delete" href="{{ route('delete.qestion', $item->id) }}"
                                             class="btn btn-danger btn-sm" id="delete"><span
                                                 class="mdi mdi-delete-circle  mdi-18px">delete</span></a>
                                     </td>
