@@ -13,6 +13,7 @@ use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\admin\Uni_answer_qController;
 use App\Http\Controllers\teacher\ExamController as TeacherExamController;
 use App\Http\Controllers\teacher\QestionController as TeacherQestionController;
+use App\Http\Controllers\teacher\StudentController;
 use App\Http\Controllers\teacher\TeacherController;
 use App\Http\Controllers\user\UserController;
 use App\Models\TeacherExam;
@@ -126,6 +127,16 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
     });
 
     Route::get('/get-teacher_subjects/{department_id}', [SubjectController::class, 'getSubjectsByDepartment']);
+
+      Route::controller(StudentController::class)->group(function() {
+        Route::get('/maange/student' , 'AllStudent')->name('manage.student');
+        // Route::get('/add/teacher/exam' , 'AddTeacherExam')->name('add.teacher.exam');
+        // Route::post('store/teacher/exam' , 'StoreTeacherExam')->name('store.teacher.exam');
+        // Route::get('/edit/teacher/exam/{id}', 'EditTeacherExam')->name('edit.teacher.exam');
+        // Route::post('update/teacher/exam' , 'UpdateTeacherExam')->name('update.teacher.exam');
+        // Route::get('/teacher/qestion/exam/{id}', 'DeleteTeacherExam')->name('delete.teacher.exam');
+    });
+
 });
 
 
