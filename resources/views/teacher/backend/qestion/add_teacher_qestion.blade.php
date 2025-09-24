@@ -23,7 +23,7 @@
                     </a>
 
                     <h2 class="text-white">Add New Category</h2>
-                   <form id="categoryForm" action="{{ route('store.qestion') }}" method="POST" enctype="multipart/form-data">
+                   <form id="categoryForm" action="{{ route('store.teacher.qestion') }}" method="POST" enctype="multipart/form-data">
 
 
                         @csrf
@@ -116,6 +116,6 @@
             })
         })
     </script>
-    
+
 
 @endsection

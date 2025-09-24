@@ -108,10 +108,10 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
     Route::controller(TeacherQestionController::class)->group(function() {
         Route::get('/all/teacher/qestion' , 'AllTeacherQestion')->name('all.teacher.qestion');
         Route::get('/add/teacher/qestion' , 'AddTeacherQestion')->name('add.teacher.qestion');
-        // Route::post('store/teacher/qestion' , 'StoreTeacherQestion')->name('store.teacher.qestion');
-        // Route::get('/edit/teacher/qestion/{id}' , 'EditTeacherQestion')->name('edit.teacher.qestion');
-        // Route::post('update/teacher/qestion' , 'UpdateTeacherQestion')->name('update.teacher.qestion');
-        // Route::get('/teacher/qestion/delete/{id}', 'DeleteTeacherQestion')->name('delete.teacher.qestion');
+        Route::post('store/teacher/qestion' , 'StoreTeacherQestion')->name('store.teacher.qestion');
+        Route::get('/edit/teacher/qestion/{id}', 'EditTeacherQestion')->name('edit.teacher.qestion');
+        Route::post('update/teacher/qestion' , 'UpdateTeacherQestion')->name('update.teacher.qestion');
+        Route::get('/teacher/qestion/delete/{id}', 'DeleteTeacherQestion')->name('delete.teacher.qestion');
     });
 });
 

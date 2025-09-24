@@ -56,12 +56,12 @@
 
                                    
                                     <td>
-                                        <a title="Edit" href="{{ route('edit.qestion', $item->id) }}"
+                                        <a title="Edit" href="{{ route('edit.teacher.qestion', $item->id) }}"
                                             class="btn btn-success btn-sm"> <span
                                                 class="mdi mdi-book-edit mdi-18px">edit</span>
                                         </a>
 
-                                        <a title="Delete" href="{{ route('delete.qestion', $item->id) }}"
+                                        <a title="Delete" href="{{ route('delete.teacher.qestion', $item->id) }}"
                                             class="btn btn-danger btn-sm" id="delete"><span
                                                 class="mdi mdi-delete-circle  mdi-18px">delete</span></a>
                                     </td>
