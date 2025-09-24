@@ -11,6 +11,7 @@ use App\Http\Controllers\admin\examcontroller;
 use App\Http\Controllers\admin\qestioncontroller;
 use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\admin\Uni_answer_qController;
+use App\Http\Controllers\teacher\QestionController as TeacherQestionController;
 use App\Http\Controllers\teacher\TeacherController;
 use App\Http\Controllers\user\UserController;
 
@@ -103,7 +104,18 @@ Route::controller(qestioncontroller::class)->group(function() {
 
 Route::middleware(['auth', 'role:teacher'])->group(function () {
     Route::get('/teacher/dashboard', [TeacherController::class, 'TeacherDashboard'])->name('teacher.dashboard');
-    Route::get('/teacher/logout', [TeacherController::class, 'TeacherLogout'])->name('teacher.logout'); // optional
+    Route::get('/teacher/logout', [TeacherController::class, 'TeacherLogout'])->name('teacher.logout');
+     // optional
+
+
+    Route::controller(TeacherQestionController::class)->group(function() {
+        Route::get('/all/teacher/qestion' , 'AllTeacherQestion')->name('all.teacher.qestion');
+        Route::get('/add/teacher/qestion' , 'AddTeacherQestion')->name('add.teacher.qestion');
+        // Route::post('store/teacher/qestion' , 'StoreTeacherQestion')->name('store.teacher.qestion');
+        // Route::get('/edit/teacher/qestion/{id}' , 'EditTeacherQestion')->name('edit.teacher.qestion');
+        // Route::post('update/teacher/qestion' , 'UpdateTeacherQestion')->name('update.teacher.qestion');
+        // Route::get('/teacher/qestion/delete/{id}', 'DeleteTeacherQestion')->name('delete.teacher.qestion');
+    });
 });
 
 

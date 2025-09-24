@@ -1,5 +1,5 @@
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('teacher.teacher_dashboard')
+@section('teacher')
 
 
     <div class="container-fluid pt-4 px-4">
@@ -17,7 +17,7 @@
                                         placeholder="Search" style="font-size: 18px; height: 55px; width: 300px" />
                                 </form>
 
-                                <a href="{{ route('add.qestion') }}">
+                                <a href="{{ route('add.teacher.qestion') }}">
                                     <button style="--clr: #39ff14" class="button-styleee">
                                         <span>Add qestion</span><i></i>
                                     </button>
@@ -112,4 +112,6 @@
             </div>
         </div>
     </div>
+
+
 @endsection
