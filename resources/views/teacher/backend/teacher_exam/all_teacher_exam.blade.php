@@ -1,14 +1,13 @@
-@extends('admin.admin_dashboard')
-@section('admin')
+@extends('teacher.teacher_dashboard')
+@section('teacher')
 
-
-    <div class="card">
+ <div class="card">
         <div class="card-body">
 
             <div class="d-flex justify-content-between">
                 <h4 class="card-title">View Student Info</h4>
-                <a href="{{ route('add.exam') }}" class="btn btn-primary waves-effect waves-light mb-4">Create
-                    Student</a>
+                <a href="{{ route('add.teacher.exam') }}" class="btn btn-primary waves-effect waves-light mb-4">Create
+                    exam</a>
             </div>
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -42,7 +41,7 @@
 
 
                             <td style="text-align:center; font-size: 20px;">
-                                <a href="{{ route('exam.edit', $exam->id) }}">
+                                <a href="{{ route('edit.teacher.exam', $exam->id) }}">
                                     <i class="fas fa-edit btn btn-primary"></i>
                                 </a>
                                 <a href="{{ route('exam.delete', $exam->id) }}" id="delete">
@@ -56,4 +55,6 @@
 
         </div>
     </div>
+
+
 @endsection

@@ -11,9 +11,11 @@ use App\Http\Controllers\admin\examcontroller;
 use App\Http\Controllers\admin\qestioncontroller;
 use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\admin\Uni_answer_qController;
+use App\Http\Controllers\teacher\ExamController as TeacherExamController;
 use App\Http\Controllers\teacher\QestionController as TeacherQestionController;
 use App\Http\Controllers\teacher\TeacherController;
 use App\Http\Controllers\user\UserController;
+use App\Models\TeacherExam;
 
 use function Pest\Laravel\get;
 
@@ -113,6 +115,17 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
         Route::post('update/teacher/qestion' , 'UpdateTeacherQestion')->name('update.teacher.qestion');
         Route::get('/teacher/qestion/delete/{id}', 'DeleteTeacherQestion')->name('delete.teacher.qestion');
     });
+
+       Route::controller(TeacherExamController::class)->group(function() {
+        Route::get('/all/teacher/exam' , 'AllTeacherExam')->name('all.teacher.exam');
+        Route::get('/add/teacher/exam' , 'AddTeacherExam')->name('add.teacher.exam');
+        Route::post('store/teacher/exam' , 'StoreTeacherExam')->name('store.teacher.exam');
+        Route::get('/edit/teacher/exam/{id}', 'EditTeacherExam')->name('edit.teacher.exam');
+        // Route::post('update/teacher/qestion' , 'UpdateTeacherQestion')->name('update.teacher.qestion');
+        // Route::get('/teacher/qestion/delete/{id}', 'DeleteTeacherQestion')->name('delete.teacher.qestion');
+    });
+
+    Route::get('/get-teacher_subjects/{department_id}', [SubjectController::class, 'getSubjectsByDepartment']);
 });
 
 

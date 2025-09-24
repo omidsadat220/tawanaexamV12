@@ -1,6 +1,5 @@
-@extends('admin.admin_dashboard')
-@section('admin')
-
+@extends('teacher.teacher_dashboard')
+@section('teacher')
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -30,7 +29,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Fill Student Info</h4>
-                        <form action="{{ route('store.exam') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('store.teacher.exam') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <div class="row mb-3">
@@ -137,7 +136,7 @@
 
                 if (depart_id) {
                     $.ajax({
-                        url: "/get-subjects/" + depart_id,
+                        url: "/get-teacher_subjects/" + depart_id,
                         type: "GET",
                         success: function(res) {
                             $('#subject-dropdown').html(
@@ -158,4 +157,6 @@
             });
         });
     </script>
+
+
 @endsection
