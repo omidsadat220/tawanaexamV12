@@ -56,6 +56,24 @@ class qestioncontroller extends Controller
 
                 return redirect()->route('all.qestion')->with($notification);
         }
+        else{
+             qestion::create([
+                'subject_id' => $request->subject_id,
+                'question' => $request->question,
+                'option1' => $request->option1,
+                'option2' => $request->option2,
+                'option3' => $request->option3,
+                'option4' => $request->option4,
+                'correct_answer' => $request->correct_answer,
+           ]);
+           
+              $notification = array(
+                'message' => 'qestion Inserted Successfully',
+                'alert-type' => 'success'
+              );
+
+                return redirect()->route('all.qestion')->with($notification);
+        }
     }
 
     //end method
