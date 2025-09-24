@@ -121,8 +121,8 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
         Route::get('/add/teacher/exam' , 'AddTeacherExam')->name('add.teacher.exam');
         Route::post('store/teacher/exam' , 'StoreTeacherExam')->name('store.teacher.exam');
         Route::get('/edit/teacher/exam/{id}', 'EditTeacherExam')->name('edit.teacher.exam');
-        // Route::post('update/teacher/qestion' , 'UpdateTeacherQestion')->name('update.teacher.qestion');
-        // Route::get('/teacher/qestion/delete/{id}', 'DeleteTeacherQestion')->name('delete.teacher.qestion');
+        Route::post('update/teacher/exam' , 'UpdateTeacherExam')->name('update.teacher.exam');
+        Route::get('/teacher/qestion/exam/{id}', 'DeleteTeacherExam')->name('delete.teacher.exam');
     });
 
     Route::get('/get-teacher_subjects/{department_id}', [SubjectController::class, 'getSubjectsByDepartment']);

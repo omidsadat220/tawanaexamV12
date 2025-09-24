@@ -30,7 +30,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Update Exam Info</h4>
 
-                        <form action="{{ route('exam.update') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('update.teacher.exam') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <input type="hidden" name="id" value="{{ $exam->id }}">

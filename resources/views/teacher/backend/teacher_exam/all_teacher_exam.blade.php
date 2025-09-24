@@ -44,7 +44,7 @@
                                 <a href="{{ route('edit.teacher.exam', $exam->id) }}">
                                     <i class="fas fa-edit btn btn-primary"></i>
                                 </a>
-                                <a href="{{ route('exam.delete', $exam->id) }}" id="delete">
+                                <a href="{{ route('delete.teacher.exam', $exam->id) }}" id="delete">
                                     <i class="fas fa-trash-alt btn btn-danger"></i>
                                 </a>
                             </td>

@@ -7,6 +7,7 @@ use App\Models\department;
 use App\Models\DepartmentSubject;
 use App\Models\TeacherExam;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ExamController extends Controller
 {
@@ -62,5 +63,49 @@ class ExamController extends Controller
 
         return view('teacher.backend.teacher_exam.edit_teacher_exam', compact('exam', 'departments', 'subjects'));
     }
+
+    public function UpdateTeacherExam(Request $request)
+    {
+
+        $examId = $request->id;
+        // Validate the request
+        $request->validate([
+            'department_id' => 'required|exists:departments,id',
+            'subject_id' => [
+                'required',
+                Rule::exists('department_subjects', 'id')->where(function ($query) use ($request) {
+                    $query->where('department_id', $request->department_id);
+                }),
+            ],
+            'exam_title' => 'required|string|max:255',
+            'start_time' => 'required|date_format:H:i',
+        ], [
+            'subject_id.exists' => 'Selected subject does not belong to the chosen department.'
+        ]);
+
+        // Find the exam
+        $exam = TeacherExam::findOrFail($examId);
+
+        // Update the exam
+        $exam->update($request->only('department_id', 'subject_id', 'exam_title', 'start_time'));
+
+        // Redirect back with success message
+        return redirect()->route('all.teacher.exam')->with([
+            'message' => 'Exam updated successfully',
+            'alert-type' => 'success'
+        ]);
+    }
+
+    public function DeleteTeacherExam($id)
+    {
+        $exam = TeacherExam::findOrFail($id);
+        $exam->delete();
+
+        return redirect()->route('all.teacher.exam')->with([
+            'message' => 'Exam deleted successfully',
+            'alert-type' => 'success'
+        ]);
+    }
+
 
 }
