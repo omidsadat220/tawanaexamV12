@@ -72,6 +72,21 @@
                   <a href="{{route('all.teacher.qestion')}}" class="dropdown-item">all Qestion</a>
                 </div>
               </div>
+
+                  <div class="nav-item dropdown">
+                <a
+                  href="#"
+                  class="nav-link dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  ><i class="far fa-file-alt me-2"></i>Exam</a
+                >
+                <div class="dropdown-menu bg-transparent border-0">
+                  <!-- <a href="teachers.html" class="dropdown-item">Teachers</a>
+                            <a href="students.html" class="dropdown-item">Students</a> -->
+                  <a href="{{route('all.teacher.exam')}}" class="dropdown-item">all Exam</a>
+                </div>
+              </div>
+
             </div>
           </nav>
         </div>
