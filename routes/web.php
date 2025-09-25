@@ -11,11 +11,13 @@ use App\Http\Controllers\admin\examcontroller;
 use App\Http\Controllers\admin\qestioncontroller;
 use App\Http\Controllers\admin\SubjectController;
 use App\Http\Controllers\admin\Uni_answer_qController;
+use App\Http\Controllers\teacher\add_examController;
 use App\Http\Controllers\teacher\ExamController as TeacherExamController;
 use App\Http\Controllers\teacher\QestionController as TeacherQestionController;
 use App\Http\Controllers\teacher\StudentController;
 use App\Http\Controllers\teacher\TeacherController;
 use App\Http\Controllers\user\UserController;
+use App\Models\AddExam;
 use App\Models\TeacherExam;
 
 use function Pest\Laravel\get;
@@ -130,11 +132,18 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
 
       Route::controller(StudentController::class)->group(function() {
         Route::get('/maange/student' , 'AllStudent')->name('manage.student');
-        // Route::get('/add/teacher/exam' , 'AddTeacherExam')->name('add.teacher.exam');
-        // Route::post('store/teacher/exam' , 'StoreTeacherExam')->name('store.teacher.exam');
-        // Route::get('/edit/teacher/exam/{id}', 'EditTeacherExam')->name('edit.teacher.exam');
-        // Route::post('update/teacher/exam' , 'UpdateTeacherExam')->name('update.teacher.exam');
-        // Route::get('/teacher/qestion/exam/{id}', 'DeleteTeacherExam')->name('delete.teacher.exam');
+
+    });
+
+    Route::controller(add_examController::class)->group(function() {
+        Route::get('/all/teacher/add/exam' , 'AllAddExam')->name('all.add.exam');
+        Route::get('/add/teacher/add/exam' , 'AddExam')->name('add.teacher.add.exam');
+        Route::post('store/teacher/add/exam' , 'StoreAddExam')->name('store.teacher.add.exam');
+        Route::get('/edit/teacher/add/exam/{id}' , 'EditAddExam')->name('edit.teacher.add.exam');
+        Route::post('update/teacher/add/exam' , 'UpdateAddExam')->name('update.teacher.add.exam');
+        Route::get('/teacher/add/exam/delete/{id}', 'DeleteAddExam')->name('delete.teacher.add.exam');
+     
+
     });
 
 });
