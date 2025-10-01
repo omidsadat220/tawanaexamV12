@@ -4,27 +4,29 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\DepartmentSubject;
+use App\Models\Exam;
 use App\Models\qestion;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
+use Illuminate\Container\Attributes\Auth;
 
 class qestioncontroller extends Controller
 {
     public function AllQestion() {
-        $alldata = qestion::with(['subject'])->get();
-
-        return view('admin.backend.qestion.all_qestion', compact('alldata'));
+        $alldata = qestion::with(['exam'])->get();
+        return view('admin.backend.qestion.all_qestion', compact('alldata' , ));
     }
 
     //end method 
 
     public function AddQestion()
 {
-    $questions = qestion::with('subject')->latest()->get();
-    $subjects = DepartmentSubject::all();
+    $questions = qestion::with('exam')->latest()->get();
+    $exams = Exam::all();
     
-    return view('admin.backend.qestion.add_qestion', compact('questions', 'subjects'));
+    return view('admin.backend.qestion.add_qestion', compact('questions', 'exams' , ));
 }
 
     //end method 
@@ -39,14 +41,16 @@ class qestioncontroller extends Controller
            $save_url = 'upload/qestion/'.$name_gen;
 
            qestion::create([
-                'subject_id' => $request->subject_id,
+                'exam_id' => $request->exam_id,
+                'user_id' => auth()->id(),
                 'question' => $request->question,
                 'option1' => $request->option1,
                 'option2' => $request->option2,
                 'option3' => $request->option3,
                 'option4' => $request->option4,
                 'correct_answer' => $request->correct_answer,
-                'image' => $save_url
+                'image' => $save_url,
+
            ]);
            
               $notification = array(
@@ -58,13 +62,16 @@ class qestioncontroller extends Controller
         }
         else{
              qestion::create([
-                'subject_id' => $request->subject_id,
+                'exam_id' => $request->exam_id,
+                'user_id' => auth()->id(),
                 'question' => $request->question,
                 'option1' => $request->option1,
                 'option2' => $request->option2,
                 'option3' => $request->option3,
                 'option4' => $request->option4,
                 'correct_answer' => $request->correct_answer,
+                
+
            ]);
            
               $notification = array(
@@ -80,8 +87,8 @@ class qestioncontroller extends Controller
 
     public function EditQestion($id) {
         $editData = qestion::findOrFail($id);
-        $subjects = DepartmentSubject::all();
-        return view('admin.backend.qestion.edit_qestion', compact('editData', 'subjects'));
+        $exams = Exam::all();
+        return view('admin.backend.qestion.edit_qestion', compact('editData', 'exams'));
     }
     //end method
 
@@ -111,7 +118,8 @@ class qestioncontroller extends Controller
                 'option3' => $request->option3,
                 'option4' => $request->option4,
                 'correct_answer' => $request->correct_answer,
-                'image' => $save_url
+                'image' => $save_url,
+                'user_id' => auth()->user()->id,
            ]);
            
               $notification = array(

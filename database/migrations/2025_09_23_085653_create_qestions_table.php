@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('qestions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('subject_id')->nullable();
+            $table->unsignedBigInteger('exam_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->text('question');
             $table->string('image')->nullable();
             $table->string('option1');
@@ -23,7 +24,7 @@ return new class extends Migration
             $table->string('correct_answer');
             $table->timestamps();
 
-            $table->foreign('subject_id')->references('id')->on('department_subjects')->onDelete('set null'); 
+            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('set null');
 
         });
     }

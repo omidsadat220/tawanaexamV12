@@ -35,12 +35,12 @@
                             <div class="col-12">
                                 <label class="col-sm-4 col-form-label">Subject</label>
                                 <div class="col-sm-10">
-                                    <select name="subject_id" class="form-select" id="subject-dropdown">
-                                        <option value="">Select Subject</option>
-                                        @foreach ($subjects as $subject)
-                                            <option value="{{ $subject->id }}"
-                                                {{ old('subject_id', $editData->subject_id) == $subject->id ? 'selected' : '' }}>
-                                                {{ $subject->subject_name }}
+                                    <select name="exam_id" class="form-select" id="subject-dropdown">
+                                        <option value="">Select exam</option>
+                                        @foreach ($exams as $exam)
+                                            <option value="{{ $exam->id }}"
+                                                {{ old('exam_id', $editData->exam_id) == $exam->id ? 'selected' : '' }}>
+                                                {{ $exam->exam_title }}
                                             </option>
                                         @endforeach
                                     </select>
