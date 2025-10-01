@@ -45,7 +45,8 @@
                                     </td>
                                     <td>
                                         <a title="Edit" href="{{ route('edit.category', $item->id) }}"
-                                            class="btn btn-success btn-sm"> <span class="mdi mdi-book-edit mdi-18px">edit</span>
+                                            class="btn btn-success btn-sm"> <span
+                                                class="mdi mdi-book-edit mdi-18px">edit</span>
                                         </a>
 
                                         <a title="Delete" href="{{ route('delete.category', $item->id) }}"

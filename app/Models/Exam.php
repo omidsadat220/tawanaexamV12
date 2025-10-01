@@ -6,18 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Exam extends Model
 {
-   protected $guarded = [];
+    protected $fillable = [
+        'department_id',
+        'subject_id',
+        'exam_title',
+        'start_time',
+    ];
 
- public function classSubjects() {
-    return $this->hasMany(ClassSubject::class, 'class_category_id', 'class_category_id');
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(DepartmentSubject::class, 'subject_id');
+    }
 }
-
-  public function classcategory()
-{
-    return $this->belongsTo(ClassCategory::class, 'class_category_id', 'id');
-}
-
-
-}
-
- 

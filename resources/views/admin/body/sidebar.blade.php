@@ -89,14 +89,52 @@
                   ><i class="fa fa-laptop me-2"></i> All Subject</a
                 >
 
-                <a href="{{route('all.exam')}}" class="nav-item nav-link"
-                  ><i class="fa fa-laptop me-2"></i> All Exam</a
-                >
+               
+
+              
 
                 </div>
 
                 
 
+                </div>
+
+                  <div class="nav-item dropdown">
+
+                <a
+                  href="#"
+                  class="nav-link dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  ><i class="far fa-file-alt me-2"></i>all department</a
+                >
+                 <div class="dropdown-menu bg-transparent border-0">
+                   <a href="{{route('all.depart')}}" class="nav-item nav-link"
+                  ><i class="fa fa-laptop me-2"></i> All Department</a
+                >
+
+                  <a href="{{route('all.exam')}}" class="nav-item nav-link"
+                  ><i class="fa fa-laptop me-2"></i> All Exam</a
+                >
+               
+                </div>
+                </div>
+
+                <div class="nav-item dropdown">
+
+                <a
+                  href="#"
+                  class="nav-link dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  ><i class="far fa-file-alt me-2"></i>all questions</a
+                >
+                 <div class="dropdown-menu bg-transparent border-0">
+                   <a href="{{route('all.qestion')}}" class="nav-item nav-link"
+                  ><i class="fa fa-laptop me-2"></i> All question</a
+                >
+
+                 
+               
+                </div>
                 </div>
 
               {{-- <div class="nav-item dropdown">

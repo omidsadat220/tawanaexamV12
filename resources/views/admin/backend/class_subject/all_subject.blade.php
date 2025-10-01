@@ -39,16 +39,17 @@
                                     <td>{{ $key + 1 }}</td>
                                     <td>{{ $item->classcategory->class_category }}</td>
 
-<td>
-    @foreach($allData as $item)
-        {{ implode(', ', json_decode($item->subject_name)) }}
-    @endforeach
-</td>
+                                    <td>
+                                        @foreach ($allData as $item)
+                                            {{ implode(', ', json_decode($item->subject_name)) }}
+                                        @endforeach
+                                    </td>
                                     {{-- <td>{{ $item->subject_name }}</td> --}}
-                                 
+
                                     <td>
                                         <a title="Edit" href="{{ route('edit.subject', $item->id) }}"
-                                            class="btn btn-success btn-sm"> <span class="mdi mdi-book-edit mdi-18px">edit</span>
+                                            class="btn btn-success btn-sm"> <span
+                                                class="mdi mdi-book-edit mdi-18px">edit</span>
                                         </a>
 
                                         <a title="Delete" href="{{ route('delete.subject', $item->id) }}"
