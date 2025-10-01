@@ -1,5 +1,7 @@
 @extends('teacher.teacher_dashboard')
 @section('teacher')
+
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 
@@ -22,60 +24,82 @@
                     <h2 class="text-white">Edit New qestion</h2>
                     <form id="qestionForm" action="{{ route('update.teacher.qestion') }}" method="POST"
                         enctype="multipart/form-data">
+
                         @csrf
-                        <input type="hidden" name="id" value="{{ $editData->id }}">
+
+                        <input type="hidden"  name="id" value="{{$editData->id}}" id="">
 
                         <div class="row">
+
                             <div class="col-12">
                                 <label class="col-sm-4 col-form-label">Subject</label>
                                 <div class="col-sm-10">
-                                    <select name="subject_id" class="form-select" id="subject-dropdown">
-                                        <option value="">Select Subject</option>
-                                        @foreach ($subjects as $subject)
-                                            <option value="{{ $subject->id }}"
-                                                {{ old('subject_id', $editData->subject_id) == $subject->id ? 'selected' : '' }}>
-                                                {{ $subject->subject_name }}
+                                    <select name="exam_id" class="form-select" id="subject-dropdown">
+                                        <option value="">Select exam</option>
+                                        @foreach ($exams as $exam)
+                                            <option value="{{ $exam->id }}"
+                                                {{ old('exam_id', $editData->exam_id) == $exam->id ? 'selected' : '' }}>
+                                                {{ $exam->exam_title }}
                                             </option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="col-12 mb-3 d-flex align-items-center justify-content-between">
-                                <label for="question">What is Question</label>
+                            <div class="col-12 d-flex align-items-center justify-content-between mb-3">
+                                <label for="question" class="text-start"> what is Question </label>
                                 <input class="catinput" type="text" id="question" name="question"
                                     value="{{ $editData->question }}">
                             </div>
 
-                            @foreach (['option1', 'option2', 'option3', 'option4'] as $option)
-                                <div class="col-12 mb-3 d-flex align-items-center justify-content-between">
-                                    <label for="{{ $option }}">{{ ucfirst($option) }}</label>
-                                    <input class="catinput" type="text" id="{{ $option }}"
-                                        name="{{ $option }}" value="{{ $editData->$option }}">
-                                </div>
-                            @endforeach
+                            <div class="col-12 d-flex align-items-center justify-content-between mb-3">
+                                <label for="option1" class="text-start">option1</label>
+                                <input class="catinput" type="text" id="option1" name="option1"
+                                    value="{{ $editData->option1 }}">
+                            </div>
 
-                            <div class="col-12 mb-3 d-flex align-items-center justify-content-between">
-                                <label for="correct_answer">Correct Answer</label>
+                            <div class="col-12 d-flex align-items-center justify-content-between mb-3">
+                                <label for="option2" class="text-start">option2</label>
+                                <input class="catinput" type="text" id="option2" name="option2"
+                                    value="{{ $editData->option2 }}">
+                            </div>
+
+                            <div class="col-12 d-flex align-items-center justify-content-between mb-3">
+                                <label for="option3" class="text-start">option3</label>
+                                <input class="catinput" type="text" id="option3" name="option3"
+                                    value="{{ $editData->option3 }}">
+                            </div>
+
+                            <div class="col-12 d-flex align-items-center justify-content-between mb-3">
+                                <label for="option4" class="text-start">option4</label>
+                                <input class="catinput" type="text" id="option4" name="option4"
+                                    value="{{ $editData->option4 }}">
+                            </div>
+
+                            <div class="col-12 d-flex align-items-center justify-content-between mb-3">
+                                <label for="correct_answer" class="text-start">correct_answer</label>
                                 <input class="catinput" type="text" id="correct_answer" name="correct_answer"
                                     value="{{ $editData->correct_answer }}">
                             </div>
 
                             <div class="col-md-6">
-                                <label for="image" class="form-label">Question Image</label>
+                                <label for="validationDefault02" class="form-label">qestion Image</label>
                                 <input type="file" class="form-control" name="image" id="image">
                             </div>
 
                             <div class="col-md-6">
-                                <img id="showImage" style="width:100px;"
-                                    src="{{ $editData->image ? asset($editData->image) : asset('upload/no_image.jpg') }}"
+                                <label for="validationDefault02" class="form-label"> </label>
+                                <img id="showImage" style="width:100px;" src="{{ asset($editData->image) }}"
                                     class="rounded-circle avatar-xl img-thumbnail float-start" alt="image profile">
                             </div>
 
+
                             <div class="col-12 d-flex align-items-end w-100 justify-content-end">
-                                <button style="--clr: #39ff14" type="submit" class="button-styleee mb-3">
-                                    <span>Save Question</span><i></i>
-                                </button>
+                                <a href="#" class="mb-3" id="addNewBtn">
+                                    <button style="--clr: #39ff14" type="submit" class="button-styleee">
+                                        <span>Save Qestion</span><i></i>
+                                    </button>
+                                </a>
                             </div>
                         </div>
                     </form>
@@ -95,4 +119,6 @@
             })
         })
     </script>
+
+    
 @endsection

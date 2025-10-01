@@ -71,6 +71,7 @@ class qestioncontroller extends Controller
                 'option4' => $request->option4,
                 'correct_answer' => $request->correct_answer,
                 
+                
 
            ]);
            
@@ -111,15 +112,15 @@ class qestioncontroller extends Controller
            }
 
            qestion::find($qestion_id)->update([
-                'subject_id' => $request->subject_id,
+                'exam_id' => $request->exam_id,
+                'user_id' => auth()->id(),
                 'question' => $request->question,
                 'option1' => $request->option1,
                 'option2' => $request->option2,
                 'option3' => $request->option3,
                 'option4' => $request->option4,
                 'correct_answer' => $request->correct_answer,
-                'image' => $save_url,
-                'user_id' => auth()->user()->id,
+                'image' => $save_url
            ]);
            
               $notification = array(

@@ -33,15 +33,18 @@
                                  <div class="col-12">
                                         <label class="col-sm-4 col-form-label">Subject</label>
                                         <div class="col-sm-10">
-                                            <select name="subject_id" class="form-select" id="subject-dropdown">
-                                                <option value="">Select Subject</option>
-                                                @foreach ($subjects as $subject)
-                                                    <option value="{{ $subject->id }}">{{ $subject->subject_name }}
+                                            <select name="exam_id" class="form-select" id="subject-dropdown">
+                                                <option value="">Select exam</option>
+                                                @foreach ($exams as $exam)
+                                                    <option value="{{ $exam->id }}">{{ $exam->exam_title }}
                                                     </option>
                                                 @endforeach
                                             </select>
                                         </div>
                                     </div>
+
+
+                                    
 
                             <div class="col-12 d-flex align-items-center justify-content-between mb-3">
                                 <label for="question" class="text-start"> what is Question </label>

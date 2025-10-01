@@ -1,7 +1,6 @@
 @extends('teacher.teacher_dashboard')
 @section('teacher')
 
-
     <div class="container-fluid pt-4 px-4">
         <div class="row vh-auto bg-secondary rounded align-items-center justify-content-center mx-0">
             <div class="col-12 text-center">
@@ -37,6 +36,7 @@
                                 <th>option3</th>
                                 <th>option4</th>
                                 <th>correct_answer</th>
+                                <th>User_id</th>
                                 <th>image</th>
                                 <th class="action">Action</th>
                             </tr>
@@ -45,13 +45,14 @@
                             @foreach ($alldata as $key => $item)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $item->subject->subject_name }}</td>
+                                    <td>{{ $item->exam->exam_title }}</td>
                                     <td>{{ $item->question }}</td>
                                     <td>{{ $item->option1 }}</td>
                                     <td>{{ $item->option2 }}</td>
                                     <td>{{ $item->option3 }}</td>
                                     <td>{{ $item->option4 }}</td>
                                     <td>{{ $item->correct_answer }}</td>
+                                    <td>{{ $item->user_id}}</td>
                                     <td> <img src="{{ asset($item->image) }}"></td>
 
                                    
