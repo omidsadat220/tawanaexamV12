@@ -30,7 +30,7 @@
                     <h3 class="text-lg font-medium mb-2">Question: {{ $answer->question->question ?? 'N/A' }}</h3>
 
                     @if($answer->question->image)
-                        <img src="{{ asset('storage/' . $answer->question->image) }}" 
+                        <img src="{{ asset(  $answer->question->image) }}" 
                              alt="Question Image" 
                              class="mb-2 w-full max-h-64 object-contain rounded">
                     @endif

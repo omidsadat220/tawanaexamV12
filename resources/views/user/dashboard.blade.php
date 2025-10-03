@@ -706,7 +706,7 @@
             <!-- Card 1: Take Test -->
             <div class="card-custom" role="button" tabindex="0" aria-label="Take Test">
                 <div class="card-text">
-                    <a href="https://www.tawanatechnology.com/login">Final Exam</a>
+                    <a href="{{route('user.unicode')}}">Final Exam</a>
                     <span class="arrow-icon">↻</span>
                 </div>
 
@@ -718,7 +718,7 @@
             <!-- Card 2: Resume Test -->
             <div class="card-custom ca__fx-clipGridReveal" role="button" tabindex="0" aria-label="Resume Test">
                 <div class="card-text">
-                    <a href="{{route('user.unicode')}}">University Exam</a>
+                    <a href="{{ route('mock.exam') }}">Mock Exam</a>
                     <span class="arrow-icon">↻</span>
                 </div>
                 <div class="icon-container" aria-hidden="true">
@@ -729,7 +729,7 @@
             <!-- Card 3: Test History -->
             <div class="card-custom" role="button" tabindex="0" aria-label="Test History">
                 <div class="card-text">
-                    <a href= "{{ route('mock.exam') }}">Mock Exam</a>
+                    <a href= "{{ route('mock.exam') }}">Certificate</a>
                     <span class="arrow-icon">↻</span>
                 </div>
                 <div class="icon-container" aria-hidden="true">

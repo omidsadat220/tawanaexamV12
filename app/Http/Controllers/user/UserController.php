@@ -296,7 +296,7 @@ $exam = Exam::findOrFail($exam_id);
             'exam_id' => $exam->id,
             'question_id' => $question_id,
             'department_id' => $exam->department_id,
-            'uni_id' => $exam->uni_id ?? null, // if your exam has uni_id
+            // 'uni_id' => $exam->uni_id ?? null, 
             'selected_answer' => $selected,
             'correct_answer' => $question->correct_answer,
         ]);
