@@ -132,6 +132,9 @@ Route::middleware(['auth', 'role:teacher'])->group(function () {
 
       Route::controller(StudentController::class)->group(function() {
         Route::get('/maange/student' , 'AllStudent')->name('manage.student');
+        Route::get('/set/class/{id}' , 'SetClass')->name('set.class');
+        Route::post('store/set/class' , 'StoreSetClass')->name('store.set.class');
+
 
     });
 
@@ -171,6 +174,16 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::post('submit/exam', [UserController::class, 'SubmitExam'])->name('exam.submit');
     Route::get('/user/examresult', [UserController::class, 'UserExamResult'])->name('user.examresult');
     Route::get('/user/certificate', [UserController::class, 'UserCertificate'])->name('user.certificate');
+
+    // Mock Exam
+
+    Route::controller(UserController::class)->group(function() {
+        Route::get('/mock/exam' , 'MockExam')->name('mock.exam');
+        Route::get('/list/exam/{id}' , 'ListExam')->name('list.exam');
+        Route::get('/mock/exam/start/{id}' , 'MockExamStart')->name('mock.exam.start');
+        Route::post('/mock/exam/submit/{id}' , 'MockExamSubmit')->name('mock.exam.submit');
+        Route::get('/mock/exam/results/{exam}',  'examResults')->name('mock.exam.results');
+    });
 });
 
 

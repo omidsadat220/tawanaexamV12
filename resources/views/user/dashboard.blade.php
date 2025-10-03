@@ -729,7 +729,7 @@
             <!-- Card 3: Test History -->
             <div class="card-custom" role="button" tabindex="0" aria-label="Test History">
                 <div class="card-text">
-                    <a href="https://tawanatechnology.com/certificate">Certificate</a>
+                    <a href= "{{ route('mock.exam') }}">Mock Exam</a>
                     <span class="arrow-icon">↻</span>
                 </div>
                 <div class="icon-container" aria-hidden="true">

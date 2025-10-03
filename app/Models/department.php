@@ -19,4 +19,6 @@ class department extends Model
     {
         return $this->hasMany(Exam::class);
     }
+
+    
 }

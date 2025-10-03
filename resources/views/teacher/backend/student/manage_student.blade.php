@@ -22,9 +22,7 @@
                         <th>#</th>
                         <th>name</th>
                         <th>email</th>
-                        <th>role</th>
-                        <th>phone</th>
-                        <th class="all">Action</th>
+                        <th>Set Class</th>
                     </tr>
                 </thead>
 
@@ -34,8 +32,9 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->role }}</td>
-                            <td>{{ $user->phone }}</td>
+                            <td><a href="{{ route('set.class', $user->id) }}">Set Class</a></td>
+
+                           
 
 
 
@@ -54,6 +53,8 @@
 
         </div>
     </div>
+
+
 
 
 @endsection

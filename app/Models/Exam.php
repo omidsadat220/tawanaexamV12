@@ -22,4 +22,6 @@ class Exam extends Model
     {
         return $this->belongsTo(DepartmentSubject::class, 'subject_id');
     }
+
+    
 }

@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\CorrectAns;
+use App\Models\department;
+use App\Models\DepartmentSubject;
+use App\Models\Exam;
+use App\Models\qestion;
+use App\Models\UserAnswer;
+use App\Models\SetClassStudent;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\uni_answer_q;
@@ -225,4 +231,104 @@ class UserController extends Controller
     {
         return view('user.uni.certificate');
     }
+
+
+    ////////////////////////////
+    public function MockExam(){
+        // $user_id = Auth::user()->id;
+        // $set_class = SetClassStudent::all();
+        // $department = department::all();
+        // $department_subject = DepartmentSubject::all();
+        $user_id = Auth::id();
+             // Get the set_class record for this user
+             $set_class = SetClassStudent::where('user_id', $user_id)
+                ->with('department.subjects') // eager load department and its subjects
+                ->first();
+        return view('user.mock.mock_exam', compact('set_class'));
+    }
+
+    public function ListExam($id){
+         $user_id = Auth::id();
+
+    // Optional: check if the user belongs to the department
+    $set_class = SetClassStudent::where('user_id', $user_id)->first();
+
+    if(!$set_class) {
+        return redirect()->back()->with('error', 'You are not assigned to any department.');
+    }
+
+    $subject = DepartmentSubject::where('id', $id)
+                ->where('department_id', $set_class->department_id)
+                ->firstOrFail();
+
+    $exams = Exam::where('subject_id', $id)->get();
+
+         return view('user.mock.list_exam', compact('subject', 'exams'));
+    }
+
+
+    // MockExamStart
+
+
+    public function MockExamStart($id){
+
+    $user_id = Auth::id();
+
+    // Get the exam
+    $exam = Exam::findOrFail($id);
+
+    // Get all questions for this exam
+    $questions = qestion::where('exam_id', $id)->get();
+
+        return view('user.mock.start_exam', compact('exam', 'questions'));
+    }
+
+    //MockExamSubmit
+
+    public function MockExamSubmit (Request $request, $exam_id){
+$exam = Exam::findOrFail($exam_id);
+
+    foreach($request->answers as $question_id => $selected) {
+        $question = qestion::find($question_id);
+
+        UserAnswer::create([
+            'user_id' => Auth::id(),
+            'exam_id' => $exam->id,
+            'question_id' => $question_id,
+            'department_id' => $exam->department_id,
+            'uni_id' => $exam->uni_id ?? null, // if your exam has uni_id
+            'selected_answer' => $selected,
+            'correct_answer' => $question->correct_answer,
+        ]);
+    }
+     return redirect()->route('mock.exam.results', $exam->id)
+                     ->with('success', 'Your exam has been submitted successfully!');
+
+    // return redirect()->back();
+
+    }
+
+         public function examResults($exam_id)
+        {
+          $exam = Exam::findOrFail($exam_id);
+
+    // get latest attempt of this user for this exam
+    $latestAttempt = UserAnswer::where('exam_id', $exam_id)
+        ->where('user_id', Auth::id())
+        ->orderBy('created_at', 'desc')
+        ->first();
+
+    if (!$latestAttempt) {
+        return redirect()->back()->with('error', 'No answers found for this exam.');
+    }
+
+    // get all answers created at the same time (that one attempt)
+    $userAnswers = UserAnswer::where('exam_id', $exam_id)
+        ->where('user_id', Auth::id())
+        ->whereDate('created_at', $latestAttempt->created_at->toDateString())
+        ->whereTime('created_at', $latestAttempt->created_at->format('H:i:s'))
+        ->get();
+
+    return view('user.mock.exam_results', compact('exam', 'userAnswers', 'latestAttempt'));
+        }
 }
