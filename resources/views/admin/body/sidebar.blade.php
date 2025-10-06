@@ -29,12 +29,12 @@
                       @endphp
               <div class="ms-3">
                 <h6 class="mb-0">{{$profileData->name}}</h6>
-                ss
+                
                 <span>{{$profileData->name}}</span>
               </div>
             </div>
             <div class="navbar-nav w-100">
-              <a href="index.html" class="nav-item nav-link"
+              <a href="{{route('admin.dashboard')}}" class="nav-item nav-link"
                 ><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a
               >
 

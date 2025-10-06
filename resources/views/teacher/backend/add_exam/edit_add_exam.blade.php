@@ -4,40 +4,33 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-    <div class="container-fluid">
-
-        <!-- Page Title -->
-        <div class="row">
-            <div class="col-12">
-                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0">Edit Exam</h4>
-                    <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="#">Student</a></li>
-                            <li class="breadcrumb-item active">Exam</li>
-                        </ol>
+<div class="container-fluid pt-4 px-4">
+        <div class="row bg-secondary">
+            <div class="col-12 text-center">
+                <div class="form-container container-form" id="add-category-page" style="display: block;">
+                    <div class="d-flex flex-row justify-content-around">
+                        <h3 class="text-white">Edit Exam</h3>
+                        <a href="{{ route('all.exam') }}" class="back-link d-block text-start" id="backBtn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" style="cursor: pointer">
+                                <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"></path>
+                            </svg>
+                            Back to Categories
+                        </a>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Edit Exam Form -->
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Update Exam Info</h4>
+                    <div class="col-12 col-lg-8 mx-auto">
+                        <div class="bg-secondary rounded p-4">
 
                         <form action="{{ route('update.teacher.add.exam') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
                             <input type="hidden" name="id" value="{{ $addexam->id }}">
 
-                            <div class="row mb-3">
-                                <!-- Department -->
-                                <div class="col-md-6">
-                                    <label class="col-form-label">Department</label>
-                                    <select name="department_id" class="form-select" id="department-dropdown">
+                             <div class="row mb-3 align-items-center">
+                                    <label class="col-2  col-form-label">Department</label>
+                                    <select name="department_id" class="col-10  form-select" id="department-dropdown">
                                         <option value="">Select Department</option>
                                         @foreach ($depart as $dept)
                                             <option value="{{ $dept->id }}"
@@ -49,12 +42,11 @@
                                     @error('department_id')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                </div>
+                            </div>
 
-                                <!-- Subject -->
-                                <div class="col-md-6">
-                                    <label class="col-form-label">Subject</label>
-                                    <select name="subject_id" class="form-select" id="subject-dropdown">
+                            <div class="row mb-3 align-items-center">
+                                    <label class="col-2 col-form-label">Subject</label>
+                                    <select name="subject_id" class="col-10 form-select" id="subject-dropdown">
                                         <option value="">Select Subject</option>
                                         @foreach ($subjects as $subject)
                                             <option value="{{ $subject->id }}"
@@ -66,14 +58,12 @@
                                     @error('subject_id')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                </div>
                             </div>
+                            
 
-                            <div class="row mb-3">
-                                <!-- Exam Title -->
-                                <div class="col-md-6">
-                                    <label class="col-form-label">Exam Title</label>
-                                    <select name="user_id" class="form-select" id="subject-dropdown">
+                            <div class="row mb-3 align-items-center">
+                                    <label class="col-2 col-form-label">Exam Title</label>
+                                    <select name="user_id" class="col-10 form-select" id="subject-dropdown">
                                         <option value="">Select Subject</option>
                                         @foreach ($users as $user)
                                             <option value="{{ $user->id }}"
@@ -82,27 +72,31 @@
                                             </option>
                                         @endforeach
                                     </select>
-                                </div>
+                            </div>
 
-                                <!-- Start Time -->
-                                <div class="col-md-6">
-                                    <label class="col-form-label">Start Time</label>
-                                    <input type="time" name="exam_time" class="form-control"
+                             <div class="row mb-3 align-items-center">
+                                    <label class="col-2 col-form-label">Start Time</label>
+                                    <input type="time" name="exam_time" class="col-10 form-control"
                                         value="{{ $addexam->exam_time }}">
                                     @error('exam_time')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
-                                </div>
                             </div>
 
-                            <button type="submit" class="btn btn-primary waves-effect waves-light">Update AddExam</button>
+                             <div class="col-12 d-flex align-items-end w-100 justify-content-end">
+                                <a href="#" class="mb-3" id="addNewBtn">
+                                    <button style="--clr: #39ff14" type="submit" class="button-styleee">
+                                        <span>Updath Add Exam</span><i></i>
+                                    </button>
+                                </a>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
 
-    </div>
+</div>
 
     <script>
         $(document).ready(function() {

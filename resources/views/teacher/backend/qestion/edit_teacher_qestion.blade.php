@@ -1,39 +1,35 @@
 @extends('teacher.teacher_dashboard')
 @section('teacher')
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
-
-    <div class="container-fluid pt-4 px-4">
-        <div class="row vh-auto bg-secondary rounded align-items-center justify-content-center mx-0">
-            <div class="col-12 text-center">
-                <!-- Categories List Page -->
-
-                <!-- Add New Category Page -->
-                <div class="form-container container-form" id="add-category-page" style="display: block;">
-                    <a href="{{ route('all.qestion') }}" class="back-link d-block text-start" id="backBtn">
+<div class="container-fluid pt-4 px-4">
+    <div class="row bg-secondary">
+        <div class="col-12 text-center">
+            <div class="form-container container-form" id="add-category-page" style="display: block;">
+                <div class="d-flex flex-row justify-content-around align-items-center mb-3">
+                    <h3 class="text-white">Edit Teacher Question</h3>
+                    <a href="{{ route('all.teacher.qestion') }}" class="back-link d-block text-start" id="backBtn">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg" style="cursor: pointer">
                             <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round"></path>
                         </svg>
-                        Back to qestion
+                        Back to Questions
                     </a>
+                </div>
 
-                    <h2 class="text-white">Edit New qestion</h2>
-                    <form id="qestionForm" action="{{ route('update.teacher.qestion') }}" method="POST"
-                        enctype="multipart/form-data">
+                <div class="col-12 col-lg-8 mx-auto">
+                    <div class="bg-secondary rounded h-100 p-4">
 
-                        @csrf
+                        <form id="qestionForm" action="{{ route('update.teacher.qestion') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $editData->id }}">
 
-                        <input type="hidden"  name="id" value="{{$editData->id}}" id="">
-
-                        <div class="row">
-
-                            <div class="col-12">
-                                <label class="col-sm-4 col-form-label">Subject</label>
-                                <div class="col-sm-10">
+                            <!-- Exam Select -->
+                            <div class="row mb-3 pt-3 align-items-center">
+                                <label class="col-2 col-form-label">Subject</label>
+                                <div class="col-10">
                                     <select name="exam_id" class="form-select" id="subject-dropdown">
                                         <option value="">Select exam</option>
                                         @foreach ($exams as $exam)
@@ -46,79 +42,75 @@
                                 </div>
                             </div>
 
-                            <div class="col-12 d-flex align-items-center justify-content-between mb-3">
-                                <label for="question" class="text-start"> what is Question </label>
-                                <input class="catinput" type="text" id="question" name="question"
-                                    value="{{ $editData->question }}">
+                            <!-- Question -->
+                            <div class="row mb-3 pt-3 align-items-center">
+                                <label for="question" class="col-2 col-form-label text-start">What is Question?</label>
+                                <div class="col-10">
+                                    <input class="catinput form-control" type="text" id="question" name="question"
+                                        value="{{ $editData->question }}" placeholder="Enter question name...">
+                                </div>
                             </div>
 
-                            <div class="col-12 d-flex align-items-center justify-content-between mb-3">
-                                <label for="option1" class="text-start">option1</label>
-                                <input class="catinput" type="text" id="option1" name="option1"
-                                    value="{{ $editData->option1 }}">
+                            <!-- Options -->
+                            @foreach (['option1', 'option2', 'option3', 'option4'] as $option)
+                                <div class="row mb-3 pt-3 align-items-center">
+                                    <label for="{{ $option }}" class="col-2 text-start col-form-label">{{ $option }}</label>
+                                    <div class="col-10">
+                                        <input class="catinput form-control" type="text" id="{{ $option }}" name="{{ $option }}"
+                                            value="{{ $editData->$option }}" placeholder="Enter {{ $option }} name...">
+                                    </div>
+                                </div>
+                            @endforeach
+
+                            <!-- Correct Answer -->
+                            <div class="row mb-3 pt-3 align-items-center">
+                                <label for="correct_answer" class="text-start col-2 col-form-label">Correct Answer</label>
+                                <div class="col-10">
+                                    <input class="catinput form-control" type="text" id="correct_answer" name="correct_answer"
+                                        value="{{ $editData->correct_answer }}" placeholder="Enter correct answer...">
+                                </div>
                             </div>
 
-                            <div class="col-12 d-flex align-items-center justify-content-between mb-3">
-                                <label for="option2" class="text-start">option2</label>
-                                <input class="catinput" type="text" id="option2" name="option2"
-                                    value="{{ $editData->option2 }}">
+                            <!-- Image Upload -->
+                            <div class="row mb-3 pt-3 align-items-center">
+                                <label for="validationDefault02" class="form-label col-2 col-form-label">Question Image</label>
+                                <div class="col-5">
+                                    <input type="file" class="form-control" name="image" id="image">
+                                </div>
+                                <div class="col-5">
+                                    <img id="showImage" style="width:100px;"
+                                        src="{{ !empty($editData->image) ? url($editData->image) : url('upload/no_image.jpg') }}"
+                                        class="rounded-circle avatar-xl img-thumbnail float-end" alt="image profile">
+                                </div>
                             </div>
 
-                            <div class="col-12 d-flex align-items-center justify-content-between mb-3">
-                                <label for="option3" class="text-start">option3</label>
-                                <input class="catinput" type="text" id="option3" name="option3"
-                                    value="{{ $editData->option3 }}">
-                            </div>
-
-                            <div class="col-12 d-flex align-items-center justify-content-between mb-3">
-                                <label for="option4" class="text-start">option4</label>
-                                <input class="catinput" type="text" id="option4" name="option4"
-                                    value="{{ $editData->option4 }}">
-                            </div>
-
-                            <div class="col-12 d-flex align-items-center justify-content-between mb-3">
-                                <label for="correct_answer" class="text-start">correct_answer</label>
-                                <input class="catinput" type="text" id="correct_answer" name="correct_answer"
-                                    value="{{ $editData->correct_answer }}">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="validationDefault02" class="form-label">qestion Image</label>
-                                <input type="file" class="form-control" name="image" id="image">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="validationDefault02" class="form-label"> </label>
-                                <img id="showImage" style="width:100px;" src="{{ asset($editData->image) }}"
-                                    class="rounded-circle avatar-xl img-thumbnail float-start" alt="image profile">
-                            </div>
-
-
+                            <!-- Submit Button -->
                             <div class="col-12 d-flex align-items-end w-100 justify-content-end">
                                 <a href="#" class="mb-3" id="addNewBtn">
                                     <button style="--clr: #39ff14" type="submit" class="button-styleee">
-                                        <span>Save Qestion</span><i></i>
+                                        <span>Update Question</span><i></i>
                                     </button>
                                 </a>
                             </div>
-                        </div>
-                    </form>
+
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#image').change(function(e) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#showImage').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(e.target.files['0']);
-            })
-        })
-    </script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#image').change(function(e) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#showImage').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(e.target.files['0']);
+    })
+})
+</script>
 
-    
 @endsection

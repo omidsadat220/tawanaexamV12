@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class classsubjectController extends Controller
 {
+    
     public function AllSubject()
     {
 

@@ -93,46 +93,56 @@ class qestioncontroller extends Controller
     }
     //end method
 
-    public function UpdateQestion(Request $request) {
+public function UpdateQestion(Request $request)
+{
+    $qestion_id = $request->id;
+    $qestion = qestion::findOrFail($qestion_id);
 
+    if ($request->file('image')) {
+        $image = $request->file('image');
+        $manager = new ImageManager(new Driver());
+        $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+        $img = $manager->read($image);
+        $img->resize(100, 90)->save(public_path('upload/qestion/' . $name_gen));
+        $save_url = 'upload/qestion/' . $name_gen;
 
-        $qestion_id = $request->id;
-        $qestion = qestion::find($qestion_id);
+        if (file_exists(public_path($qestion->image))) {
+            @unlink(public_path($qestion->image));
+        }
 
-        if ($request->file('image')) {
-           $image = $request->file('image');
-           $manager = new ImageManager(new Driver());
-           $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-           $img = $manager->read($image);
-           $img->resize(100,90)->save(public_path('upload/qestion/'.$name_gen));
-           $save_url = 'upload/qestion/'.$name_gen;
-
-           if (file_exists(public_path($qestion->image))) {
-             @unlink(public_path($qestion->image));
-           }
-
-           qestion::find($qestion_id)->update([
-                'exam_id' => $request->exam_id,
-                'user_id' => auth()->id(),
-                'question' => $request->question,
-                'option1' => $request->option1,
-                'option2' => $request->option2,
-                'option3' => $request->option3,
-                'option4' => $request->option4,
-                'correct_answer' => $request->correct_answer,
-                'image' => $save_url
-           ]);
-           
-              $notification = array(
-                'message' => 'qestion Inserted Successfully',
-                'alert-type' => 'success'
-              );
-
-                return redirect()->route('all.qestion')->with($notification);
-
-            }
-
+        $qestion->update([
+            'exam_id' => $request->exam_id,
+            'user_id' => auth()->id(),
+            'question' => $request->question,
+            'option1' => $request->option1,
+            'option2' => $request->option2,
+            'option3' => $request->option3,
+            'option4' => $request->option4,
+            'correct_answer' => $request->correct_answer,
+            'image' => $save_url,
+        ]);
+    } else {
+        // 🔹 این بخش برای زمانی است که عکس جدید انتخاب نشده
+        $qestion->update([
+            'exam_id' => $request->exam_id,
+            'user_id' => auth()->id(),
+            'question' => $request->question,
+            'option1' => $request->option1,
+            'option2' => $request->option2,
+            'option3' => $request->option3,
+            'option4' => $request->option4,
+            'correct_answer' => $request->correct_answer,
+        ]);
     }
+
+    $notification = [
+        'message' => 'Question Updated Successfully',
+        'alert-type' => 'success',
+    ];
+
+    return redirect()->route('all.qestion')->with($notification);
+}
+
 
     //end method 
 

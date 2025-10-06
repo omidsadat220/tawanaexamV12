@@ -6,47 +6,47 @@
         <div class="row vh-auto bg-secondary rounded align-items-center justify-content-center mx-0">
             <div class="col-12 text-center">
                 <!-- Categories List Page -->
-                <div class="container-form" id="categories-page">
+                 <div class="container-form" id="categories-page">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-between mb-4">
-                            <h1 class="m-0">Question</h1>
+                            <h3 class="m-0">All Question</h3>
 
                             <div class="d-flex align-items-center gap-2">
                                 <form class="d-none d-md-flex">
-                                    <input class="form-control bg-dark border-0 py-3 px-3" type="search"
-                                        placeholder="Search" style="font-size: 18px; height: 55px; width: 300px" />
+                                    <input class="form-control bg-dark border-0 " type="search" placeholder="Search" />
                                 </form>
 
                                 <a href="{{ route('add.qestion') }}">
                                     <button style="--clr: #39ff14" class="button-styleee">
-                                        <span>Add qestion</span><i></i>
+                                        <span>Add Catagory</span><i></i>
                                     </button>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <table class="paginated">
+                 <div class="table-responsive">
+                    <table class="paginated table table-bordered">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Subject name</th>
-                                <th>qestion</th>
-                                <th>option1</th>
-                                <th>option2</th>
-                                <th>option3</th>
-                                <th>option4</th>
-                                <th>correct_answer</th>
-                                <th>User_id</th>
-                                <th>image</th>
-                                <th class="action">Action</th>
+                                <th  scope="col" >ID</th>
+                                <th  scope="col" >Subject name</th>
+                                <th  scope="col" >qestion</th>
+                                <th  scope="col" >option1</th>
+                                <th  scope="col" >option2</th>
+                                <th  scope="col" >option3</th>
+                                <th  scope="col" >option4</th>
+                                <th  scope="col" >correct_answer</th>
+                                <th  scope="col" >User_id</th>
+                                <th  scope="col" >image</th>
+                                <th  scope="col"  class="action">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($alldata as $key => $item)
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
-                                    <td>{{ $item->exam->exam_title }}</td>
+                                    <td  scope="row">{{ $key + 1 }}</td>
+                                    <td>{{ $item->exam->exam_title ?? 'null'}}</td>
                                     <td>{{ $item->question }}</td>
                                     <td>{{ $item->option1 }}</td>
                                     <td>{{ $item->option2 }}</td>
@@ -72,9 +72,10 @@
 
 
                         </tbody>
-                    </table>
+                     </table>
                     <div id="pagination" class="mt-3 d-flex gap-2"></div>
                 </div>
+
 
                 <!-- Add New Category Page -->
                 <div class="form-container container-form" id="add-category-page" style="display: none">

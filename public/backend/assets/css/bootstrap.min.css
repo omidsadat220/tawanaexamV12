@@ -48,6 +48,7 @@
   }
 }
 body {
+  height: 100vh !important;
   margin: 0;
   font-family: "Open Sans", sans-serif;
   font-size: 1rem;
@@ -57,6 +58,7 @@ body {
   background-color: #000;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
 
 }
 
@@ -285,7 +287,10 @@ caption {
 th {
   text-align: inherit;
   text-align: -webkit-match-parent;
+
 }
+
+
 thead,
 tbody,
 tfoot,
@@ -1816,6 +1821,7 @@ progress {
   margin-bottom: 0;
   font-size: inherit;
   line-height: 1.5;
+  text-align: start;
 }
 .col-form-label-lg {
   padding-top: calc(0.5rem + 1px);
@@ -10059,3 +10065,121 @@ fieldset:disabled .btn {
 }
 
 
+
+
+
+
+/* ----------------------------------------------------mystylecss ------------------------------------------------ */
+
+button.button-styleee {
+  position: relative;
+  background: #191c24;
+  color: #fff !important;
+  text-decoration: none;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px !important;
+  letter-spacing: 0.1rem;
+  font-size: 0.8rem;
+  padding:0.5rem 1rem;
+  transition: 0.2s, transform 0.2s ease;
+  border: 1px solid #3ad13a ;
+}
+
+button.button-styleee:hover {
+  letter-spacing: 0.1rem;
+  background: var(--clr);
+  color: var(--clr);
+  animation: box 3s infinite;
+  transform: scale(1.05);
+}
+
+button.button-styleee::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  background: #191c24;
+  border-radius: 5px !important;
+
+}
+
+button.button-styleee span {
+  position: relative;
+  z-index: 1;
+}
+button.button-styleee i {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+button.button-styleee i::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  left: 80%;
+  top: -2px;
+  border: 1px solid var(--clr);
+  background: #191c24;
+  border-radius: 5px !important;
+  transition: 0.2s;
+}
+
+button.button-styleee:hover i::before {
+  width: 15px;
+  left: 20%;
+  animation: move 3s infinite;
+}
+
+button.button-styleee i::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 2px;
+  left: 20%;
+  bottom: -2px;
+  border: 1px solid var(--clr);
+  background: #191c24;
+  border-radius: 5px !important;
+  transition: 0.2s;
+}
+
+button.button-styleee:hover i::after {
+  width: 15px;
+  left: 80%;
+  animation: move 3s infinite;
+}
+
+@keyframes move {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes box {
+  0% {
+    box-shadow: #191c24;
+  }
+  50% {
+    box-shadow: 0 0 25px var(--clr);
+  }
+  100% {
+    box-shadow: #191c24;
+  }
+}
+
+
+
+
+/*--------------------------- table changes ------------------------ */
+
+tr:hover {
+  background-color:#0c4100;
+}

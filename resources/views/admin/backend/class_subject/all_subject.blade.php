@@ -10,11 +10,9 @@
                             <h1 class="m-0">All Class Categories</h1>
 
                             <div class="d-flex align-items-center gap-2">
-                                <form class="d-none d-md-flex">
-                                    <input class="form-control bg-dark border-0 py-3 px-3" type="search"
-                                        placeholder="Search" style="font-size: 18px; height: 55px; width: 300px" />
+                             <form class="d-none d-md-flex">
+                                    <input class="form-control bg-dark border-0" type="search" placeholder="Search" />
                                 </form>
-
                                 <a href="{{ route('add.subject') }}">
                                     <button style="--clr: #39ff14" class="button-styleee">
                                         <span>All Class Categories</span><i></i>

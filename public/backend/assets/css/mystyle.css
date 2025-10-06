@@ -6,6 +6,8 @@
     /* background-color: #191C24 !important; */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #a1d490;
+    height: 100vh !important;
+    
   }
 
 
@@ -22,10 +24,10 @@ button.button-styleee {
   border: none;
   border-radius: 5px !important;
   letter-spacing: 0.1rem;
-  font-size: 1rem;
-  padding: 1rem 2rem;
+  font-size: 0.8rem;
+  padding:0.5rem 1rem;
   transition: 0.2s, transform 0.2s ease;
-   border: 1px solid #3ad13a ;
+  border: 1px solid #3ad13a ;
 }
 
 button.button-styleee:hover {
@@ -173,7 +175,8 @@ button.button-styleee:hover i::after {
     background-color: #2a6f2a;
   }
   tr:hover {
-    background-color: #3ad13a33;
+   background: linear-gradient(90deg,rgba(3, 105, 45, 1) 31%, rgb(22, 59, 1) 100%);
+    color: #000;
   }
 
   /* Form container */
@@ -196,7 +199,7 @@ button.button-styleee:hover i::after {
     font-weight: 600;
     font-size: 1.1rem;
   }
-  input[type="text"],
+  /* input[type="text"],
   input[type="email"],
   input[type="number"],
   textarea {
@@ -205,13 +208,13 @@ button.button-styleee:hover i::after {
     margin-bottom: 1.5rem;
     border-bottom: 1.5px solid #3ad13a;
     border-radius: 6px;
-    /* background-color: #0a0f0a; */
+    background-color: #0a0f0a;
     background-color: transparent !important;
     color: #a1d490;
     font-size: 1.1rem;
     resize: vertical;
-  }
-  input[type="text"]:focus,
+  } */
+  /* input[type="text"]:focus,
   textarea:focus {
     outline: none;
     border-color: #7bd87b;
@@ -231,7 +234,7 @@ button.button-styleee:hover i::after {
   }
   button:hover {
     background-color: #7bd87b;
-  }
+  } */
   
   /* Link to go back */
   .back-link {
@@ -247,7 +250,7 @@ button.button-styleee:hover i::after {
 
 
   
-  input[type="text"],
+  /* input[type="text"],
     input[type="number"],
     input[type="email"],
   textarea {
@@ -257,7 +260,6 @@ button.button-styleee:hover i::after {
     border-bottom: 1.5px solid #3ad13a;
     border-radius: 6px;
     background-color: #152015;
-    /* background-color: transparent !important; */
   }
 
   @media (min-width:992px){
@@ -266,9 +268,9 @@ button.button-styleee:hover i::after {
     }
 
 
-  }
+  } */
 
-
+/* 
 
   select{
      width: 70% !important;
@@ -276,7 +278,7 @@ button.button-styleee:hover i::after {
     margin-bottom: 1.5rem;
     border: 2px solid #3ad13a;
     border-radius: 6px;
-    /* background-color: #191c24; */
+    background-color: #191c24;
     color: #a1d490;
     font-size: 1rem;
     resize: vertical;
@@ -291,7 +293,7 @@ button.button-styleee:hover i::after {
     outline: none;
     border-color: #7bd87b;
     box-shadow: 0 0 5px #7bd87b;
-  }
+  } */
 
   /* ==== Responsive CSS ==== */
   @media (max-width: 768px) {
@@ -502,7 +504,7 @@ button.button-styleee:hover i::after {
   }
 
 
-  /* .category-header::before {
+  .category-header::before {
     counter-increment: category-counter;
     content: counter(category-counter) "";
     color: #3ad13a;
@@ -512,7 +514,7 @@ button.button-styleee:hover i::after {
     color: #7bd87b;
     font-weight: 700;
     margin-left: 6px;
-  } */
+  }
 
   body {
     counter-reset: category-counter;
@@ -575,21 +577,21 @@ button.button-styleee:hover i::after {
     margin-bottom: 6px;
     display: block;
   }
-
+/* 
   select, textarea, input[type="text"], input[type="file"], input[type="number"]{
     width: 70% !important;
     background-color: #191c24;
     color: #828181;
     border: none;
-     border-bottom: 1px solid #3ad13a;
+    border-bottom: 1px solid #3ad13a; 
     border-radius: 8px;
     padding: 10px 15px;
     font-size: 1.1rem;
     font-family: inherit;
     transition: border-color 0.3s ease;
-  }
+  } */
 
-    input[type="email"]{
+    /* input[type="email"]{
        background-color: #191c24;
     color: #828181;
     border: none;
@@ -605,7 +607,7 @@ button.button-styleee:hover i::after {
     outline: none;
     border-color: #7bd87b;
     box-shadow: 0 0 8px #7bd87b;
-  }
+  } */
   textarea {
     min-height: 100px;
     width: 85% !important;
@@ -636,7 +638,7 @@ button.button-styleee:hover i::after {
 
   
 
-  .checkbox-container input[type="checkbox"] {
+  /* .checkbox-container input[type="checkbox"] {
   appearance: none;       
   -webkit-appearance: none; 
   -moz-appearance: none;  
@@ -654,7 +656,7 @@ button.button-styleee:hover i::after {
 .checkbox-container input[type="checkbox"]:checked {
   background-color: #00ff88; 
   border-color: #00ff88;
-}
+} */
 
 .checkbox-container input[type="checkbox"]:checked::after {
   content: "✔";
@@ -688,9 +690,9 @@ button.button-styleee:hover i::after {
     background-color: #3ad13a88;
   }
 
-  .answer-item input[type="text"] {
+  /* .answer-item input[type="text"] {
     flex-grow: 1;
-    /* background-color: #000; */
+    background-color: #000;
     border: none;
     color: #a1d490;
     font-size: 1rem;
@@ -698,7 +700,7 @@ button.button-styleee:hover i::after {
   .answer-item input[type="text"]:focus {
     outline: none;
     border-bottom: 1px solid #7bd87b;
-  }
+  } */
 
   .answer-actions {
     display: flex;
@@ -734,9 +736,9 @@ button.button-styleee:hover i::after {
     background-color: #ff616f;
   }
 
-    .answer-item input[type="text"] {
+    /* .answer-item input[type="text"] {
         flex-grow: 1;
-        /* background-color: black; */
+        background-color: black;
         border-bottom: 1.5px solid #3ad13a; 
         border-radius: 8px;        
         color: #a1d490;
@@ -749,7 +751,7 @@ button.button-styleee:hover i::after {
         border-color: #7bd87b;
         box-shadow: 0 0 8px #7bd87b;
     }
-
+*/
 
   #submitBtn {
     background-color: #3ad13a;
@@ -762,7 +764,7 @@ button.button-styleee:hover i::after {
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     margin-top: 30px;
-  }
+  } 
 
 
   @media (max-width: 900px) {

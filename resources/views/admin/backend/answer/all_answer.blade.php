@@ -1,7 +1,7 @@
 @extends('admin.admin_dashboard')
 @section('admin')
-    <div class="container-fluid pt-4 px-4">
-        <div class="row vh-auto bg-secondary rounded align-items-center justify-content-center mx-0">
+   <div class="container-fluid pt-4 px-4">
+        <div class="row bg-secondary ">
             <div class="col-12 text-center">
                 <!-- Categories List Page -->
                 <div class="container-form" id="categories-page">
@@ -10,9 +10,8 @@
                             <h1 class="m-0">Answer </h1>
 
                             <div class="d-flex align-items-center gap-2">
-                                <form class="d-none d-md-flex">
-                                    <input class="form-control bg-dark border-0 py-3 px-3" type="search"
-                                        placeholder="Search" style="font-size: 18px; height: 55px; width: 300px" />
+                                 <form class="d-none d-md-flex">
+                                    <input class="form-control bg-dark border-0" type="search" placeholder="Search" />
                                 </form>
 
                                 <a href="{{ route('add.answer') }}">
@@ -24,24 +23,25 @@
                         </div>
                     </div>
 
-                    <table class="paginated">
+                <div class="table-responsive">
+                    <table class="paginated table table-bordered">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Category</th>
-                                <th>question title</th>
-                                <th>question_one</th>
-                                <th>question_two</th>
-                                <th>question_three</th>
-                                <th>question_four</th>
-                                <th>correct_answer</th>
-                                <th class="action">Action</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Category</th>
+                                <th scope="col">question</th>
+                                <th scope="col">Answer_one</th>
+                                <th scope="col">Answer_two</th>
+                                <th scope="col">Answer_three</th>
+                                <th scope="col">Answer_four</th>
+                                <th scope="col">correct_answer</th>
+                                <th scope="col" class="action">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($allData as $key => $item)
                                 <tr>
-                                    <td>{{ $key + 1 }}</td>
+                                    <td scope="row">{{ $key + 1 }}</td>
                                     <td>{{ $item->category->uni_name ?? 'N/A' }}</td>
                                     <td>{{ $item->question }}</td>
                                     <td>{{ $item->question_one }}</td>

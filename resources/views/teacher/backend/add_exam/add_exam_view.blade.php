@@ -6,96 +6,94 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-    <div class="container-fluid">
-
-        <!-- Page Title -->
-        <div class="row">
-            <div class="col-12">
-                <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0">Add Teacher Exam</h4>
-                    <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="#">teacher</a></li>
-                            <li class="breadcrumb-item active">exam</li>
-                        </ol>
+    <div class="container-fluid pt-4 px-4">
+        <div class="row bg-secondary">
+            <div class="col-12 text-center">
+                <div class="form-container container-form" id="add-category-page" style="display: block;">
+                    <div class="d-flex flex-row justify-content-around">
+                        <h3 class="text-white">Add Teacher Exam</h3>
+                        <a href="{{ route('all.exam') }}" class="back-link d-block text-start" id="backBtn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" style="cursor: pointer">
+                                <path d="M15 6L9 12L15 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round"></path>
+                            </svg>
+                            Back to Categories
+                        </a>
                     </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Admission Form -->
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-body">
-                        <h4 class="card-title">Fill exam  Info</h4>
-                        <form action="{{ route('store.teacher.add.exam') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
+
+
+                    <!-- Admission Form -->
+                    <form action="{{ route('store.teacher.add.exam') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="row mb-3">
+                            <!-- Name -->
+
+                            <div class="col-md-6">
+                                <label class="col-sm-4 col-form-label">Department</label>
+                                <div class="col-sm-10">
+                                    <select name="department_id" class="form-select" id="department-dropdown">
+                                        <option value="">Select</option>
+                                        @foreach ($depart as $info)
+                                            <option value="{{ $info->id }}">{{ $info->depart_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
 
                             <div class="row mb-3">
-                                <!-- Name -->
-
                                 <div class="col-md-6">
-                                    <label class="col-sm-4 col-form-label">Department</label>
+                                    <label class="col-sm-4 col-form-label">Subject</label>
                                     <div class="col-sm-10">
-                                        <select name="department_id" class="form-select" id="department-dropdown">
-                                            <option value="">Select</option>
-                                            @foreach ($depart as $info)
-                                                <option value="{{ $info->id }}">{{ $info->depart_name }}</option>
+                                        <select name="subject_id" class="form-select" id="subject-dropdown">
+                                            <option value="">Select Subject</option>
+                                            @foreach ($subjects as $subject)
+                                                <option value="{{ $subject->id }}">{{ $subject->subject_name }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
 
-
-                                <div class="row mb-3">
-                                    <div class="col-md-6">
-                                        <label class="col-sm-4 col-form-label">Subject</label>
-                                        <div class="col-sm-10">
-                                            <select name="subject_id" class="form-select" id="subject-dropdown">
-                                                <option value="">Select Subject</option>
-                                                @foreach ($subjects as $subject)
-                                                    <option value="{{ $subject->id }}">{{ $subject->subject_name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
+                                <div class="col-md-6">
+                                    <label class="col-sm-4 col-form-label">Subject</label>
+                                    <div class="col-sm-10">
+                                        <select name="user_id" class="form-select" id="subject-dropdown">
+                                            <option value="">Select Subject</option>
+                                            @foreach ($users as $user)
+                                                <option value="{{ $user->id }}">{{ $user->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
                                     </div>
-
-                                    <div class="col-md-6">
-                                        <label class="col-sm-4 col-form-label">Subject</label>
-                                        <div class="col-sm-10">
-                                            <select name="user_id" class="form-select" id="subject-dropdown">
-                                                <option value="">Select Subject</option>
-                                                @foreach ($users as $user)
-                                                    <option value="{{ $user->id }}">{{ $user->name }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <label class="col-sm-6 col-form-label">time</label>
-                                        <div class="col-sm-10">
-                                            <input class="form-control" name="exam_time" type="time"
-                                                placeholder="paid_date">
-                                        </div>
-                                    </div>
-
                                 </div>
 
+                                <div class="col-md-6">
+                                    <label class="col-sm-6 col-form-label">time</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" name="exam_time" type="time"
+                                            placeholder="paid_date">
+                                    </div>
+                                </div>
 
                             </div>
-                            {{-- row 4 --}}
-                            <!-- Submit Button -->
-                            <button type="submit" class="btn btn-primary waves-effect waves-light">Add exam</button>
-                        </form>
-                    </div>
+
+
+                        </div>
+                         <div class="col-12 d-flex align-items-end w-100 justify-content-end">
+                                <a href="#" class="mb-3" id="addNewBtn">
+                                    <button style="--clr: #39ff14" type="submit" class="button-styleee">
+                                        <span>Add Exam</span><i></i>
+                                    </button>
+                                </a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-
     </div>
 
 

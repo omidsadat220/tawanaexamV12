@@ -1,31 +1,32 @@
 @extends('teacher.teacher_dashboard')
 @section('teacher')
 
-    <div class="container-fluid pt-4 px-4">
-        <div class="row vh-auto bg-secondary rounded align-items-center justify-content-center mx-0">
+     <div class="container-fluid pt-4 px-4">
+        <div class="row bg-secondary ">
             <div class="col-12 text-center">
+
                 <!-- Categories List Page -->
                 <div class="container-form" id="categories-page">
                     <div class="row">
                         <div class="col-12 d-flex align-items-center justify-content-between mb-4">
-                            <h1 class="m-0">Question</h1>
+                            <h3 class="m-0">Questions</h3>
 
                             <div class="d-flex align-items-center gap-2">
                                 <form class="d-none d-md-flex">
-                                    <input class="form-control bg-dark border-0 py-3 px-3" type="search"
-                                        placeholder="Search" style="font-size: 18px; height: 55px; width: 300px" />
+                                    <input class="form-control bg-dark border-0 " type="search" placeholder="Search" />
                                 </form>
 
-                                <a href="{{ route('add.teacher.qestion') }}">
+                                <a href="{{ route('add.teacher.qestion') }}"">
                                     <button style="--clr: #39ff14" class="button-styleee">
-                                        <span>Add qestion</span><i></i>
+                                        <span>Create Question</span><i></i>
                                     </button>
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <table class="paginated">
+                      <div class="table-responsive">
+                        <table class="paginated table table-bordered" id="datatable">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -45,7 +46,7 @@
                             @foreach ($alldata as $key => $item)
                                 <tr>
                                     <td>{{ $key + 1 }}</td>
-                                    <td>{{ $item->exam->exam_title }}</td>
+                                    <td>{{ $item->exam->exam_title ?? 'null' }}</td>
                                     <td>{{ $item->question }}</td>
                                     <td>{{ $item->option1 }}</td>
                                     <td>{{ $item->option2 }}</td>
@@ -73,6 +74,7 @@
                         </tbody>
                     </table>
                     <div id="pagination" class="mt-3 d-flex gap-2"></div>
+                    </div>
                 </div>
 
                 <!-- Add New Category Page -->

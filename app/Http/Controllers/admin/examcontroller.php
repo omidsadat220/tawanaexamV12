@@ -15,9 +15,10 @@ class examcontroller extends Controller
 {
 
     public function AllExam()
+    
     {
         $departments = Department::with(['subjects', 'subjects.exams'])->get();
-        $exams = Exam::with(['department', 'subject'])->get();
+        $exams = Exam::with(['department', 'subject'])->latest()->get();
 
         return view('admin.backend.exam.all_exam', compact('departments', 'exams'));
     }
@@ -68,9 +69,6 @@ class examcontroller extends Controller
 
         return view('admin.backend.exam.edit_exam', compact('exam', 'departments', 'subjects'));
     }
-
-
-
 
 
     public function UpdateExam(Request $request)
