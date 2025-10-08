@@ -37,7 +37,7 @@
                                 <th>option3</th>
                                 <th>option4</th>
                                 <th>correct_answer</th>
-                                <th>User_id</th>
+                                {{-- <th>User_id</th> --}}
                                 <th>image</th>
                                 <th class="action">Action</th>
                             </tr>
@@ -53,7 +53,7 @@
                                     <td>{{ $item->option3 }}</td>
                                     <td>{{ $item->option4 }}</td>
                                     <td>{{ $item->correct_answer }}</td>
-                                    <td>{{ $item->user_id}}</td>
+                                    {{-- <td>{{ $item->user_id}}</td> --}}
                                     <td> <img src="{{ asset($item->image) }}"></td>
 
                                    

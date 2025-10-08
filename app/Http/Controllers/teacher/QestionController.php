@@ -14,7 +14,7 @@ use Intervention\Image\ImageManager;
 class QestionController extends Controller
 {
     public function AllTeacherQestion() {
-        $alldata = qestion::with(['exam'])->get();
+        $alldata = qestion::with(['exam'])->where('user_id', auth()->id())->get();
         return view('teacher.backend.qestion.all_teacher_qestion', compact('alldata'));
     }
 
@@ -112,7 +112,7 @@ class QestionController extends Controller
 
            qestion::find($qestion_id)->update([
                 'exam_id' => $request->exam_id,
-                'user_id' => auth()->id(),
+                // 'user_id' => auth()->id(),
                 'question' => $request->question,
                 'option1' => $request->option1,
                 'option2' => $request->option2,
@@ -127,7 +127,17 @@ class QestionController extends Controller
                 'message' => 'qestion Inserted Successfully',
                 'alert-type' => 'success'
               );
-            }
+            }else {
+        $qestion->update([
+            'exam_id' => $request->exam_id,
+            'question' => $request->question,
+            'option1' => $request->option1,
+            'option2' => $request->option2,
+            'option3' => $request->option3,
+            'option4' => $request->option4,
+            'correct_answer' => $request->correct_answer,
+        ]);
+    }
 
     return redirect()->route('all.teacher.qestion')->with($notification);
     }

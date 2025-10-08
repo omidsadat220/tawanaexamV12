@@ -77,17 +77,17 @@
             @csrf
             <div class="gradient-border">
                 <div class="bg-gray rounded-2xl p-6 md:p-8 relative overflow-hidden">
-                    @foreach ($questions as $item)
-                        <div class="gradient-border mb-8">
+                    @foreach ($questions as $index => $item)
+                        <div class="question-block gradient-border mb-8" data-index="{{ $index }}" style="{{ $index == 0 ? '' : 'display:none;' }}">
                             <div class="bg-in-gray rounded-xl p-6">
                                 <h2 class="text-xl font-semibold text-white mb-4">{{ $item->question }}</h2>
 
                                 <!-- Question Image -->
                                 @if($item->image)
-                                    <img src="{{ asset( $item->image) }}" 
-                                         alt="Question Image" 
-                                         class="question-image mb-4 w-full max-w-md cursor-pointer"
-                                         onclick="openModal('{{ asset( $item->image) }}')" />
+                                    <img src="{{ asset($item->image) }}" 
+                                        alt="Question Image" 
+                                        class="question-image mb-4 w-full max-w-md cursor-pointer"
+                                        onclick="openModal('{{ asset($item->image) }}')" />
                                 @endif
 
                                 <!-- Options -->
@@ -98,7 +98,10 @@
                                             $label = chr(64 + $i); // A, B, C, D
                                         @endphp
                                         <label class="option-hover flex items-center bg-gray rounded-xl p-4 cursor-pointer">
-                                            <input type="radio" name="answers[{{ $item->id }}]" value="{{ $item->$option }}" class="hidden" required />
+                                            <input type="radio" 
+                                                name="answers[{{ $item->id }}]" 
+                                                value="{{ $item->$option }}" 
+                                                class="hidden" required />
                                             <div class="w-6 h-6 rounded-full border-2 border-gray-600 flex items-center justify-center mr-3">
                                                 <div class="w-3 h-3 rounded-full bg-green-500 opacity-0"></div>
                                             </div>
@@ -110,10 +113,29 @@
                             </div>
                         </div>
                     @endforeach
+                    
+                        <div class="flex justify-center mt-8">
+                            <button type="button" id="prevBtn"
+                                class="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all mr-3"
+                                style="display:none;">
+                                Previous
+                            </button>
+
+                            <button type="button" id="nextBtn"
+                                class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all">
+                                Next
+                            </button>
+
+                            {{-- <button type="submit" id="submitBtn"
+                                class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all"
+                                style="display:none;">
+                                Submit Exam
+                            </button> --}}
+                        </div>
 
                     <!-- Submit Button -->
                     <div class="flex justify-center mt-8">
-                        <button type="submit"
+                        <button type="submit"  id="submitBtn"
                                 class="px-6 py-3 bg-gradient-to-r from-green-600 to-dark-600 text-white rounded-lg hover:from-dark-700 hover:to-green-700 transition-all duration-300 flex items-center pulse">
                             Submit Exam <i class="fas fa-paper-plane ml-2"></i>
                         </button>
@@ -178,7 +200,52 @@
                 this.querySelector("div > div").style.opacity = "1";
             });
         });
-    </script>
+
+        // Next and Previous Button
+        document.addEventListener("DOMContentLoaded", function() {
+            let current = 0;
+            const blocks = document.querySelectorAll(".question-block");
+            const nextBtn = document.getElementById("nextBtn");
+            const prevBtn = document.getElementById("prevBtn");
+            const submitBtn = document.getElementById("submitBtn");
+
+            nextBtn.addEventListener("click", () => {
+                const curBlock = blocks[current];
+                const chosen = curBlock.querySelector('input[type="radio"]:checked');
+                if (!chosen) {
+                    alert("Please select an answer before proceeding.");
+                    return;
+                }
+
+                curBlock.style.display = "none";
+                current++;
+
+                if (current < blocks.length) {
+                    blocks[current].style.display = "block";
+                    prevBtn.style.display = "inline-block"; // 👈 اینجا ظاهر شود
+                }
+
+                if (current === blocks.length - 1) {
+                    nextBtn.style.display = "none";
+                    submitBtn.style.display = "inline-block";
+                }
+            });
+
+            prevBtn.addEventListener("click", () => {
+                blocks[current].style.display = "none";
+                current--;
+                blocks[current].style.display = "block";
+
+                nextBtn.style.display = "inline-block";
+                submitBtn.style.display = "none";
+
+                if (current === 0) {
+                    prevBtn.style.display = "none";
+                }
+            });
+        });
+</script>
+
 </body>
 
 </html>

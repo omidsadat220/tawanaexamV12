@@ -21,14 +21,27 @@ class StudentController extends Controller
     public function SetClass($id) {
             $student = User::find($id);
             $department = department::latest()->get();
+
+            $setClass = SetClassStudent::where('user_id', $id)->latest()->first();
+            $student->department_id = $setClass ? $setClass->department_id : null;
+
             return view('teacher.backend.student.set_class',compact('student','department'));
     } 
 
-    public function StoreSetClass(Request $request){
+    public function StoreSetClass(Request $request)
+{
+    $setClass = SetClassStudent::where('user_id', $request->user_id)->latest()->first();
+
+    if($setClass) {
+        $setClass->department_id = $request->department_id;
+        $setClass->save();
+    } else {
         SetClassStudent::create([
             'user_id' => $request->user_id,
             'department_id' => $request->department_id,
         ]);
-        return redirect()->route('manage.student');
-    }  
+    }
+
+    return redirect()->route('manage.student');
+}
 }
