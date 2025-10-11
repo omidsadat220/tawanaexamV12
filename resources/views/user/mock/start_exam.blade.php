@@ -73,76 +73,127 @@
         </div>
 
         <!-- Exam Form -->
-        <form method="POST" action="{{ route('mock.exam.submit', $exam->id) }}">
-            @csrf
-            <div class="gradient-border">
-                <div class="bg-gray rounded-2xl p-6 md:p-8 relative overflow-hidden">
-                    @foreach ($questions as $index => $item)
-                        <div class="question-block gradient-border mb-8" data-index="{{ $index }}" style="{{ $index == 0 ? '' : 'display:none;' }}">
-                            <div class="bg-in-gray rounded-xl p-6">
-                                <h2 class="text-xl font-semibold text-white mb-4">{{ $item->question }}</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                
+                <div class="lg:col-span-9 order-1 lg:order-1">
+                    <form method="POST" action="{{ route('mock.exam.submit', $exam->id) }}">
+                        @csrf
+                        <div class="gradient-border">
+                            <div class="bg-gray rounded-2xl p-6 md:p-8 relative overflow-hidden">
+                                @foreach ($questions as $index => $item)
+                                    <div class="question-block gradient-border mb-8"
+                                        data-index="{{ $index }}"
+                                        style="{{ $index == 0 ? '' : 'display:none;' }}">
+                                        <div class="bg-in-gray rounded-xl p-6">
+                                            <h2 class="text-xl font-semibold text-white mb-4">{{ $item->question }}</h2>
 
-                                <!-- Question Image -->
-                                @if($item->image)
-                                    <img src="{{ asset($item->image) }}" 
-                                        alt="Question Image" 
-                                        class="question-image mb-4 w-full max-w-md cursor-pointer"
-                                        onclick="openModal('{{ asset($item->image) }}')" />
-                                @endif
+                                            @if($item->image)
+                                                <img src="{{ asset($item->image) }}"
+                                                    alt="Question Image"
+                                                    class="question-image mb-4 w-full max-w-md cursor-pointer"
+                                                    onclick="openModal('{{ asset($item->image) }}')" />
+                                            @endif
 
-                                <!-- Options -->
-                                <div class="space-y-4">
-                                    @for ($i = 1; $i <= 4; $i++)
-                                        @php
-                                            $option = 'option' . $i;
-                                            $label = chr(64 + $i); // A, B, C, D
-                                        @endphp
-                                        <label class="option-hover flex items-center bg-gray rounded-xl p-4 cursor-pointer">
-                                            <input type="radio" 
-                                                name="answers[{{ $item->id }}]" 
-                                                value="{{ $item->$option }}" 
-                                                class="hidden" required />
-                                            <div class="w-6 h-6 rounded-full border-2 border-gray-600 flex items-center justify-center mr-3">
-                                                <div class="w-3 h-3 rounded-full bg-green-500 opacity-0"></div>
+                                            <div class="space-y-4">
+                                                @for ($i = 1; $i <= 4; $i++)
+                                                    @php
+                                                        $option = 'option' . $i;
+                                                        $label = chr(64 + $i);
+                                                    @endphp
+                                                    <label
+                                                        class="option-hover flex items-center bg-gray rounded-xl p-4 cursor-pointer transition-all hover:bg-gray-700">
+                                                        <input type="radio"
+                                                            name="answers[{{ $item->id }}]"
+                                                            value="{{ $item->$option }}"
+                                                            class="hidden" required />
+                                                        <div
+                                                            class="w-6 h-6 rounded-full border-2 border-gray-600 flex items-center justify-center mr-3">
+                                                            <div class="w-3 h-3 rounded-full bg-green-500 opacity-0"></div>
+                                                        </div>
+                                                        <span class="text-gray-300 flex-1">{{ $item->$option }}</span>
+                                                        <span class="text-xs text-gray-500 ml-2">{{ $label }}</span>
+                                                    </label>
+                                                @endfor
                                             </div>
-                                            <span class="text-gray-300 flex-1">{{ $item->$option }}</span>
-                                            <span class="text-xs text-gray-500 ml-2">{{ $label }}</span>
-                                        </label>
-                                    @endfor
+                                        </div>
+                                    </div>
+                                @endforeach
+
+                                <div class="flex flex-wrap justify-between mt-8 gap-3">
+                                    <button type="button" id="prevBtn"
+                                        class="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all mr-3"
+                                        style="display:none;">
+                                        Previous
+                                    </button>
+
+                                    <button type="button" id="nextBtn"
+                                        class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all">
+                                        Next
+                                    </button>
+
+                                    <button type="submit" id="submitBtn"
+                                        class="px-6 py-3 bg-gradient-to-r from-green-600 to-dark-600 text-white rounded-lg hover:from-dark-700 hover:to-green-700 transition-all duration-300 flex items-center pulse"
+                                        style="display:none;">
+                                        Submit Exam <i class="fas fa-paper-plane ml-2"></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                    
-                        <div class="flex justify-center mt-8">
-                            <button type="button" id="prevBtn"
-                                class="px-6 py-3 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition-all mr-3"
-                                style="display:none;">
-                                Previous
-                            </button>
-
-                            <button type="button" id="nextBtn"
-                                class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all">
-                                Next
-                            </button>
-
-                            {{-- <button type="submit" id="submitBtn"
-                                class="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-all"
-                                style="display:none;">
-                                Submit Exam
-                            </button> --}}
-                        </div>
-
-                    <!-- Submit Button -->
-                    <div class="flex justify-center mt-8">
-                        <button type="submit"  id="submitBtn"
-                                class="px-6 py-3 bg-gradient-to-r from-green-600 to-dark-600 text-white rounded-lg hover:from-dark-700 hover:to-green-700 transition-all duration-300 flex items-center pulse">
-                            Submit Exam <i class="fas fa-paper-plane ml-2"></i>
-                        </button>
-                    </div>
+                    </form>
                 </div>
+
+                <!-- Sidebar -->
+                    <div class="lg:col-span-3 order-2 lg:order-2">
+                        <div class="relative sticky top-6 rounded-2xl bg-[#0f172a] shadow-md">
+                            <div class="p-5 rounded-2xl bg-[#0f172a]"> <!-- فقط p-5 به جای p-4 -->
+                                <h3 class="text-sm font-semibold mb-3 flex items-center text-gray-100">
+                                    <i class="fas fa-list-ol text-purple-300 mr-2"></i>
+                                    Questions
+                                </h3>
+
+                                <!-- Numbers -->
+                                <div class="grid grid-cols-5 gap-2 mb-3">
+                                    @foreach($questions as $index => $item)
+                                        <div 
+                                            class="q-number {{ $index == 0 ? 'bg-green-600' : 'bg-gray-700' }} text-white text-sm flex justify-center items-center rounded-md py-1.5 cursor-pointer"
+                                            data-index="{{ $index }}">
+                                            @if($item->image)
+                                                <i class="fas fa-image fa-xs"></i>
+                                            @else
+                                                {{ $index + 1 }}
+                                            @endif
+                                        </div>
+                                    @endforeach
+                                </div>
+
+                                <!-- Stats -->
+                                <div class="p-4 rounded-xl bg-[#1e293b]">
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-xs text-gray-400">Answered:</span>
+                                        <span id="answeredCount" class="text-xs text-green-400">0 questions</span>
+                                    </div>
+                                    <div class="flex justify-between mb-2">
+                                        <span class="text-xs text-gray-400">With Images:</span>
+                                        <span id="withImagesCount" class="text-xs text-blue-400">0 questions</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-xs text-gray-400">Remaining:</span>
+                                        <span id="remainingCount" class="text-xs text-yellow-400">0 questions</span>
+                                    </div>
+                                </div>
+
+                                <!-- Button -->
+                                <button
+                                    class="w-full mt-3 py-2.5 bg-gradient-to-r from-green-600 to-emerald-700 text-white text-sm font-medium rounded-lg hover:from-green-700 hover:to-emerald-800 transition-all duration-300 flex items-center justify-center gap-2">
+                                    <i class="fas fa-paper-plane text-xs"></i> Finish Exam
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
             </div>
-        </form>
+
+
     </div>
 
     <div class="floating-particles" id="particles"></div>
@@ -244,6 +295,140 @@
                 }
             });
         });
+
+        // Question Number Click
+        // Click on sidebar numbers
+        document.querySelectorAll(".q-number").forEach((num) => {
+            num.addEventListener("click", function() {
+                const index = parseInt(this.getAttribute("data-index"));
+                const blocks = document.querySelectorAll(".question-block");
+
+                blocks.forEach((b, i) => {
+                    b.style.display = i === index ? "block" : "none";
+                });
+
+                // Update active color
+                document.querySelectorAll(".q-number").forEach(n => {
+                    n.classList.remove("bg-green-600");
+                    n.classList.add("bg-gray-700");
+                });
+                this.classList.add("bg-green-600");
+
+                // Update buttons visibility
+                const prevBtn = document.getElementById("prevBtn");
+                const nextBtn = document.getElementById("nextBtn");
+                const submitBtn = document.getElementById("submitBtn");
+
+                prevBtn.style.display = index === 0 ? "none" : "inline-block";
+                nextBtn.style.display = index === blocks.length - 1 ? "none" : "inline-block";
+                submitBtn.style.display = index === blocks.length - 1 ? "inline-block" : "none";
+
+                current = index; // Update current for next/prev buttons
+            });
+        });
+
+        // Update Stats
+function updateStats() {
+    const blocks = document.querySelectorAll(".question-block");
+    let answered = 0;
+    let withImages = 0;
+
+    blocks.forEach((block, index) => {
+        const checked = block.querySelector('input[type="radio"]:checked');
+        if (checked) {
+            answered++;
+            // شماره پاسخ داده شده سبز شود
+            const qNum = document.querySelectorAll(".q-number")[index];
+            if (qNum) {
+                qNum.classList.add("bg-green-600");
+                qNum.classList.remove("bg-gray-700");
+            }
+        } else {
+            // اگر پاسخ داده نشده، خاکستری باشد
+            const qNum = document.querySelectorAll(".q-number")[index];
+            if (qNum) {
+                qNum.classList.remove("bg-green-600");
+                qNum.classList.add("bg-gray-700");
+            }
+        }
+
+        // بررسی وجود تصویر
+        const img = block.querySelector("img");
+        if (img) withImages++;
+    });
+
+    const remaining = blocks.length - answered;
+
+    document.getElementById("answeredCount").textContent = answered + " questions";
+    document.getElementById("withImagesCount").textContent = withImages + " questions";
+    document.getElementById("remainingCount").textContent = remaining + " questions";
+}
+
+// اجرای اولیه Stats
+updateStats();
+
+// آپدیت Stats هر بار که کاربر گزینه‌ای انتخاب کند
+document.querySelectorAll("input[type='radio']").forEach(input => {
+    input.addEventListener("change", updateStats);
+});
+
+// مدیریت Next و Previous بدون محدودیت انتخاب
+document.addEventListener("DOMContentLoaded", function() {
+    let current = 0;
+    const blocks = document.querySelectorAll(".question-block");
+    const nextBtn = document.getElementById("nextBtn");
+    const prevBtn = document.getElementById("prevBtn");
+    const submitBtn = document.getElementById("submitBtn");
+
+    // نمایش سوال فعلی
+    blocks.forEach((b, i) => b.style.display = i === current ? "block" : "none");
+    prevBtn.style.display = "none";
+    submitBtn.style.display = blocks.length === 1 ? "inline-block" : "none";
+
+    nextBtn.addEventListener("click", () => {
+        blocks[current].style.display = "none";
+        current++;
+        if (current >= blocks.length) current = blocks.length - 1; // جلوگیری از overflow
+        blocks[current].style.display = "block";
+
+        prevBtn.style.display = current === 0 ? "none" : "inline-block";
+        nextBtn.style.display = current === blocks.length - 1 ? "none" : "inline-block";
+        submitBtn.style.display = current === blocks.length - 1 ? "inline-block" : "none";
+
+        updateStats();
+    });
+
+    prevBtn.addEventListener("click", () => {
+        blocks[current].style.display = "none";
+        current--;
+        if (current < 0) current = 0;
+        blocks[current].style.display = "block";
+
+        prevBtn.style.display = current === 0 ? "none" : "inline-block";
+        nextBtn.style.display = current === blocks.length - 1 ? "none" : "inline-block";
+        submitBtn.style.display = current === blocks.length - 1 ? "inline-block" : "none";
+
+        updateStats();
+    });
+
+    // کلیک روی شماره سوال‌ها
+    const qNumbers = document.querySelectorAll(".q-number");
+    qNumbers.forEach((num, index) => {
+        num.addEventListener("click", () => {
+            blocks[current].style.display = "none";
+            current = index;
+            blocks[current].style.display = "block";
+
+            prevBtn.style.display = current === 0 ? "none" : "inline-block";
+            nextBtn.style.display = current === blocks.length - 1 ? "none" : "inline-block";
+            submitBtn.style.display = current === blocks.length - 1 ? "inline-block" : "none";
+
+            updateStats();
+        });
+    });
+});
+
+
 </script>
 
 </body>
