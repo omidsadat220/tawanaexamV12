@@ -737,13 +737,13 @@
 
                                     <div class="flex items-center mb-4">
                                         <i class="fas fa-calendar-alt text-green-400 mr-2"></i>
-                                        <span class="text-sm text-white-500"> {{ \Carbon\Carbon::parse($subject->created_at)->format('F d, Y - h:i A') }}</span>
+                                        <span class="text-sm text-white-500"> {{ \Carbon\Carbon::parse($subject->created_at)->setTimezone('Asia/Kabul')->format('F d, Y - h:i A') }}</span>
                                     </div>
                                     <div class="flex items-center">
                                         <i class="fas fa-check-circle text-green-400 mr-2"></i>
                                         <span class="text-sm text-white-500">Score: 93/100</span>
                                     </div>
-                                    <div class="mt-6">
+                                    {{-- <div class="mt-6">
                                         <div class="flex justify-between mb-1">
                                             <span class="text-sm font-sm text-white-500">Performance</span>
                                             <span class="text-sm font-sm text-white-500">97%</span>
@@ -751,7 +751,7 @@
                                         <div class="w-full bg-gray-200 rounded-full h-2.5">
                                             <div class="bg-green-500 h-2.5 rounded-full" style="width: 97%"></div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="mt-6 flex space-x-3">
                                         <a href="{{ route('list.exam',$subject->id) }}" class="flex-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">Review</a>
