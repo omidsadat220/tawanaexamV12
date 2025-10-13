@@ -742,10 +742,9 @@
                                         <i class="fas fa-calendar-alt text-green-400 mr-2"></i>
                                         <span class="text-sm text-white-500"> {{ \Carbon\Carbon::parse($exam->created_at)->setTimezone('Asia/Kabul')->format('F d, Y - h:i A') }}</span>
                                     </div>
-                                    <div class="flex items-center">
-                                        <i class="fas fa-check-circle text-green-400 mr-2"></i>
-                                        <span class="text-sm text-white-500">Score: 93/100</span>
-                                    </div>
+                                    <span class="text-sm text-white-500">
+                                        Score: {{ $exam->correct_answers }}/{{ $exam->total_questions }}
+                                    </span>
                                     {{-- <div class="mt-6">
                                         <div class="flex justify-between mb-1">
                                             <span class="text-sm font-sm text-white-500">Performance</span>

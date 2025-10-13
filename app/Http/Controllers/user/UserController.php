@@ -247,24 +247,58 @@ class UserController extends Controller
         return view('user.mock.mock_exam', compact('set_class'));
     }
 
-    public function ListExam($id){
-         $user_id = Auth::id();
+    public function ListExam($subject_id)
+{
+    $user_id = Auth::id();
 
-    // Optional: check if the user belongs to the department
+    // بررسی اینکه کاربر به چه set_class اختصاص دارد
     $set_class = SetClassStudent::where('user_id', $user_id)->first();
-
-    if(!$set_class) {
+    if (!$set_class) {
         return redirect()->back()->with('error', 'You are not assigned to any department.');
     }
 
-    $subject = DepartmentSubject::where('id', $id)
+    // گرفتن موضوع (subject) مورد نظر
+    $subject = DepartmentSubject::where('id', $subject_id)
                 ->where('department_id', $set_class->department_id)
                 ->firstOrFail();
 
-    $exams = Exam::where('subject_id', $id)->get();
+    // گرفتن تمام امتحانات این موضوع
+    $exams = Exam::where('subject_id', $subject->id)->get();
 
-         return view('user.mock.list_exam', compact('subject', 'exams'));
+    foreach ($exams as $exam) {
+
+        // آخرین تلاش کاربر برای این امتحان
+        $latestAttempt = UserAnswer::where('exam_id', $exam->id)
+            ->where('user_id', $user_id)
+            ->latest('created_at')
+            ->first();
+
+        if ($latestAttempt) {
+            // فقط پاسخ‌های همان تلاش آخر
+            $correctAnswers = UserAnswer::where('exam_id', $exam->id)
+                ->where('user_id', $user_id)
+                ->whereDate('created_at', $latestAttempt->created_at->toDateString())
+                ->whereTime('created_at', $latestAttempt->created_at->format('H:i:s'))
+                ->whereColumn('selected_answer', 'correct_answer')
+                ->count();
+        } else {
+            $correctAnswers = 0;
+        }
+
+        // کل سوالات امتحان
+        $totalQuestions = qestion::where('exam_id', $exam->id)->count();
+
+        // مقادیر برای Blade
+        $exam->total_questions = $totalQuestions;
+        $exam->correct_answers = $correctAnswers;
+
+        // درصد پیشرفت
+        $exam->progress = $totalQuestions > 0 ? round(($correctAnswers / $totalQuestions) * 100, 2) : 0;
     }
+
+    // مسیر درست Blade (بر اساس فولدر شما)
+    return view('user.mock.list_exam', compact('subject', 'exams'));
+}
 
 
     // MockExamStart
